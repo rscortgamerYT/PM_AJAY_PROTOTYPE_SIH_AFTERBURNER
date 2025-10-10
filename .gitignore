@@ -30,7 +30,8 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/
+# Commented out /build/ to allow deployment
+# /build/
 /coverage/
 
 # Symbolication related
