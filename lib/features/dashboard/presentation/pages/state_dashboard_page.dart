@@ -18,7 +18,6 @@ import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
-import '../../../../core/widgets/app_footer.dart';
 
 class StateDashboardPage extends ConsumerStatefulWidget {
   const StateDashboardPage({super.key});
@@ -289,45 +288,31 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
   }
 
   Widget _buildAgencyOptimizer() {
-    return const SingleChildScrollView(
-      child: AgencyCapacityOptimizerWidget(),
-    );
+    return const AgencyCapacityOptimizerWidget();
   }
 
   Widget _buildFundSimulator() {
-    return SingleChildScrollView(
-      child: FundAllocationSimulatorWidget(stateId: _stateId),
-    );
+    return FundAllocationSimulatorWidget(stateId: _stateId);
   }
 
   Widget _buildDistrictCapacityPlanner() {
-    return SingleChildScrollView(
-      child: DistrictCapacityPlannerWidget(stateId: _stateId),
-    );
+    return DistrictCapacityPlannerWidget(stateId: _stateId);
   }
 
   Widget _buildComponentTimeline() {
-    return SingleChildScrollView(
-      child: ComponentTimelineSynchronizerWidget(stateId: _stateId),
-    );
+    return ComponentTimelineSynchronizerWidget(stateId: _stateId);
   }
 
   Widget _buildAgencyComparator() {
-    return SingleChildScrollView(
-      child: AgencyPerformanceComparatorWidget(stateId: _stateId),
-    );
+    return AgencyPerformanceComparatorWidget(stateId: _stateId);
   }
 
   Widget _buildCommunicationHub() {
-    return const SingleChildScrollView(
-      child: CommunicationHubPage(),
-    );
+    return const CommunicationHubPage();
   }
 
   Widget _buildReviewPanel() {
-    return const SingleChildScrollView(
-      child: StateReviewPanelWidget(),
-    );
+    return const StateReviewPanelWidget();
   }
 
   @override
@@ -405,48 +390,42 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
           const DashboardSwitcherWidget(),
         ],
       ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          NavigationBar(
-            selectedIndex: _selectedIndex,
-            onDestinationSelected: (index) {
-              setState(() => _selectedIndex = index);
-            },
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Icons.dashboard_outlined),
-                selectedIcon: Icon(Icons.dashboard),
-                label: 'Overview',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.approval_outlined),
-                selectedIcon: Icon(Icons.approval),
-                label: 'Requests',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.analytics_outlined),
-                selectedIcon: Icon(Icons.analytics),
-                label: 'Planning',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.calculate_outlined),
-                selectedIcon: Icon(Icons.calculate),
-                label: 'Funds',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.leaderboard_outlined),
-                selectedIcon: Icon(Icons.leaderboard),
-                label: 'Performance',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.chat_bubble_outline),
-                selectedIcon: Icon(Icons.chat_bubble),
-                label: 'Comms',
-              ),
-            ],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (index) {
+          setState(() => _selectedIndex = index);
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.dashboard_outlined),
+            selectedIcon: Icon(Icons.dashboard),
+            label: 'Overview',
           ),
-          const AppFooter(),
+          NavigationDestination(
+            icon: Icon(Icons.approval_outlined),
+            selectedIcon: Icon(Icons.approval),
+            label: 'Requests',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.analytics_outlined),
+            selectedIcon: Icon(Icons.analytics),
+            label: 'Planning',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.calculate_outlined),
+            selectedIcon: Icon(Icons.calculate),
+            label: 'Funds',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.leaderboard_outlined),
+            selectedIcon: Icon(Icons.leaderboard),
+            label: 'Performance',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.chat_bubble_outline),
+            selectedIcon: Icon(Icons.chat_bubble),
+            label: 'Comms',
+          ),
         ],
       ),
     );

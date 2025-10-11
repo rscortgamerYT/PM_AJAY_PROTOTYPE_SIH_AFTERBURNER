@@ -17,7 +17,6 @@ import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
-import '../../../../core/widgets/app_footer.dart';
 
 class AgencyDashboardPage extends ConsumerStatefulWidget {
   const AgencyDashboardPage({super.key});
@@ -364,35 +363,26 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
   }
 
   Widget _buildMilestonesView() {
-    return const SingleChildScrollView(
-      child: SmartMilestoneClaimsWidget(),
-    );
+    return const SmartMilestoneClaimsWidget();
   }
 
   Widget _buildSmartMilestoneWorkflow() {
-    return const SingleChildScrollView(
-      child: SmartMilestoneWorkflowWidget(agencyId: 'mock-agency-id'),
-    );
+    return const SmartMilestoneWorkflowWidget(agencyId: 'mock-agency-id');
   }
 
   Widget _buildResourceProximityMap() {
-    return const SingleChildScrollView(
-      child: ResourceProximityMapWidget(agencyId: 'mock-agency-id'),
-    );
+    return const ResourceProximityMapWidget(agencyId: 'mock-agency-id');
   }
 
   Widget _buildPerformanceView() {
-    return const SingleChildScrollView(
-      child: PerformanceAnalyticsWidget(
-        agencyId: 'mock-agency-id',
-      ),
+    // TODO: Replace with actual agency ID from auth/session
+    return const PerformanceAnalyticsWidget(
+      agencyId: 'mock-agency-id',
     );
   }
 
   Widget _buildCommunicationHub() {
-    return const SingleChildScrollView(
-      child: CommunicationHubPage(),
-    );
+    return const CommunicationHubPage();
   }
 
   List<CalendarEvent> _getSampleEvents() {
@@ -550,48 +540,42 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
           const DashboardSwitcherWidget(),
         ],
       ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          NavigationBar(
-            selectedIndex: _selectedIndex,
-            onDestinationSelected: (index) {
-              setState(() => _selectedIndex = index);
-            },
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Icons.dashboard_outlined),
-                selectedIcon: Icon(Icons.dashboard),
-                label: 'Overview',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.list_alt_outlined),
-                selectedIcon: Icon(Icons.list_alt),
-                label: 'Projects',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.flag_outlined),
-                selectedIcon: Icon(Icons.flag),
-                label: 'Claims',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.place_outlined),
-                selectedIcon: Icon(Icons.place),
-                label: 'Resources',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.analytics_outlined),
-                selectedIcon: Icon(Icons.analytics),
-                label: 'Analytics',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.chat_bubble_outline),
-                selectedIcon: Icon(Icons.chat_bubble),
-                label: 'Comms',
-              ),
-            ],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (index) {
+          setState(() => _selectedIndex = index);
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.dashboard_outlined),
+            selectedIcon: Icon(Icons.dashboard),
+            label: 'Overview',
           ),
-          const AppFooter(),
+          NavigationDestination(
+            icon: Icon(Icons.list_alt_outlined),
+            selectedIcon: Icon(Icons.list_alt),
+            label: 'Projects',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.flag_outlined),
+            selectedIcon: Icon(Icons.flag),
+            label: 'Claims',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.place_outlined),
+            selectedIcon: Icon(Icons.place),
+            label: 'Resources',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.analytics_outlined),
+            selectedIcon: Icon(Icons.analytics),
+            label: 'Analytics',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.chat_bubble_outline),
+            selectedIcon: Icon(Icons.chat_bubble),
+            label: 'Comms',
+          ),
         ],
       ),
     );

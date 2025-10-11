@@ -15,7 +15,6 @@ import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
 import '../../data/mock_fund_flow_data.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
-import '../../../../core/widgets/app_footer.dart';
 
 class CentreDashboardPage extends ConsumerStatefulWidget {
   const CentreDashboardPage({super.key});
@@ -373,48 +372,42 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
           const DashboardSwitcherWidget(),
         ],
       ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          NavigationBar(
-            selectedIndex: _selectedIndex,
-            onDestinationSelected: (index) {
-              setState(() => _selectedIndex = index);
-            },
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Icons.dashboard_outlined),
-                selectedIcon: Icon(Icons.dashboard),
-                label: 'Overview',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.approval_outlined),
-                selectedIcon: Icon(Icons.approval),
-                label: 'Approvals',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.emoji_events_outlined),
-                selectedIcon: Icon(Icons.emoji_events),
-                label: 'Performance',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.rule_outlined),
-                selectedIcon: Icon(Icons.rule),
-                label: 'Compliance',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.account_balance_outlined),
-                selectedIcon: Icon(Icons.account_balance),
-                label: 'Funds',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.chat_bubble_outline),
-                selectedIcon: Icon(Icons.chat_bubble),
-                label: 'Communication',
-              ),
-            ],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (index) {
+          setState(() => _selectedIndex = index);
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.dashboard_outlined),
+            selectedIcon: Icon(Icons.dashboard),
+            label: 'Overview',
           ),
-          const AppFooter(),
+          NavigationDestination(
+            icon: Icon(Icons.approval_outlined),
+            selectedIcon: Icon(Icons.approval),
+            label: 'Approvals',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.emoji_events_outlined),
+            selectedIcon: Icon(Icons.emoji_events),
+            label: 'Performance',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.rule_outlined),
+            selectedIcon: Icon(Icons.rule),
+            label: 'Compliance',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.account_balance_outlined),
+            selectedIcon: Icon(Icons.account_balance),
+            label: 'Funds',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.chat_bubble_outline),
+            selectedIcon: Icon(Icons.chat_bubble),
+            label: 'Communication',
+          ),
         ],
       ),
     );

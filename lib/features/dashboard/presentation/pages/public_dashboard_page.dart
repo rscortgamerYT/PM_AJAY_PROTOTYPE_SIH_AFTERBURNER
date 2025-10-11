@@ -12,7 +12,6 @@ import '../../../public_portal/presentation/widgets/eligibility_checker_widget.d
 import '../../../public_portal/presentation/widgets/application_tracker_widget.dart';
 import '../../../public_portal/presentation/widgets/coverage_checker_widget.dart';
 import '../../../public_portal/presentation/widgets/infrastructure_reports_widget.dart';
-import '../../../../core/widgets/app_footer.dart';
 
 class PublicDashboardPage extends ConsumerStatefulWidget {
   const PublicDashboardPage({super.key});
@@ -250,39 +249,27 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
   }
 
   Widget _buildCoverageChecker() {
-    return const SingleChildScrollView(
-      child: CoverageCheckerWidget(),
-    );
+    return const CoverageCheckerWidget();
   }
 
   Widget _buildSubmitComplaint() {
-    return const SingleChildScrollView(
-      child: SubmitComplaintWidget(userId: 'public_user'),
-    );
+    return const SubmitComplaintWidget(userId: 'public_user');
   }
 
   Widget _buildProjectRatings() {
-    return const SingleChildScrollView(
-      child: ProjectRatingsFeedbackWidget(userId: 'public_user'),
-    );
+    return const ProjectRatingsFeedbackWidget(userId: 'public_user');
   }
 
   Widget _buildOpenDataExplorer() {
-    return const SingleChildScrollView(
-      child: OpenDataExplorerWidget(userId: 'public_user'),
-    );
+    return const OpenDataExplorerWidget(userId: 'public_user');
   }
 
   Widget _buildCitizenIdeaHub() {
-    return const SingleChildScrollView(
-      child: CitizenIdeaHubWidget(userId: 'public_user'),
-    );
+    return const CitizenIdeaHubWidget(userId: 'public_user');
   }
 
   Widget _buildTransparencyStories() {
-    return const SingleChildScrollView(
-      child: TransparencyStoriesWidget(userId: 'public_user'),
-    );
+    return const TransparencyStoriesWidget(userId: 'public_user');
   }
 
   @override
@@ -348,53 +335,47 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
           const DashboardSwitcherWidget(),
         ],
       ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          NavigationBar(
-            selectedIndex: _selectedIndex,
-            onDestinationSelected: (index) {
-              setState(() => _selectedIndex = index);
-            },
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Icons.home_outlined),
-                selectedIcon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.calculate_outlined),
-                selectedIcon: Icon(Icons.calculate),
-                label: 'Eligibility',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.track_changes_outlined),
-                selectedIcon: Icon(Icons.track_changes),
-                label: 'Track',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.search_outlined),
-                selectedIcon: Icon(Icons.search),
-                label: 'Coverage',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.report_problem_outlined),
-                selectedIcon: Icon(Icons.report_problem),
-                label: 'Report',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.data_exploration_outlined),
-                selectedIcon: Icon(Icons.data_exploration),
-                label: 'Data',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.location_city_outlined),
-                selectedIcon: Icon(Icons.location_city),
-                label: 'Projects',
-              ),
-            ],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (index) {
+          setState(() => _selectedIndex = index);
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: 'Home',
           ),
-          const AppFooter(),
+          NavigationDestination(
+            icon: Icon(Icons.calculate_outlined),
+            selectedIcon: Icon(Icons.calculate),
+            label: 'Eligibility',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.track_changes_outlined),
+            selectedIcon: Icon(Icons.track_changes),
+            label: 'Track',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.search_outlined),
+            selectedIcon: Icon(Icons.search),
+            label: 'Coverage',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.report_problem_outlined),
+            selectedIcon: Icon(Icons.report_problem),
+            label: 'Report',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.data_exploration_outlined),
+            selectedIcon: Icon(Icons.data_exploration),
+            label: 'Data',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.location_city_outlined),
+            selectedIcon: Icon(Icons.location_city),
+            label: 'Projects',
+          ),
         ],
       ),
     );

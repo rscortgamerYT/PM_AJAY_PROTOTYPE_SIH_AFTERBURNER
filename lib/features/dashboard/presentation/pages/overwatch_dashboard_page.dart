@@ -13,7 +13,6 @@ import '../../../../core/widgets/dashboard_components.dart';
 import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
-import '../../../../core/widgets/app_footer.dart';
 
 class OverwatchDashboardPage extends ConsumerStatefulWidget {
   const OverwatchDashboardPage({super.key});
@@ -267,71 +266,29 @@ class _OverwatchDashboardPageState extends ConsumerState<OverwatchDashboardPage>
               },
             ),
           ),
-          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
-          const AppFooter(),
         ],
       ),
     );
   }
 
   Widget _buildAlertsPage() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const AlertsMonitoringWidget(),
-          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
-          const AppFooter(),
-        ],
-      ),
-    );
+    return const AlertsMonitoringWidget();
   }
 
   Widget _buildCompliancePage() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const ComplianceMonitoringWidget(),
-          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
-          const AppFooter(),
-        ],
-      ),
-    );
+    return const ComplianceMonitoringWidget();
   }
 
   Widget _buildEvidencePage() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const EvidenceManagementWidget(),
-          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
-          const AppFooter(),
-        ],
-      ),
-    );
+    return const EvidenceManagementWidget();
   }
 
   Widget _buildIntelligencePage() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const ProjectIntelligenceWidget(),
-          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
-          const AppFooter(),
-        ],
-      ),
-    );
+    return const ProjectIntelligenceWidget();
   }
 
   Widget _buildReportsPage() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const ReportsAnalyticsWidget(),
-          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
-          const AppFooter(),
-        ],
-      ),
-    );
+    return const ReportsAnalyticsWidget();
   }
 
   Widget _buildHorizontalCalendarStrip() {
