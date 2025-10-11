@@ -373,15 +373,13 @@ class _NewOverwatchDashboardPageState
               child: OverwatchMapWithFilters(
                 projects: _projects,
                 onProjectSelected: (projectId) {
+                  // Just update selected project, let map widget handle tooltip display
                   final project = _projects.firstWhere(
                     (p) => p.id == projectId,
                     orElse: () => _projects.first,
                   );
                   _onProjectSelect(project);
-                  // Switch to Fund Flow tab to show selected project details
-                  setState(() {
-                    _selectedTabIndex = 0;
-                  });
+                  // Map widget will show tooltip automatically - no need to switch tabs
                 },
               ),
             ),

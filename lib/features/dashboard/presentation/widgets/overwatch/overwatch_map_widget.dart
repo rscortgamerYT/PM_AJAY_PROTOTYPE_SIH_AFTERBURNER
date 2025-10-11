@@ -69,15 +69,35 @@ class OverwatchMapWidget extends StatelessWidget {
   /// Generate mock location based on project ID
   /// In production, replace with actual project coordinates from database
   LatLng _generateLocationForProject(String projectId) {
+    // Use actual Indian city coordinates for more realistic placement
+    final indianCities = [
+      const LatLng(28.6139, 77.2090),  // Delhi
+      const LatLng(19.0760, 72.8777),  // Mumbai
+      const LatLng(13.0827, 80.2707),  // Chennai
+      const LatLng(22.5726, 88.3639),  // Kolkata
+      const LatLng(12.9716, 77.5946),  // Bangalore
+      const LatLng(17.3850, 78.4867),  // Hyderabad
+      const LatLng(23.0225, 72.5714),  // Ahmedabad
+      const LatLng(18.5204, 73.8567),  // Pune
+      const LatLng(26.9124, 75.7873),  // Jaipur
+      const LatLng(30.7333, 76.7794),  // Chandigarh
+      const LatLng(21.1458, 79.0882),  // Nagpur
+      const LatLng(15.2993, 74.1240),  // Goa
+      const LatLng(11.0168, 76.9558),  // Coimbatore
+      const LatLng(25.5941, 85.1376),  // Patna
+      const LatLng(23.3441, 85.3096),  // Ranchi
+      const LatLng(26.8467, 80.9462),  // Lucknow
+      const LatLng(19.9975, 73.7898),  // Nashik
+      const LatLng(21.1702, 72.8311),  // Surat
+      const LatLng(20.2961, 85.8245),  // Bhubaneswar
+      const LatLng(10.8505, 76.2711),  // Thrissur
+    ];
+    
     // Extract number from project ID for deterministic location
     final hashCode = projectId.hashCode.abs();
+    final cityIndex = hashCode % indianCities.length;
     
-    // Generate coordinates within India's bounds
-    // Latitude: 8°N to 35°N, Longitude: 68°E to 97°E
-    final lat = 8.0 + (hashCode % 27);
-    final lng = 68.0 + ((hashCode ~/ 27) % 29);
-    
-    return LatLng(lat, lng);
+    return indianCities[cityIndex];
   }
 
   String _formatAmount(double amount) {
