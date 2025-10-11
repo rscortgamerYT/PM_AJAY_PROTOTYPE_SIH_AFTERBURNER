@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import '../models/state_model.dart';
-import '../models/agency_model.dart';
-import '../models/project_model.dart';
 
 /// Service for managing hierarchical drill-down navigation
 /// Supports: National → State → District → Agency → Project navigation
@@ -262,7 +259,7 @@ class BreadcrumbNavigationBar extends ConsumerWidget {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceVariant,
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),

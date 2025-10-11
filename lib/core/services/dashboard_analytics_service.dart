@@ -1,7 +1,6 @@
 import 'package:latlong2/latlong.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/agency_model.dart';
-import '../models/project_model.dart';
 
 /// Service for dashboard analytics and performance metrics
 class DashboardAnalyticsService {
@@ -46,7 +45,7 @@ class DashboardAnalyticsService {
         .rpc('get_fund_flow_waterfall_data')
         .single();
 
-    return FundFlowData.fromJson(response as Map<String, dynamic>);
+    return FundFlowData.fromJson(response);
   }
 
   /// Get predictive analytics data
@@ -55,7 +54,7 @@ class DashboardAnalyticsService {
         .rpc('predict_project_delays')
         .single();
 
-    return PredictionData.fromJson(response as Map<String, dynamic>);
+    return PredictionData.fromJson(response);
   }
 
   /// Get compliance scores for scoreboard
@@ -72,7 +71,7 @@ class DashboardAnalyticsService {
         .rpc('get_district_performance', params: {'state_uuid': stateId})
         .single();
 
-    return StateData.fromJson(response as Map<String, dynamic>);
+    return StateData.fromJson(response);
   }
 
   /// Get capacity optimization suggestions
@@ -81,7 +80,7 @@ class DashboardAnalyticsService {
         .rpc('optimize_agency_capacity', params: {'state_uuid': stateId})
         .single();
 
-    return OptimizationData.fromJson(response as Map<String, dynamic>);
+    return OptimizationData.fromJson(response);
   }
 
   /// Get project timeline data with dependencies
@@ -162,7 +161,7 @@ class DashboardAnalyticsService {
         .rpc('get_agency_performance_analytics', params: {'agency_uuid': agencyId})
         .single();
 
-    return PerformanceData.fromJson(response as Map<String, dynamic>);
+    return PerformanceData.fromJson(response);
   }
 
   /// Get collaboration network for cross-state partnerships

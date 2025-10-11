@@ -57,11 +57,11 @@ class KeyboardNavigationWrapper extends StatefulWidget {
   final bool enableArrowKeyNavigation;
 
   const KeyboardNavigationWrapper({
-    Key? key,
+    super.key,
     required this.child,
     this.shortcuts,
     this.enableArrowKeyNavigation = true,
-  }) : super(key: key);
+  });
 
   @override
   State<KeyboardNavigationWrapper> createState() => _KeyboardNavigationWrapperState();
@@ -109,13 +109,13 @@ class AccessibleButton extends StatelessWidget {
   final bool isEnabled;
 
   const AccessibleButton({
-    Key? key,
+    super.key,
     required this.child,
     required this.onPressed,
     required this.semanticLabel,
     this.tooltip,
     this.isEnabled = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -143,13 +143,13 @@ class AccessibleIconButton extends StatelessWidget {
   final double size;
 
   const AccessibleIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.onPressed,
     required this.semanticLabel,
     this.tooltip,
     this.size = 24.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +179,7 @@ class AccessibleTextField extends StatelessWidget {
   final bool obscureText;
 
   const AccessibleTextField({
-    Key? key,
+    super.key,
     this.controller,
     this.label,
     this.hint,
@@ -187,7 +187,7 @@ class AccessibleTextField extends StatelessWidget {
     this.onChanged,
     this.keyboardType,
     this.obscureText = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -216,12 +216,12 @@ class AccessibleCard extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
 
   const AccessibleCard({
-    Key? key,
+    super.key,
     required this.child,
     required this.semanticLabel,
     this.onTap,
     this.padding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -252,14 +252,14 @@ class AccessibleListTile extends StatelessWidget {
   final String semanticLabel;
 
   const AccessibleListTile({
-    Key? key,
+    super.key,
     this.leading,
     required this.title,
     this.subtitle,
     this.trailing,
     this.onTap,
     required this.semanticLabel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -284,11 +284,11 @@ class SkipNavigationLink extends StatelessWidget {
   final FocusNode focusNode;
 
   const SkipNavigationLink({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
     required this.focusNode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -317,10 +317,10 @@ class FocusManager extends StatefulWidget {
   final List<FocusNode> focusNodes;
 
   const FocusManager({
-    Key? key,
+    super.key,
     required this.child,
     required this.focusNodes,
-  }) : super(key: key);
+  });
 
   @override
   State<FocusManager> createState() => _FocusManagerState();
@@ -378,11 +378,11 @@ class AccessibleNavigationMenu extends StatefulWidget {
   final int currentIndex;
 
   const AccessibleNavigationMenu({
-    Key? key,
+    super.key,
     required this.items,
     required this.onItemSelected,
     this.currentIndex = 0,
-  }) : super(key: key);
+  });
 
   @override
   State<AccessibleNavigationMenu> createState() => _AccessibleNavigationMenuState();
@@ -480,11 +480,11 @@ class AccessibleDataTable extends StatelessWidget {
   final String semanticLabel;
 
   const AccessibleDataTable({
-    Key? key,
+    super.key,
     required this.headers,
     required this.rows,
     required this.semanticLabel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -526,11 +526,11 @@ class LiveRegion extends StatelessWidget {
   final Assertiveness assertiveness;
 
   const LiveRegion({
-    Key? key,
+    super.key,
     required this.child,
     this.label,
     this.assertiveness = Assertiveness.polite,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

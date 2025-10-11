@@ -129,10 +129,10 @@ class _PredictiveAnalyticsWidgetState extends State<PredictiveAnalyticsWidget> {
                       color: AppTheme.successGreen.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(Icons.trending_up, size: 16, color: AppTheme.successGreen),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(
                           'Confidence: 87%',
                           style: TextStyle(
@@ -151,7 +151,7 @@ class _PredictiveAnalyticsWidgetState extends State<PredictiveAnalyticsWidget> {
                 height: 300,
                 child: LineChart(
                   LineChartData(
-                    gridData: FlGridData(
+                    gridData: const FlGridData(
                       show: true,
                       drawVerticalLine: true,
                       horizontalInterval: 20,
@@ -425,7 +425,7 @@ class _PredictiveAnalyticsWidgetState extends State<PredictiveAnalyticsWidget> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.lightbulb, color: AppTheme.warningOrange),
+                  const Icon(Icons.lightbulb, color: AppTheme.warningOrange),
                   const SizedBox(width: 8),
                   Text(
                     'AI Recommendations',

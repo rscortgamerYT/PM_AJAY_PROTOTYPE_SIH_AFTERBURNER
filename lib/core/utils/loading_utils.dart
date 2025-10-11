@@ -96,7 +96,7 @@ class ProgressiveLoadingWidget<T> extends StatefulWidget {
   final bool autoLoad;
 
   const ProgressiveLoadingWidget({
-    Key? key,
+    super.key,
     required this.loadData,
     required this.builder,
     this.loadingWidget,
@@ -104,7 +104,7 @@ class ProgressiveLoadingWidget<T> extends StatefulWidget {
     this.errorWidget,
     this.pageSize = LoadingUtils.defaultPageSize,
     this.autoLoad = true,
-  }) : super(key: key);
+  });
 
   @override
   State<ProgressiveLoadingWidget<T>> createState() => _ProgressiveLoadingWidgetState<T>();
@@ -240,14 +240,14 @@ class LazyLoadListView<T> extends StatefulWidget {
   final double loadThreshold;
 
   const LazyLoadListView({
-    Key? key,
+    super.key,
     required this.loadData,
     required this.itemBuilder,
     this.loadingIndicator,
     this.emptyWidget,
     this.pageSize = LoadingUtils.defaultPageSize,
     this.loadThreshold = LoadingUtils.lazyLoadThreshold,
-  }) : super(key: key);
+  });
 
   @override
   State<LazyLoadListView<T>> createState() => _LazyLoadListViewState<T>();
@@ -331,12 +331,12 @@ class DebouncedSearchField extends StatefulWidget {
   final TextEditingController? controller;
 
   const DebouncedSearchField({
-    Key? key,
+    super.key,
     required this.onSearch,
     this.hintText,
     this.debounceDuration = LoadingUtils.debounceDuration,
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   State<DebouncedSearchField> createState() => _DebouncedSearchFieldState();
@@ -397,11 +397,11 @@ class SkeletonLoader extends StatelessWidget {
   final BorderRadius? borderRadius;
 
   const SkeletonLoader({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
     this.borderRadius,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -409,7 +409,7 @@ class SkeletonLoader extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: borderRadius ?? BorderRadius.circular(4),
       ),
       child: _ShimmerEffect(),
@@ -471,7 +471,7 @@ class _ShimmerEffectState extends State<_ShimmerEffect>
 
 /// Calendar skeleton loader
 class CalendarSkeletonLoader extends StatelessWidget {
-  const CalendarSkeletonLoader({Key? key}) : super(key: key);
+  const CalendarSkeletonLoader({super.key});
 
   @override
   Widget build(BuildContext context) {

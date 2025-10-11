@@ -105,7 +105,7 @@ class GeoFence {
     if (polygon != null) {
       return _pointInPolygon(point, polygon!);
     }
-    final distance = Distance();
+    const distance = Distance();
     return distance(center, point) <= radiusMeters;
   }
 

@@ -9,11 +9,11 @@ class TransactionExplorerTable extends StatefulWidget {
   final Function(List<String>)? onExport;
 
   const TransactionExplorerTable({
-    Key? key,
+    super.key,
     required this.transactions,
     this.onTransactionTap,
     this.onExport,
-  }) : super(key: key);
+  });
 
   @override
   State<TransactionExplorerTable> createState() => _TransactionExplorerTableState();
@@ -208,7 +208,7 @@ class _TransactionExplorerTableState extends State<TransactionExplorerTable> {
                       border: OutlineInputBorder(),
                       isDense: true,
                     ),
-                    value: _selectedStage,
+                    initialValue: _selectedStage,
                     items: [
                       const DropdownMenuItem(
                         value: null,
@@ -238,7 +238,7 @@ class _TransactionExplorerTableState extends State<TransactionExplorerTable> {
                       border: OutlineInputBorder(),
                       isDense: true,
                     ),
-                    value: _selectedStatus,
+                    initialValue: _selectedStatus,
                     items: [
                       const DropdownMenuItem(
                         value: null,
@@ -527,7 +527,7 @@ class _TransactionExplorerTableState extends State<TransactionExplorerTable> {
       ),
       child: Row(
         children: [
-          Text('Rows per page:'),
+          const Text('Rows per page:'),
           const SizedBox(width: 8),
           DropdownButton<int>(
             value: _rowsPerPage,

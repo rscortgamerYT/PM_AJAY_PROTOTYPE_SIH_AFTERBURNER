@@ -705,7 +705,7 @@ class _EscalationManagementConsoleWidgetState
       margin: const EdgeInsets.only(bottom: 8),
       color: Colors.grey.shade50,
       child: ListTile(
-        leading: Icon(Icons.update, color: AppTheme.secondaryBlue),
+        leading: const Icon(Icons.update, color: AppTheme.secondaryBlue),
         title: Row(
           children: [
             Text(

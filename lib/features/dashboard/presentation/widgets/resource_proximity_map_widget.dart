@@ -171,7 +171,7 @@ class _ResourceProximityMapWidgetState
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [AppTheme.agencyUserColor, AppTheme.accentTeal],
           begin: Alignment.topLeft,
@@ -370,7 +370,7 @@ class _ResourceProximityMapWidgetState
                 ),
                 Row(
                   children: [
-                    Icon(Icons.star, size: 16, color: AppTheme.warningOrange),
+                    const Icon(Icons.star, size: 16, color: AppTheme.warningOrange),
                     const SizedBox(width: 4),
                     Text(
                       resource.rating.toStringAsFixed(1),

@@ -46,12 +46,12 @@ class DashboardSwitcherWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
                   Icon(Icons.swap_horiz, color: AppDesignSystem.deepIndigo, size: 28),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Text(
                     'Switch Dashboard',
                     style: TextStyle(
@@ -72,18 +72,10 @@ class DashboardSwitcherWidget extends StatelessWidget {
                     _buildDashboardTile(
                       context,
                       icon: Icons.visibility,
-                      title: 'Overwatch Dashboard (New)',
+                      title: 'Overwatch Dashboard',
                       subtitle: 'Comprehensive monitoring and analytics',
                       route: AppRouter.newOverwatchDashboard,
                       color: Colors.blue,
-                    ),
-                    _buildDashboardTile(
-                      context,
-                      icon: Icons.visibility_outlined,
-                      title: 'Overwatch Dashboard (Legacy)',
-                      subtitle: 'Original overwatch interface',
-                      route: AppRouter.overwatchDashboard,
-                      color: Colors.blueGrey,
                     ),
                     _buildDashboardTile(
                       context,

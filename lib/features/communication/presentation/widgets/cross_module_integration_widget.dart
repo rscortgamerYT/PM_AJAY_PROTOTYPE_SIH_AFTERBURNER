@@ -76,7 +76,7 @@ class _CrossModuleIntegrationWidgetState extends ConsumerState<CrossModuleIntegr
               color: AppTheme.primaryIndigo.withOpacity(0.2),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.priority_high,
               color: AppTheme.primaryIndigo,
               size: 16,

@@ -190,9 +190,9 @@ class DashboardFilterBar extends StatelessWidget {
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Icon(Icons.clear_all, size: 16),
                   SizedBox(width: 4),
                   Text('Clear'),

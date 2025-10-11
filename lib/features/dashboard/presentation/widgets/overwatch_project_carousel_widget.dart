@@ -82,7 +82,7 @@ class _OverwatchProjectCarouselWidgetState
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Active Projects Overview',
                     style: AppDesignSystem.headlineMedium,
                   ),
@@ -95,7 +95,7 @@ class _OverwatchProjectCarouselWidgetState
                           color: AppDesignSystem.vibrantTeal,
                         ),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.arrow_forward,
                         size: 16,
                         color: AppDesignSystem.vibrantTeal,
@@ -111,7 +111,7 @@ class _OverwatchProjectCarouselWidgetState
                       onPressed: _scrollLeft,
                       icon: const Icon(Icons.chevron_left),
                       style: IconButton.styleFrom(
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                           borderRadius: AppDesignSystem.radiusSmall,
                           side: BorderSide(
                             color: AppDesignSystem.neutral300,
@@ -125,7 +125,7 @@ class _OverwatchProjectCarouselWidgetState
                       onPressed: _scrollRight,
                       icon: const Icon(Icons.chevron_right),
                       style: IconButton.styleFrom(
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                           borderRadius: AppDesignSystem.radiusSmall,
                           side: BorderSide(
                             color: AppDesignSystem.neutral300,
@@ -192,7 +192,7 @@ class _OverwatchProjectCarouselWidgetState
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
+                const Icon(
                   Icons.location_on,
                   size: 20,
                   color: AppDesignSystem.neutral600,
@@ -223,7 +223,7 @@ class _OverwatchProjectCarouselWidgetState
             const SizedBox(height: 16),
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.calendar_today,
                   size: 14,
                   color: AppDesignSystem.neutral600,
@@ -240,7 +240,7 @@ class _OverwatchProjectCarouselWidgetState
             const SizedBox(height: 8),
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.person,
                   size: 14,
                   color: AppDesignSystem.neutral600,

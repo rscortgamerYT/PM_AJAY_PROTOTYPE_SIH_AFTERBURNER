@@ -28,7 +28,7 @@ class _SubmitComplaintWidgetState extends ConsumerState<SubmitComplaintWidget> {
   String _selectedPriority = 'Medium';
   bool _isAnonymous = false;
   bool _isSubmitting = false;
-  List<PlatformFile> _attachments = [];
+  final List<PlatformFile> _attachments = [];
 
   final List<String> _categories = [
     'Infrastructure',
@@ -72,10 +72,10 @@ class _SubmitComplaintWidgetState extends ConsumerState<SubmitComplaintWidget> {
                 end: Alignment.bottomRight,
               ),
             ),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Submit a Complaint',
                   style: TextStyle(
                     fontSize: 28,
@@ -83,8 +83,8 @@ class _SubmitComplaintWidgetState extends ConsumerState<SubmitComplaintWidget> {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Text(
+                SizedBox(height: 8),
+                Text(
                   'Report issues directly to the Overwatch dashboard for immediate attention',
                   style: TextStyle(
                     fontSize: 16,
@@ -204,7 +204,7 @@ class _SubmitComplaintWidgetState extends ConsumerState<SubmitComplaintWidget> {
                     children: [
                       Expanded(
                         child: DropdownButtonFormField<String>(
-                          value: _selectedCategory,
+                          initialValue: _selectedCategory,
                           decoration: InputDecoration(
                             labelText: 'Category *',
                             prefixIcon: const Icon(Icons.category),
@@ -226,7 +226,7 @@ class _SubmitComplaintWidgetState extends ConsumerState<SubmitComplaintWidget> {
                       const SizedBox(width: 16),
                       Expanded(
                         child: DropdownButtonFormField<String>(
-                          value: _selectedPriority,
+                          initialValue: _selectedPriority,
                           decoration: InputDecoration(
                             labelText: 'Priority *',
                             prefixIcon: const Icon(Icons.priority_high),
@@ -420,13 +420,13 @@ class _SubmitComplaintWidgetState extends ConsumerState<SubmitComplaintWidget> {
                       padding: const EdgeInsets.all(16),
                       child: Row(
                         children: [
-                          Icon(Icons.info_outline, color: AppTheme.secondaryBlue),
+                          const Icon(Icons.info_outline, color: AppTheme.secondaryBlue),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   'What happens next?',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -582,7 +582,7 @@ class _SubmitComplaintWidgetState extends ConsumerState<SubmitComplaintWidget> {
             color: AppTheme.successGreen.withOpacity(0.2),
             shape: BoxShape.circle,
           ),
-          child: Icon(
+          child: const Icon(
             Icons.check_circle,
             color: AppTheme.successGreen,
             size: 48,
@@ -660,7 +660,7 @@ class _SubmitComplaintWidgetState extends ConsumerState<SubmitComplaintWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        icon: Icon(Icons.error_outline, color: AppTheme.errorRed, size: 48),
+        icon: const Icon(Icons.error_outline, color: AppTheme.errorRed, size: 48),
         title: const Text('Error'),
         content: Text(message),
         actions: [

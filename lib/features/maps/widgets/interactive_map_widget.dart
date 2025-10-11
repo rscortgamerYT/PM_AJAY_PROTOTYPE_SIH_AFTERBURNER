@@ -353,7 +353,7 @@ class _InteractiveMapWidgetState extends State<InteractiveMapWidget> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: AppTheme.accentTeal,
                       shape: BoxShape.circle,
                     ),

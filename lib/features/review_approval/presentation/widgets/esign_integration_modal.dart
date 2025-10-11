@@ -8,11 +8,11 @@ class ESignIntegrationModal extends StatefulWidget {
   final VoidCallback onCancel;
 
   const ESignIntegrationModal({
-    Key? key,
+    super.key,
     required this.request,
     required this.onSignatureComplete,
     required this.onCancel,
-  }) : super(key: key);
+  });
 
   @override
   State<ESignIntegrationModal> createState() => _ESignIntegrationModalState();

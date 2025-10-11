@@ -31,7 +31,7 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
   Widget _buildHeroSection() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
             AppDesignSystem.skyBlue,
@@ -246,20 +246,20 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
   }
 
   Widget _buildCoverageChecker() {
-    return Center(
+    return const Center(
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.search, size: 80, color: AppTheme.secondaryBlue),
-            const SizedBox(height: 16),
-            const Text(
+            SizedBox(height: 16),
+            Text(
               'Coverage Checker',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
-            const Text(
+            SizedBox(height: 8),
+            Text(
               'Check if PM-AJAY projects are available in your area',
               textAlign: TextAlign.center,
             ),
@@ -301,7 +301,7 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 AppDesignSystem.skyBlue,

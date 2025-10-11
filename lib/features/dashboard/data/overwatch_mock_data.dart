@@ -341,7 +341,7 @@ class OverwatchMockData {
           date: DateTime.now().subtract(Duration(days: _random.nextInt(20))),
           bankDetails: 'SBI Wardha Branch',
           approvalStatus: i == 0 ? 'Completed' : 'In Progress',
-          pfmsId: 'PFMS-2025-00124${i}',
+          pfmsId: 'PFMS-2025-00124$i',
         ),
         metadata: {'expense': i},
       );
@@ -353,7 +353,7 @@ class OverwatchMockData {
         value: amount,
         status: i == 0 ? FlowLinkStatus.completed : FlowLinkStatus.pending,
         details: PFMSDetails(
-          pfmsId: 'PFMS-2025-00124${i}',
+          pfmsId: 'PFMS-2025-00124$i',
           transferDate: DateTime.now().subtract(Duration(days: 15 - (i * 5))),
           processingDays: i == 0 ? 2 : 7,
           documents: ['Invoice.pdf', 'Receipt.pdf'],

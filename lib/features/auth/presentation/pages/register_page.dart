@@ -64,7 +64,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Registration successful! Please sign in.'),
+            content: const Text('Registration successful! Please sign in.'),
             backgroundColor: Theme.of(context).colorScheme.primary,
           ),
         );
@@ -140,7 +140,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           const SizedBox(height: 24),
                           TextFormField(
                             controller: _fullNameController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Full Name',
                               prefixIcon: Icon(Icons.person_outlined),
                             ),
@@ -155,7 +155,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           TextFormField(
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Email',
                               prefixIcon: Icon(Icons.email_outlined),
                             ),
@@ -173,7 +173,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           TextFormField(
                             controller: _phoneController,
                             keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Phone Number',
                               prefixIcon: Icon(Icons.phone_outlined),
                             ),
@@ -186,12 +186,12 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           ),
                           const SizedBox(height: 16),
                           DropdownButtonFormField<String>(
-                            value: _selectedRole,
-                            decoration: InputDecoration(
+                            initialValue: _selectedRole,
+                            decoration: const InputDecoration(
                               labelText: 'Role',
                               prefixIcon: Icon(Icons.work_outline),
                             ),
-                            items: [
+                            items: const [
                               DropdownMenuItem(value: 'agency_user', child: Text('Agency User')),
                               DropdownMenuItem(value: 'state_officer', child: Text('State Officer')),
                               DropdownMenuItem(value: 'public', child: Text('Public')),
@@ -206,7 +206,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                             obscureText: _obscurePassword,
                             decoration: InputDecoration(
                               labelText: 'Password',
-                              prefixIcon: Icon(Icons.lock_outlined),
+                              prefixIcon: const Icon(Icons.lock_outlined),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   _obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
@@ -232,7 +232,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                             obscureText: _obscureConfirmPassword,
                             decoration: InputDecoration(
                               labelText: 'Confirm Password',
-                              prefixIcon: Icon(Icons.lock_outlined),
+                              prefixIcon: const Icon(Icons.lock_outlined),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   _obscureConfirmPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
@@ -258,7 +258,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: _isLoading
-                                  ? SizedBox(
+                                  ? const SizedBox(
                                       height: 20,
                                       width: 20,
                                       child: CircularProgressIndicator(
@@ -266,19 +266,19 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                       ),
                                     )
-                                  : Text('Register'),
+                                  : const Text('Register'),
                             ),
                           ),
                           const SizedBox(height: 16),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Already have an account? '),
+                              const Text('Already have an account? '),
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pushReplacementNamed(AppRouter.login);
                                 },
-                                child: Text('Sign In'),
+                                child: const Text('Sign In'),
                               ),
                             ],
                           ),

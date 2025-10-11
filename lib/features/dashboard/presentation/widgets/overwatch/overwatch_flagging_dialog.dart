@@ -31,7 +31,7 @@ class _OverwatchFlaggingDialogState extends State<OverwatchFlaggingDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: AppDesignSystem.radiusLarge,
       ),
       child: Container(
@@ -45,13 +45,13 @@ class _OverwatchFlaggingDialogState extends State<OverwatchFlaggingDialog> {
             children: [
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.flag,
                     color: AppDesignSystem.error,
                     size: 28,
                   ),
                   const SizedBox(width: 12),
-                  Expanded(
+                  const Expanded(
                     child: Text(
                       'Flag Project Issue',
                       style: AppDesignSystem.headlineSmall,
@@ -66,7 +66,7 @@ class _OverwatchFlaggingDialogState extends State<OverwatchFlaggingDialog> {
               const SizedBox(height: 24),
               Container(
                 padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppDesignSystem.neutral100,
                   borderRadius: AppDesignSystem.radiusMedium,
                 ),
@@ -123,7 +123,7 @@ class _OverwatchFlaggingDialogState extends State<OverwatchFlaggingDialog> {
               TextFormField(
                 controller: _reasonController,
                 maxLines: 4,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Describe the issue or concern in detail...',
                   border: OutlineInputBorder(
                     borderRadius: AppDesignSystem.radiusMedium,

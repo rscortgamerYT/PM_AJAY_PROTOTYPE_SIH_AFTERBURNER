@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:file_picker/file_picker.dart';
 import '../../../../core/models/request_model.dart';
-import '../../../../core/models/state_model.dart';
-import '../../../../core/models/esign_model.dart';
-import '../../../../core/models/communication_models.dart';
 
 class CentreReviewPanelWidget extends ConsumerStatefulWidget {
   const CentreReviewPanelWidget({super.key});
@@ -17,7 +13,7 @@ class _CentreReviewPanelWidgetState extends ConsumerState<CentreReviewPanelWidge
   final TextEditingController _searchController = TextEditingController();
   ProjectComponent _selectedComponentFilter = ProjectComponent.all;
   RequestStatus _selectedStatusFilter = RequestStatus.pending;
-  RequestPriority _selectedPriorityFilter = RequestPriority.medium;
+  final RequestPriority _selectedPriorityFilter = RequestPriority.medium;
   RequestModel? _selectedRequest;
   
   // Mock data - to be replaced with Supabase queries
@@ -210,7 +206,7 @@ class _CentreReviewPanelWidgetState extends ConsumerState<CentreReviewPanelWidge
           const SizedBox(width: 16),
           Expanded(
             child: DropdownButtonFormField<ProjectComponent>(
-              value: _selectedComponentFilter,
+              initialValue: _selectedComponentFilter,
               decoration: InputDecoration(
                 labelText: 'Component',
                 border: OutlineInputBorder(
@@ -235,7 +231,7 @@ class _CentreReviewPanelWidgetState extends ConsumerState<CentreReviewPanelWidge
           const SizedBox(width: 16),
           Expanded(
             child: DropdownButtonFormField<RequestStatus>(
-              value: _selectedStatusFilter,
+              initialValue: _selectedStatusFilter,
               decoration: InputDecoration(
                 labelText: 'Status',
                 border: OutlineInputBorder(

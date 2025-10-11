@@ -351,9 +351,9 @@ class _AlertsMonitoringWidgetState extends State<AlertsMonitoringWidget> {
       child: Column(
         children: [
           TextField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Search alerts...',
-              prefixIcon: const Icon(Icons.search),
+              prefixIcon: Icon(Icons.search),
               border: OutlineInputBorder(borderRadius: AppDesignSystem.radiusMedium),
               filled: true,
               fillColor: Colors.white,
@@ -365,8 +365,8 @@ class _AlertsMonitoringWidgetState extends State<AlertsMonitoringWidget> {
             children: [
               Expanded(
                 child: DropdownButtonFormField<AlertSeverity>(
-                  value: _selectedSeverity,
-                  decoration: InputDecoration(
+                  initialValue: _selectedSeverity,
+                  decoration: const InputDecoration(
                     labelText: 'Severity',
                     border: OutlineInputBorder(borderRadius: AppDesignSystem.radiusMedium),
                     filled: true,
@@ -391,8 +391,8 @@ class _AlertsMonitoringWidgetState extends State<AlertsMonitoringWidget> {
               const SizedBox(width: 16),
               Expanded(
                 child: DropdownButtonFormField<AlertType>(
-                  value: _selectedType,
-                  decoration: InputDecoration(
+                  initialValue: _selectedType,
+                  decoration: const InputDecoration(
                     labelText: 'Type',
                     border: OutlineInputBorder(borderRadius: AppDesignSystem.radiusMedium),
                     filled: true,
@@ -442,14 +442,14 @@ class _AlertsMonitoringWidgetState extends State<AlertsMonitoringWidget> {
     final alerts = _filteredAlerts;
 
     if (alerts.isEmpty) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.check_circle_outline, size: 64, color: AppDesignSystem.success),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text('No alerts found', style: AppDesignSystem.headlineMedium),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text('All systems operational', style: AppDesignSystem.bodyLarge),
           ],
         ),
@@ -518,7 +518,7 @@ class _AlertsMonitoringWidgetState extends State<AlertsMonitoringWidget> {
                     Chip(
                       label: const Text('Acknowledged'),
                       backgroundColor: AppDesignSystem.info.withOpacity(0.1),
-                      labelStyle: TextStyle(color: AppDesignSystem.info, fontSize: 11),
+                      labelStyle: const TextStyle(color: AppDesignSystem.info, fontSize: 11),
                     ),
                 ],
               ),
@@ -609,13 +609,13 @@ class _AlertsMonitoringWidgetState extends State<AlertsMonitoringWidget> {
               Text(alert.description),
               const SizedBox(height: 16),
               if (alert.actions.isNotEmpty) ...[
-                Text('Recommended Actions:', style: AppDesignSystem.titleSmall),
+                const Text('Recommended Actions:', style: AppDesignSystem.titleSmall),
                 const SizedBox(height: 8),
                 ...alert.actions.map((action) => Padding(
                   padding: const EdgeInsets.only(bottom: 4),
                   child: Row(
                     children: [
-                      Icon(Icons.arrow_right, size: 16, color: AppDesignSystem.deepIndigo),
+                      const Icon(Icons.arrow_right, size: 16, color: AppDesignSystem.deepIndigo),
                       const SizedBox(width: 4),
                       Expanded(child: Text(action)),
                     ],

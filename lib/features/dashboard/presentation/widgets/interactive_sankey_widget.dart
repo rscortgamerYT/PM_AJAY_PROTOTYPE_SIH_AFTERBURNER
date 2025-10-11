@@ -38,7 +38,7 @@ class _InteractiveSankeyWidgetState extends ConsumerState<InteractiveSankeyWidge
   DateTimeRange? _dateFilter;
   double? _minAmountFilter;
   double? _maxAmountFilter;
-  Set<FundFlowStatus> _statusFilter = {};
+  final Set<FundFlowStatus> _statusFilter = {};
   String _searchQuery = '';
   
   // Layout calculations
@@ -207,7 +207,7 @@ class _InteractiveSankeyWidgetState extends ConsumerState<InteractiveSankeyWidge
   Widget _buildBreadcrumbBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
           bottom: BorderSide(color: AppDesignSystem.neutral300),
@@ -217,16 +217,16 @@ class _InteractiveSankeyWidgetState extends ConsumerState<InteractiveSankeyWidge
         children: [
           InkWell(
             onTap: () => _navigateToBreadcrumb(-1),
-            child: Row(
+            child: const Row(
               children: [
                 Icon(Icons.home, size: 20, color: AppDesignSystem.deepIndigo),
-                const SizedBox(width: 4),
+                SizedBox(width: 4),
                 Text('Centre', style: AppDesignSystem.labelLarge),
               ],
             ),
           ),
           for (int i = 0; i < _breadcrumbs.length; i++) ...[
-            Icon(Icons.chevron_right, size: 20, color: AppDesignSystem.neutral500),
+            const Icon(Icons.chevron_right, size: 20, color: AppDesignSystem.neutral500),
             InkWell(
               onTap: () => _navigateToBreadcrumb(i),
               child: Text(
@@ -248,7 +248,7 @@ class _InteractiveSankeyWidgetState extends ConsumerState<InteractiveSankeyWidge
   Widget _buildFilterBar() {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppDesignSystem.neutral100,
         border: Border(
           bottom: BorderSide(color: AppDesignSystem.neutral300),
@@ -423,7 +423,7 @@ class _InteractiveSankeyWidgetState extends ConsumerState<InteractiveSankeyWidge
           ),
           const SizedBox(height: 24),
           if (node.evidenceDocuments.isNotEmpty) ...[
-            Text('Evidence Documents', style: AppDesignSystem.titleMedium),
+            const Text('Evidence Documents', style: AppDesignSystem.titleMedium),
             const SizedBox(height: 8),
             ...node.evidenceDocuments.map((doc) => ListTile(
               leading: const Icon(Icons.file_present),
@@ -447,7 +447,7 @@ class _InteractiveSankeyWidgetState extends ConsumerState<InteractiveSankeyWidge
         children: [
           Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: Text(
                   'Fund Transfer',
                   style: AppDesignSystem.headlineSmall,
@@ -476,7 +476,7 @@ class _InteractiveSankeyWidgetState extends ConsumerState<InteractiveSankeyWidge
             _buildInfoRow('UC Status', link.ucStatus!),
           const SizedBox(height: 24),
           if (link.auditTrail.isNotEmpty) ...[
-            Text('Audit Trail', style: AppDesignSystem.titleMedium),
+            const Text('Audit Trail', style: AppDesignSystem.titleMedium),
             const SizedBox(height: 8),
             ...link.auditTrail.map((entry) => Card(
               margin: const EdgeInsets.only(bottom: 8),
@@ -595,7 +595,7 @@ class SankeyPainter extends CustomPainter {
 
   void _drawFlowingParticles(Canvas canvas, Path path) {
     final metrics = path.computeMetrics().first;
-    final particleCount = 5;
+    const particleCount = 5;
     
     for (int i = 0; i < particleCount; i++) {
       final progress = (flowAnimation.value + (i / particleCount)) % 1.0;

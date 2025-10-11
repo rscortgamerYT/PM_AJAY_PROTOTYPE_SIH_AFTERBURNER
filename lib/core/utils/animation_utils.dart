@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 /// Utility class for creating reusable animations throughout the app
 class AnimationUtils {
@@ -109,13 +108,13 @@ class PulsingMapPin extends StatefulWidget {
   final bool enabled;
 
   const PulsingMapPin({
-    Key? key,
+    super.key,
     required this.child,
     required this.color,
     this.size = 40.0,
     this.duration = const Duration(milliseconds: 1500),
     this.enabled = true,
-  }) : super(key: key);
+  });
 
   @override
   State<PulsingMapPin> createState() => _PulsingMapPinState();
@@ -205,12 +204,12 @@ class AnimatedChartTransition extends StatefulWidget {
   final bool animate;
 
   const AnimatedChartTransition({
-    Key? key,
+    super.key,
     required this.child,
     this.duration = const Duration(milliseconds: 800),
     this.curve = Curves.easeOutCubic,
     this.animate = true,
-  }) : super(key: key);
+  });
 
   @override
   State<AnimatedChartTransition> createState() => _AnimatedChartTransitionState();

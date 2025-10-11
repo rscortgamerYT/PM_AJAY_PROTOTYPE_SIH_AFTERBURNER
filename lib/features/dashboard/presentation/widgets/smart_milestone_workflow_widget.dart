@@ -160,7 +160,7 @@ class _SmartMilestoneWorkflowWidgetState
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [AppTheme.agencyUserColor, AppTheme.accentTeal],
           begin: Alignment.topLeft,
@@ -384,11 +384,11 @@ class _SmartMilestoneWorkflowWidgetState
                     ),
                     if (milestone.completedDate != null) ...[
                       const SizedBox(width: 16),
-                      Icon(Icons.check, size: 16, color: AppTheme.successGreen),
+                      const Icon(Icons.check, size: 16, color: AppTheme.successGreen),
                       const SizedBox(width: 4),
                       Text(
                         'Completed: ${_formatDate(milestone.completedDate!)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppTheme.successGreen,
                           fontWeight: FontWeight.w500,
                         ),

@@ -86,7 +86,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.location_on,
                 size: 120,
                 color: Colors.white,
@@ -107,7 +107,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
                     ),
               ),
               const SizedBox(height: 48),
-              CircularProgressIndicator(
+              const CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               ),
             ],

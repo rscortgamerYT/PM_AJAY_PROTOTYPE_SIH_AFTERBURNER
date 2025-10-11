@@ -8,10 +8,10 @@ class FundFlowDrillDownModal extends StatefulWidget {
   final Function(String)? onEntityTap;
 
   const FundFlowDrillDownModal({
-    Key? key,
+    super.key,
     required this.context,
     this.onEntityTap,
-  }) : super(key: key);
+  });
 
   @override
   State<FundFlowDrillDownModal> createState() => _FundFlowDrillDownModalState();
@@ -23,7 +23,7 @@ class FundFlowDrillDownModal extends StatefulWidget {
     return showDialog(
       context: context,
       builder: (context) => Dialog(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
           height: MediaQuery.of(context).size.height * 0.8,
           child: FundFlowDrillDownModal(context: drillDownContext),

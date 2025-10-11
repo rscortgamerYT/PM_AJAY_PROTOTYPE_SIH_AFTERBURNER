@@ -36,7 +36,7 @@ class _EventCalendarWidgetState extends State<EventCalendarWidget>
   late Animation<double> _fadeAnimation;
   
   DateTime _currentMonth = DateTime.now();
-  List<Event> _events = [];
+  final List<Event> _events = [];
 
   @override
   void initState() {
@@ -105,7 +105,7 @@ class _EventCalendarWidgetState extends State<EventCalendarWidget>
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          title: Text(
+          title: const Text(
             'Add New Event',
             style: AppDesignSystem.titleLarge,
           ),
@@ -114,7 +114,7 @@ class _EventCalendarWidgetState extends State<EventCalendarWidget>
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Event Name', style: AppDesignSystem.labelMedium),
+                const Text('Event Name', style: AppDesignSystem.labelMedium),
                 const SizedBox(height: 8),
                 TextField(
                   controller: nameController,
@@ -124,7 +124,7 @@ class _EventCalendarWidgetState extends State<EventCalendarWidget>
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text('Enter Only Date', style: AppDesignSystem.labelMedium),
+                const Text('Enter Only Date', style: AppDesignSystem.labelMedium),
                 const SizedBox(height: 8),
                 TextField(
                   controller: dateController,
@@ -135,7 +135,7 @@ class _EventCalendarWidgetState extends State<EventCalendarWidget>
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text('Icon (emoji or text)', style: AppDesignSystem.labelMedium),
+                const Text('Icon (emoji or text)', style: AppDesignSystem.labelMedium),
                 const SizedBox(height: 8),
                 TextField(
                   controller: iconController,
@@ -145,7 +145,7 @@ class _EventCalendarWidgetState extends State<EventCalendarWidget>
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text('Color', style: AppDesignSystem.labelMedium),
+                const Text('Color', style: AppDesignSystem.labelMedium),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -552,7 +552,7 @@ class _EventCalendarWidgetState extends State<EventCalendarWidget>
               ),
               GestureDetector(
                 onTap: () => _removeEvent(event.id),
-                child: Icon(
+                child: const Icon(
                   Icons.close,
                   size: 12,
                   color: AppDesignSystem.neutral600,

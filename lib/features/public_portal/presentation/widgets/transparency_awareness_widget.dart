@@ -60,10 +60,10 @@ class _TransparencyAwarenessWidgetState extends ConsumerState<TransparencyAwaren
               end: Alignment.bottomRight,
             ),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Transparency & Awareness',
                 style: TextStyle(
                   fontSize: 28,
@@ -71,8 +71,8 @@ class _TransparencyAwarenessWidgetState extends ConsumerState<TransparencyAwaren
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 8),
-              const Text(
+              SizedBox(height: 8),
+              Text(
                 'Learn about PM-AJAY through tutorials, videos, and FAQs',
                 style: TextStyle(
                   fontSize: 16,
@@ -305,7 +305,7 @@ class _TransparencyAwarenessWidgetState extends ConsumerState<TransparencyAwaren
                 Container(
                   height: 120,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [AppTheme.primaryIndigo, AppTheme.secondaryBlue],
                       begin: Alignment.topLeft,
@@ -402,7 +402,7 @@ class _TransparencyAwarenessWidgetState extends ConsumerState<TransparencyAwaren
             color: AppTheme.primaryIndigo.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
-          child: Icon(
+          child: const Icon(
             Icons.help_outline,
             color: AppTheme.primaryIndigo,
             size: 20,
@@ -552,7 +552,7 @@ class _TransparencyAwarenessWidgetState extends ConsumerState<TransparencyAwaren
             : Container(
                 width: 8,
                 height: 8,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppTheme.primaryIndigo,
                   shape: BoxShape.circle,
                 ),
@@ -736,7 +736,7 @@ class _TransparencyAwarenessWidgetState extends ConsumerState<TransparencyAwaren
               height: 200,
               width: double.infinity,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   colors: [AppTheme.primaryIndigo, AppTheme.secondaryBlue],
                 ),
                 borderRadius: BorderRadius.circular(12),

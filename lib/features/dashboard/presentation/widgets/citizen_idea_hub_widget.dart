@@ -714,7 +714,7 @@ class _CitizenIdeaHubWidgetState extends State<CitizenIdeaHubWidget> {
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<IdeaCategory>(
-                  value: category,
+                  initialValue: category,
                   decoration: const InputDecoration(
                     labelText: 'Category',
                     border: OutlineInputBorder(),
@@ -729,7 +729,7 @@ class _CitizenIdeaHubWidgetState extends State<CitizenIdeaHubWidget> {
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
-                  value: district,
+                  initialValue: district,
                   decoration: const InputDecoration(
                     labelText: 'District',
                     border: OutlineInputBorder(),

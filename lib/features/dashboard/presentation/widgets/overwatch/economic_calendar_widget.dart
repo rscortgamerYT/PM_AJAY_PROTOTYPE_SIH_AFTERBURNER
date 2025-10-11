@@ -94,7 +94,7 @@ class _EconomicCalendarWidgetState extends State<EconomicCalendarWidget>
               ),
             ),
             const SizedBox(width: 8),
-            Icon(
+            const Icon(
               Icons.chevron_right,
               color: AppDesignSystem.neutral600,
               size: 20,
@@ -108,7 +108,7 @@ class _EconomicCalendarWidgetState extends State<EconomicCalendarWidget>
             if (_canScrollRight)
               _buildScrollButton(Icons.chevron_right, () => _scroll(false)),
             const SizedBox(width: 8),
-            Icon(
+            const Icon(
               Icons.code,
               color: AppDesignSystem.neutral600,
               size: 24,
@@ -259,7 +259,7 @@ class _EconomicCalendarWidgetState extends State<EconomicCalendarWidget>
         Container(
           width: 32,
           height: 32,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: AppDesignSystem.neutral200,
           ),

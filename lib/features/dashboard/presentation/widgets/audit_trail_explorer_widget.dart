@@ -334,7 +334,7 @@ class _AuditTrailExplorerWidgetState
             children: [
               Expanded(
                 child: DropdownButtonFormField<String>(
-                  value: _selectedActionType,
+                  initialValue: _selectedActionType,
                   decoration: const InputDecoration(
                     labelText: 'Action Type',
                     border: OutlineInputBorder(),
@@ -360,7 +360,7 @@ class _AuditTrailExplorerWidgetState
               
               Expanded(
                 child: DropdownButtonFormField<String>(
-                  value: _selectedUser,
+                  initialValue: _selectedUser,
                   decoration: const InputDecoration(
                     labelText: 'User',
                     border: OutlineInputBorder(),
@@ -667,7 +667,7 @@ class _AuditTrailExplorerWidgetState
                   ),
                   child: Text(
                     oldValue,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 11,
                       color: AppTheme.errorRed,
                       decoration: TextDecoration.lineThrough,
@@ -686,7 +686,7 @@ class _AuditTrailExplorerWidgetState
                   ),
                   child: Text(
                     newValue,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 11,
                       color: AppTheme.successGreen,
                       fontWeight: FontWeight.bold,

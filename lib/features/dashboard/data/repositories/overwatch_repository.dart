@@ -47,7 +47,7 @@ class OverwatchRepository {
           .eq('id', projectId)
           .single();
 
-      return OverwatchProject.fromJson(response as Map<String, dynamic>);
+      return OverwatchProject.fromJson(response);
     } catch (e) {
       return null;
     }
@@ -62,7 +62,7 @@ class OverwatchRepository {
           .eq('project_id', projectId)
           .order('level', ascending: true);
 
-      if (response == null || (response as List).isEmpty) {
+      if ((response as List).isEmpty) {
         return null;
       }
 

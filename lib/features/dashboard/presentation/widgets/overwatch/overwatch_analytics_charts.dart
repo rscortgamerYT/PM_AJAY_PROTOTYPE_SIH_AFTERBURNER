@@ -137,7 +137,7 @@ class OverwatchAnalyticsCharts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Risk Level Distribution',
             style: AppDesignSystem.titleMedium,
           ),
@@ -185,7 +185,7 @@ class OverwatchAnalyticsCharts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Fund Utilization by Component',
             style: AppDesignSystem.titleMedium,
           ),

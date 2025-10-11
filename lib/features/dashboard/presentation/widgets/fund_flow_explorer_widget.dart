@@ -4,7 +4,6 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/fund_transaction_model.dart';
 import '../../../../core/models/project_model.dart';
 import '../../../../core/models/agency_model.dart';
-import '../../../../core/models/state_model.dart';
 import '../../../../core/data/demo_data_generator.dart';
 import 'package:latlong2/latlong.dart';
 import '../../../maps/widgets/interactive_map_widget.dart';
@@ -113,11 +112,11 @@ class _FundFlowExplorerWidgetState extends ConsumerState<FundFlowExplorerWidget>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Icon(Icons.auto_awesome, color: AppTheme.overwatchColor, size: 24),
-                      const SizedBox(width: 8),
-                      const Text(
+                      Icon(Icons.auto_awesome, color: AppTheme.overwatchColor, size: 24),
+                      SizedBox(width: 8),
+                      Text(
                         'AI-Powered Search',
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
@@ -266,7 +265,7 @@ class _FundFlowExplorerWidgetState extends ConsumerState<FundFlowExplorerWidget>
                       prefixIcon: Icon(Icons.account_balance_wallet),
                       border: OutlineInputBorder(),
                     ),
-                    value: _selectedStatus,
+                    initialValue: _selectedStatus,
                     items: TransactionStatus.values.map((status) {
                       return DropdownMenuItem(
                         value: status,
@@ -283,7 +282,7 @@ class _FundFlowExplorerWidgetState extends ConsumerState<FundFlowExplorerWidget>
                       prefixIcon: Icon(Icons.category),
                       border: OutlineInputBorder(),
                     ),
-                    value: _selectedComponent,
+                    initialValue: _selectedComponent,
                     items: SchemeComponent.values.map((component) {
                       return DropdownMenuItem(
                         value: component,
@@ -300,7 +299,7 @@ class _FundFlowExplorerWidgetState extends ConsumerState<FundFlowExplorerWidget>
                       prefixIcon: Icon(Icons.location_on),
                       border: OutlineInputBorder(),
                     ),
-                    value: _selectedState,
+                    initialValue: _selectedState,
                     items: ['Delhi', 'Maharashtra', 'Karnataka', 'Tamil Nadu']
                         .map((state) => DropdownMenuItem(value: state, child: Text(state)))
                         .toList(),
@@ -393,11 +392,11 @@ class _FundFlowExplorerWidgetState extends ConsumerState<FundFlowExplorerWidget>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Icon(Icons.account_tree, color: AppTheme.overwatchColor),
-                      const SizedBox(width: 8),
-                      const Text(
+                      Icon(Icons.account_tree, color: AppTheme.overwatchColor),
+                      SizedBox(width: 8),
+                      Text(
                         'Fund Flow Sankey Diagram',
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
@@ -606,11 +605,11 @@ class _FundFlowExplorerWidgetState extends ConsumerState<FundFlowExplorerWidget>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
-                  const Icon(Icons.waterfall_chart, color: AppTheme.overwatchColor),
-                  const SizedBox(width: 8),
-                  const Text(
+                  Icon(Icons.waterfall_chart, color: AppTheme.overwatchColor),
+                  SizedBox(width: 8),
+                  Text(
                     'Waterfall Utilization Chart',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -630,7 +629,7 @@ class _FundFlowExplorerWidgetState extends ConsumerState<FundFlowExplorerWidget>
                   itemBuilder: (context, index) {
                     final stage = stages[index];
                     final value = stage['value'] as double;
-                    final maxValue = 50000000.0;
+                    const maxValue = 50000000.0;
                     final widthPercent = (value / maxValue);
                     
                     return Padding(
@@ -812,24 +811,24 @@ class _FundFlowExplorerWidgetState extends ConsumerState<FundFlowExplorerWidget>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Card(
+          const Card(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.folder_open, color: AppTheme.overwatchColor),
-                      const SizedBox(width: 8),
-                      const Text(
+                      Icon(Icons.folder_open, color: AppTheme.overwatchColor),
+                      SizedBox(width: 8),
+                      Text(
                         'Evidence & Documentation',
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
+                  SizedBox(height: 16),
+                  Text(
                     'Supporting documents linked to fund events',
                     style: TextStyle(color: Colors.grey),
                   ),
@@ -1047,14 +1046,14 @@ class _FundFlowExplorerWidgetState extends ConsumerState<FundFlowExplorerWidget>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Card(
+          const Card(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               child: Row(
                 children: [
-                  const Icon(Icons.notifications_active, color: AppTheme.overwatchColor),
-                  const SizedBox(width: 8),
-                  const Text(
+                  Icon(Icons.notifications_active, color: AppTheme.overwatchColor),
+                  SizedBox(width: 8),
+                  Text(
                     'Real-Time Alerts & SLA Tracking',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),

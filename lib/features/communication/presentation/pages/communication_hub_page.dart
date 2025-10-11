@@ -47,11 +47,11 @@ class _CommunicationHubPageState extends ConsumerState<CommunicationHubPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.hub, color: AppTheme.primaryIndigo),
-            const SizedBox(width: 12),
-            const Text('Communication Hub'),
+            SizedBox(width: 12),
+            Text('Communication Hub'),
           ],
         ),
         actions: [
@@ -119,7 +119,7 @@ class _CommunicationHubPageState extends ConsumerState<CommunicationHubPage> {
               color: AppTheme.primaryIndigo,
               size: 28,
             ),
-            unselectedIconTheme: IconThemeData(
+            unselectedIconTheme: const IconThemeData(
               color: AppTheme.neutralGray,
               size: 24,
             ),
@@ -127,7 +127,7 @@ class _CommunicationHubPageState extends ConsumerState<CommunicationHubPage> {
               color: AppTheme.primaryIndigo,
               fontWeight: FontWeight.w600,
             ),
-            unselectedLabelTextStyle: TextStyle(
+            unselectedLabelTextStyle: const TextStyle(
               color: AppTheme.neutralGray,
             ),
             destinations: _navItems.map((item) {
@@ -172,7 +172,7 @@ class _CommunicationHubPageState extends ConsumerState<CommunicationHubPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.settings,
             size: 64,
             color: AppTheme.neutralGray,

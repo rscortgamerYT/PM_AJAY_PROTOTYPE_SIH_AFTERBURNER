@@ -260,7 +260,7 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
         children: [
           _buildKpiSection(),
           SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
-          DashboardSectionHeader(
+          const DashboardSectionHeader(
             title: 'District Overview',
             subtitle: 'Geographic distribution of projects and agencies',
           ),
@@ -330,7 +330,7 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 AppDesignSystem.deepIndigo,

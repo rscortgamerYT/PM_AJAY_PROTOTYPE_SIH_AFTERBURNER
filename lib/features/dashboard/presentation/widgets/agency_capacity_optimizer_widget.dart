@@ -232,7 +232,7 @@ class _AgencyCapacityOptimizerWidgetState extends State<AgencyCapacityOptimizerW
                         ),
                       ),
                     ),
-                    gridData: FlGridData(
+                    gridData: const FlGridData(
                       show: true,
                       drawVerticalLine: false,
                       horizontalInterval: 20,
@@ -466,7 +466,7 @@ class _AgencyCapacityOptimizerWidgetState extends State<AgencyCapacityOptimizerW
             children: [
               Row(
                 children: [
-                  Icon(Icons.psychology, color: AppTheme.primaryIndigo),
+                  const Icon(Icons.psychology, color: AppTheme.primaryIndigo),
                   const SizedBox(width: 8),
                   Text(
                     'AI Optimization Suggestions',

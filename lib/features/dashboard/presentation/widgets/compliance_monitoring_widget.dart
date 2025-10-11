@@ -393,9 +393,9 @@ class _ComplianceMonitoringWidgetState extends State<ComplianceMonitoringWidget>
           Expanded(
             flex: 2,
             child: TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search states...',
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(borderRadius: AppDesignSystem.radiusMedium),
                 filled: true,
                 fillColor: Colors.white,
@@ -406,8 +406,8 @@ class _ComplianceMonitoringWidgetState extends State<ComplianceMonitoringWidget>
           const SizedBox(width: 16),
           Expanded(
             child: DropdownButtonFormField<ComplianceStatus>(
-              value: _selectedStatus,
-              decoration: InputDecoration(
+              initialValue: _selectedStatus,
+              decoration: const InputDecoration(
                 labelText: 'Status Filter',
                 border: OutlineInputBorder(borderRadius: AppDesignSystem.radiusMedium),
                 filled: true,
@@ -442,8 +442,8 @@ class _ComplianceMonitoringWidgetState extends State<ComplianceMonitoringWidget>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
+          const Padding(
+            padding: EdgeInsets.all(16),
             child: Text('State Compliance Status', style: AppDesignSystem.headlineSmall),
           ),
           Expanded(
@@ -512,7 +512,7 @@ class _ComplianceMonitoringWidgetState extends State<ComplianceMonitoringWidget>
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('Score', style: AppDesignSystem.labelSmall),
+                      const Text('Score', style: AppDesignSystem.labelSmall),
                     ],
                   ),
                 ],
@@ -565,7 +565,7 @@ class _ComplianceMonitoringWidgetState extends State<ComplianceMonitoringWidget>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Compliance Distribution', style: AppDesignSystem.headlineSmall),
+            const Text('Compliance Distribution', style: AppDesignSystem.headlineSmall),
             const SizedBox(height: 24),
             Expanded(
               child: PieChart(
@@ -639,7 +639,7 @@ class _ComplianceMonitoringWidgetState extends State<ComplianceMonitoringWidget>
                 style: AppDesignSystem.titleMedium),
               const SizedBox(height: 16),
               if (state.issues.isNotEmpty) ...[
-                Text('Active Issues:', style: AppDesignSystem.titleSmall),
+                const Text('Active Issues:', style: AppDesignSystem.titleSmall),
                 const SizedBox(height: 8),
                 ...state.issues.map((issue) => Card(
                   margin: const EdgeInsets.only(bottom: 8),

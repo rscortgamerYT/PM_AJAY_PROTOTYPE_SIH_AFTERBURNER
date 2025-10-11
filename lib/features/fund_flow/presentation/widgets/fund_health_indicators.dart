@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import '../../../../core/models/fund_transaction_model.dart';
 
 /// Fund Health Indicators showing key metrics and alerts
 class FundHealthIndicators extends StatelessWidget {
@@ -13,7 +12,7 @@ class FundHealthIndicators extends StatelessWidget {
   final Function()? onViewDetails;
 
   const FundHealthIndicators({
-    Key? key,
+    super.key,
     required this.utilizationRate,
     required this.averageTransferDays,
     required this.delayedTransactions,
@@ -21,7 +20,7 @@ class FundHealthIndicators extends StatelessWidget {
     required this.complianceScore,
     required this.bottlenecks,
     this.onViewDetails,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +82,9 @@ class UtilizationRateGauge extends StatefulWidget {
   final double utilizationRate;
 
   const UtilizationRateGauge({
-    Key? key,
+    super.key,
     required this.utilizationRate,
-  }) : super(key: key);
+  });
 
   @override
   State<UtilizationRateGauge> createState() => _UtilizationRateGaugeState();
@@ -276,11 +275,11 @@ class AverageTransferTimeCard extends StatelessWidget {
   final int totalTransactions;
 
   const AverageTransferTimeCard({
-    Key? key,
+    super.key,
     required this.averageTransferDays,
     required this.delayedTransactions,
     required this.totalTransactions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -384,9 +383,9 @@ class ComplianceScoreCard extends StatelessWidget {
   final double complianceScore;
 
   const ComplianceScoreCard({
-    Key? key,
+    super.key,
     required this.complianceScore,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -519,9 +518,9 @@ class BottleneckAlertsPanel extends StatelessWidget {
   final List<BottleneckAlert> bottlenecks;
 
   const BottleneckAlertsPanel({
-    Key? key,
+    super.key,
     required this.bottlenecks,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

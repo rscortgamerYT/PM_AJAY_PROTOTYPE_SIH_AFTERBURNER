@@ -287,11 +287,11 @@ class _SubmitComplaintWidgetState extends State<SubmitComplaintWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
                 Icon(Icons.location_on, color: AppTheme.publicColor),
-                const SizedBox(width: 8),
-                const Text(
+                SizedBox(width: 8),
+                Text(
                   'Location Details',
                   style: TextStyle(
                     fontSize: 16,
@@ -302,7 +302,7 @@ class _SubmitComplaintWidgetState extends State<SubmitComplaintWidget> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: _selectedDistrict,
+              initialValue: _selectedDistrict,
               decoration: const InputDecoration(
                 labelText: 'District *',
                 border: OutlineInputBorder(),
@@ -323,7 +323,7 @@ class _SubmitComplaintWidgetState extends State<SubmitComplaintWidget> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: _selectedProject,
+              initialValue: _selectedProject,
               decoration: const InputDecoration(
                 labelText: 'Related Project (Optional)',
                 border: OutlineInputBorder(),
@@ -355,11 +355,11 @@ class _SubmitComplaintWidgetState extends State<SubmitComplaintWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
                 Icon(Icons.description, color: AppTheme.publicColor),
-                const SizedBox(width: 8),
-                const Text(
+                SizedBox(width: 8),
+                Text(
                   'Complaint Details',
                   style: TextStyle(
                     fontSize: 16,
@@ -370,7 +370,7 @@ class _SubmitComplaintWidgetState extends State<SubmitComplaintWidget> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<ComplaintCategory>(
-              value: _selectedCategory,
+              initialValue: _selectedCategory,
               decoration: const InputDecoration(
                 labelText: 'Complaint Category *',
                 border: OutlineInputBorder(),
@@ -552,11 +552,11 @@ class _SubmitComplaintWidgetState extends State<SubmitComplaintWidget> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.check_circle, color: AppTheme.successGreen, size: 32),
-            const SizedBox(width: 12),
-            const Text('Complaint Submitted'),
+            SizedBox(width: 12),
+            Text('Complaint Submitted'),
           ],
         ),
         content: Column(

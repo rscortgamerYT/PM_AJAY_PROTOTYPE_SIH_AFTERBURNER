@@ -10,12 +10,12 @@ class MilestoneTimelineWidget extends StatefulWidget {
   final Function(ProjectMilestone)? onMilestoneUpdate;
 
   const MilestoneTimelineWidget({
-    Key? key,
+    super.key,
     required this.projectId,
     required this.milestones,
     this.onMilestoneSubmit,
     this.onMilestoneUpdate,
-  }) : super(key: key);
+  });
 
   @override
   State<MilestoneTimelineWidget> createState() => _MilestoneTimelineWidgetState();
@@ -539,7 +539,7 @@ class _ArrowPainter extends CustomPainter {
 
     canvas.drawLine(start, end, paint);
 
-    final arrowSize = 8.0;
+    const arrowSize = 8.0;
     final angle = (end - start).direction;
     final arrowPath = Path()
       ..moveTo(end.dx, end.dy)
@@ -674,8 +674,8 @@ class _AddMilestoneDialogState extends State<_AddMilestoneDialog> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   MilestoneType _type = MilestoneType.construction;
-  DateTime _startDate = DateTime.now();
-  DateTime _endDate = DateTime.now().add(const Duration(days: 30));
+  final DateTime _startDate = DateTime.now();
+  final DateTime _endDate = DateTime.now().add(const Duration(days: 30));
 
   @override
   Widget build(BuildContext context) {
@@ -694,7 +694,7 @@ class _AddMilestoneDialogState extends State<_AddMilestoneDialog> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<MilestoneType>(
-              value: _type,
+              initialValue: _type,
               decoration: const InputDecoration(
                 labelText: 'Type',
                 border: OutlineInputBorder(),

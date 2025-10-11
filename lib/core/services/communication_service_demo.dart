@@ -8,7 +8,7 @@ import '../data/demo_data_generator.dart';
 class CommunicationServiceDemo {
   // Static demo data storage
   static List<Channel>? _channels;
-  static Map<String, List<Message>> _messagesByChannel = {};
+  static final Map<String, List<Message>> _messagesByChannel = {};
   static List<Ticket>? _tickets;
   static List<Tag>? _tags;
 
@@ -114,7 +114,9 @@ class CommunicationServiceDemo {
     var filteredTickets = _tickets!.where((ticket) {
       if (userId != null &&
           ticket.creatorId != userId &&
-          ticket.assigneeId != userId) return false;
+          ticket.assigneeId != userId) {
+        return false;
+      }
       if (status != null && ticket.status != status) return false;
       if (priority != null && ticket.priority != priority) return false;
       if (projectId != null && ticket.projectId != projectId) return false;

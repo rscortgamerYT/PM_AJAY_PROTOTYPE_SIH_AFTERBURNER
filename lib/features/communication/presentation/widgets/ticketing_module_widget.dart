@@ -123,7 +123,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
                           },
                         ),
                       );
-                    }).toList(),
+                    }),
                   ],
                 ),
               ),
@@ -152,7 +152,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.confirmation_number_outlined,
                         size: 64,
                         color: AppTheme.neutralGray,
@@ -226,7 +226,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
           children: [
             Text(
               'Ticket #${ticket.id.substring(0, 8)}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: AppTheme.neutralGray,
               ),
@@ -286,7 +286,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
             const SizedBox(height: 4),
             Text(
               _formatDate(ticket.createdAt),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 10,
                 color: AppTheme.neutralGray,
               ),
@@ -334,7 +334,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
                         const SizedBox(height: 8),
                         Text(
                           'Ticket #${ticket.id.substring(0, 8)}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: AppTheme.neutralGray,
                             fontSize: 14,
                           ),
@@ -428,7 +428,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Assigned To',
                               style: TextStyle(
                                 color: AppTheme.neutralGray,
@@ -455,7 +455,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'SLA Deadline',
                               style: TextStyle(
                                 color: AppTheme.neutralGray,
@@ -517,7 +517,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
           children: [
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppTheme.neutralGray,
                 fontSize: 12,
               ),
@@ -571,7 +571,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
                       ),
                       Text(
                         _formatDate(comment.createdAt),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: AppTheme.neutralGray,
                         ),
@@ -638,7 +638,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.confirmation_number_outlined,
             size: 64,
             color: AppTheme.neutralGray,
@@ -743,7 +743,7 @@ class _TicketingModuleWidgetState extends ConsumerState<TicketingModuleWidget> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<TicketPriority>(
-                value: selectedPriority,
+                initialValue: selectedPriority,
                 decoration: const InputDecoration(
                   labelText: 'Priority',
                 ),

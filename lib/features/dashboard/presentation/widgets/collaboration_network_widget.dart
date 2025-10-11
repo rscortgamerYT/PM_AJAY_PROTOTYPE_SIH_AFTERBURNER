@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 import '../../../../core/services/dashboard_analytics_service.dart';
@@ -182,7 +181,7 @@ class _CollaborationNetworkWidgetState extends State<CollaborationNetworkWidget>
                 children: [
                   Container(
                     padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: AppTheme.accentTeal,
                       shape: BoxShape.circle,
                     ),

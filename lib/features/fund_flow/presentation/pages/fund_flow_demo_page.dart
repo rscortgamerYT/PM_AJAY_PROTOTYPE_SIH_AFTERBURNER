@@ -14,7 +14,7 @@ import '../widgets/comparative_analytics_widget.dart';
 /// Comprehensive Fund Flow demo page for production testing
 /// Tests all 8 Fund Flow widgets with demo data
 class FundFlowDemoPage extends StatefulWidget {
-  const FundFlowDemoPage({Key? key}) : super(key: key);
+  const FundFlowDemoPage({super.key});
 
   @override
   State<FundFlowDemoPage> createState() => _FundFlowDemoPageState();

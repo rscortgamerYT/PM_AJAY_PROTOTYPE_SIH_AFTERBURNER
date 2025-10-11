@@ -266,7 +266,7 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.location_on, size: 20, color: AppTheme.secondaryBlue),
+                    const Icon(Icons.location_on, size: 20, color: AppTheme.secondaryBlue),
                     const SizedBox(width: 8),
                     Text(
                       request.stateName,
@@ -381,7 +381,7 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
                       label: const Text('Reject'),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppTheme.errorRed,
-                        side: BorderSide(color: AppTheme.errorRed),
+                        side: const BorderSide(color: AppTheme.errorRed),
                       ),
                     ),
                   ),
@@ -443,7 +443,7 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Are you sure you want to approve this request?'),
+            const Text('Are you sure you want to approve this request?'),
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),

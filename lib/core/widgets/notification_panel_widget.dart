@@ -231,7 +231,7 @@ class _NotificationPanelWidgetState extends State<NotificationPanelWidget>
               children: [
                 _buildHeader(unreadCount),
                 _buildFilters(),
-                Divider(height: 1, color: AppDesignSystem.neutral300),
+                const Divider(height: 1, color: AppDesignSystem.neutral300),
                 Expanded(
                   child: filteredNotifications.isEmpty
                       ? _buildEmptyState()
@@ -248,7 +248,7 @@ class _NotificationPanelWidgetState extends State<NotificationPanelWidget>
   Widget _buildHeader(int unreadCount) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
             AppDesignSystem.deepIndigo,
@@ -257,7 +257,7 @@ class _NotificationPanelWidgetState extends State<NotificationPanelWidget>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: const BorderRadius.vertical(
+        borderRadius: BorderRadius.vertical(
           top: Radius.circular(16),
         ),
       ),
@@ -509,7 +509,7 @@ class _NotificationPanelWidgetState extends State<NotificationPanelWidget>
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.access_time,
                             size: 12,
                             color: AppDesignSystem.neutral500,
@@ -544,7 +544,7 @@ class _NotificationPanelWidgetState extends State<NotificationPanelWidget>
                           ],
                           const Spacer(),
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.close,
                               size: 16,
                               color: AppDesignSystem.neutral500,
@@ -573,7 +573,7 @@ class _NotificationPanelWidgetState extends State<NotificationPanelWidget>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.notifications_none,
             size: 64,
             color: AppDesignSystem.neutral400,

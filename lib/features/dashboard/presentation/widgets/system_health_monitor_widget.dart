@@ -64,7 +64,7 @@ class _SystemHealthMonitorWidgetState extends State<SystemHealthMonitorWidget> {
             color: AppTheme.successGreen.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(Icons.monitor_heart, color: AppTheme.successGreen, size: 28),
+          child: const Icon(Icons.monitor_heart, color: AppTheme.successGreen, size: 28),
         ),
         const SizedBox(width: 16),
         Expanded(

@@ -51,7 +51,7 @@ class _ImpactVisualizationWidgetState extends State<ImpactVisualizationWidget> {
             color: AppTheme.publicColor.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(Icons.insights, color: AppTheme.publicColor, size: 28),
+          child: const Icon(Icons.insights, color: AppTheme.publicColor, size: 28),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -580,7 +580,7 @@ class _ImpactVisualizationWidgetState extends State<ImpactVisualizationWidget> {
         LinearProgressIndicator(
           value: percentage / 100,
           backgroundColor: Colors.grey[200],
-          valueColor: AlwaysStoppedAnimation<Color>(AppTheme.publicColor),
+          valueColor: const AlwaysStoppedAnimation<Color>(AppTheme.publicColor),
           minHeight: 8,
           borderRadius: BorderRadius.circular(4),
         ),

@@ -192,7 +192,7 @@ class _FundFlowWaterfallWidgetState extends State<FundFlowWaterfallWidget> {
                         ),
                       ),
                     ),
-                    gridData: FlGridData(
+                    gridData: const FlGridData(
                       show: true,
                       drawVerticalLine: false,
                       horizontalInterval: 2000,

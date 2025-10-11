@@ -296,7 +296,7 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
             ],
           ),
           SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
-          DashboardSectionHeader(
+          const DashboardSectionHeader(
             title: 'Project Locations',
             subtitle: 'Geographic distribution of your projects',
           ),
@@ -475,7 +475,7 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 AppDesignSystem.royalPurple,

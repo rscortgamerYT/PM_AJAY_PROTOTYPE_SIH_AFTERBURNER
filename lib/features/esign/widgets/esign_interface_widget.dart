@@ -8,11 +8,11 @@ class ESignInterfaceWidget extends StatefulWidget {
   final Function(SignatureData)? onSignatureComplete;
 
   const ESignInterfaceWidget({
-    Key? key,
+    super.key,
     required this.document,
     required this.currentUserId,
     this.onSignatureComplete,
-  }) : super(key: key);
+  });
 
   @override
   State<ESignInterfaceWidget> createState() => _ESignInterfaceWidgetState();
@@ -158,7 +158,7 @@ class _ESignInterfaceWidgetState extends State<ESignInterfaceWidget> {
               child: LinearProgressIndicator(
                 value: progress,
                 backgroundColor: Colors.grey.shade300,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
                 minHeight: 8,
               ),
             ),
@@ -283,7 +283,7 @@ class _ESignInterfaceWidgetState extends State<ESignInterfaceWidget> {
                 DateFormat('MMM dd, yyyy HH:mm').format(widget.document.expiresAt!),
                 color: widget.document.isExpired ? Colors.red : null,
               ),
-            _buildInfoRow('Document Hash', widget.document.documentHash.substring(0, 16) + '...'),
+            _buildInfoRow('Document Hash', '${widget.document.documentHash.substring(0, 16)}...'),
           ],
         ),
       ),

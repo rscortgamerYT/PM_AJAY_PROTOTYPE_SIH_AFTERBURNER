@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import '../../../../core/models/request_model.dart';
 
 /// Analytics dashboard for Review & Approval workflows
 /// 
@@ -333,9 +332,9 @@ class _ReviewAnalyticsDashboardState extends State<ReviewAnalyticsDashboard> {
               height: 250,
               child: LineChart(
                 LineChartData(
-                  gridData: FlGridData(show: true),
+                  gridData: const FlGridData(show: true),
                   titlesData: FlTitlesData(
-                    leftTitles: AxisTitles(
+                    leftTitles: const AxisTitles(
                       sideTitles: SideTitles(showTitles: true),
                     ),
                     bottomTitles: AxisTitles(
@@ -350,8 +349,8 @@ class _ReviewAnalyticsDashboardState extends State<ReviewAnalyticsDashboard> {
                         },
                       ),
                     ),
-                    rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                   ),
                   borderData: FlBorderData(show: true),
                   lineBarsData: [
@@ -368,7 +367,7 @@ class _ReviewAnalyticsDashboardState extends State<ReviewAnalyticsDashboard> {
                       isCurved: true,
                       color: Colors.blue,
                       barWidth: 3,
-                      dotData: FlDotData(show: true),
+                      dotData: const FlDotData(show: true),
                       belowBarData: BarAreaData(
                         show: true,
                         color: Colors.blue.withOpacity(0.1),
@@ -475,7 +474,7 @@ class _ReviewAnalyticsDashboardState extends State<ReviewAnalyticsDashboard> {
               height: 200,
               child: BarChart(
                 BarChartData(
-                  gridData: FlGridData(show: true),
+                  gridData: const FlGridData(show: true),
                   titlesData: FlTitlesData(
                     leftTitles: AxisTitles(
                       sideTitles: SideTitles(
@@ -497,8 +496,8 @@ class _ReviewAnalyticsDashboardState extends State<ReviewAnalyticsDashboard> {
                         },
                       ),
                     ),
-                    rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                   ),
                   borderData: FlBorderData(show: true),
                   barGroups: [
@@ -535,7 +534,7 @@ class _ReviewAnalyticsDashboardState extends State<ReviewAnalyticsDashboard> {
               height: 200,
               child: BarChart(
                 BarChartData(
-                  gridData: FlGridData(show: true),
+                  gridData: const FlGridData(show: true),
                   titlesData: FlTitlesData(
                     leftTitles: AxisTitles(
                       sideTitles: SideTitles(
@@ -557,8 +556,8 @@ class _ReviewAnalyticsDashboardState extends State<ReviewAnalyticsDashboard> {
                         },
                       ),
                     ),
-                    rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                   ),
                   borderData: FlBorderData(show: true),
                   barGroups: [

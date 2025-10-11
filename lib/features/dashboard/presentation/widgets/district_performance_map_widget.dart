@@ -72,7 +72,7 @@ class _DistrictPerformanceMapWidgetState extends State<DistrictPerformanceMapWid
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, size: 48, color: AppTheme.errorRed),
+                const Icon(Icons.error_outline, size: 48, color: AppTheme.errorRed),
                 const SizedBox(height: 16),
                 const Text('Error loading district data'),
                 const SizedBox(height: 8),
@@ -372,7 +372,7 @@ class _DistrictPerformanceMapWidgetState extends State<DistrictPerformanceMapWid
                       color: _getPerformanceColor(district.performanceScore),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.location_city,
                       color: Colors.white,
                       size: 28,

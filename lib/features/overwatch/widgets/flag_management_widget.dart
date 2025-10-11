@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import '../../../core/models/flag_model.dart';
-import '../../../core/models/project_model.dart';
 
 class FlagManagementWidget extends StatefulWidget {
   final Function(ProjectFlag)? onFlagCreated;
   final Function(ProjectFlag)? onFlagUpdated;
 
   const FlagManagementWidget({
-    Key? key,
+    super.key,
     this.onFlagCreated,
     this.onFlagUpdated,
-  }) : super(key: key);
+  });
 
   @override
   State<FlagManagementWidget> createState() => _FlagManagementWidgetState();
 }
 
 class _FlagManagementWidgetState extends State<FlagManagementWidget> {
-  List<ProjectFlag> _flags = [];
+  final List<ProjectFlag> _flags = [];
   FlagStatus? _filterStatus;
   FlagSeverity? _filterSeverity;
   String _searchQuery = '';
@@ -515,11 +514,11 @@ class CreateFlagDialog extends StatefulWidget {
   final Function(ProjectFlag) onFlagCreated;
 
   const CreateFlagDialog({
-    Key? key,
+    super.key,
     required this.projectId,
     required this.agencyId,
     required this.onFlagCreated,
-  }) : super(key: key);
+  });
 
   @override
   State<CreateFlagDialog> createState() => _CreateFlagDialogState();
@@ -541,7 +540,7 @@ class _CreateFlagDialogState extends State<CreateFlagDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DropdownButtonFormField<FlagReason>(
-              value: _reason,
+              initialValue: _reason,
               decoration: const InputDecoration(
                 labelText: 'Reason',
                 border: OutlineInputBorder(),
@@ -566,7 +565,7 @@ class _CreateFlagDialogState extends State<CreateFlagDialog> {
             ],
             const SizedBox(height: 16),
             DropdownButtonFormField<FlagSeverity>(
-              value: _severity,
+              initialValue: _severity,
               decoration: const InputDecoration(
                 labelText: 'Severity',
                 border: OutlineInputBorder(),

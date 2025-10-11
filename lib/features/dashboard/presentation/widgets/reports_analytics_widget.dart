@@ -460,12 +460,12 @@ class _ReportsAnalyticsWidgetState extends State<ReportsAnalyticsWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Trend Analysis', style: AppDesignSystem.headlineSmall),
+            const Text('Trend Analysis', style: AppDesignSystem.headlineSmall),
             const SizedBox(height: 24),
             Expanded(
               child: LineChart(
                 LineChartData(
-                  gridData: FlGridData(
+                  gridData: const FlGridData(
                     show: true,
                     drawVerticalLine: false,
                     horizontalInterval: 10,
@@ -535,7 +535,7 @@ class _ReportsAnalyticsWidgetState extends State<ReportsAnalyticsWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Key Insights', style: AppDesignSystem.headlineSmall),
+            const Text('Key Insights', style: AppDesignSystem.headlineSmall),
             const SizedBox(height: 16),
             Expanded(
               child: ListView(

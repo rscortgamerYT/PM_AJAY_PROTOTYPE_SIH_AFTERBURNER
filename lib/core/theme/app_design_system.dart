@@ -35,7 +35,7 @@ class AppDesignSystem {
   static const Color neutral300 = Color(0xFFE0E0E0);
   static const Color neutral200 = Color(0xFFEEEEEE);
   static const Color neutral100 = Color(0xFFF5F5F5);
-  static const Color neutral50 = Color(0xFAFAFA);
+  static const Color neutral50 = Color(0x00fafafa);
   
   /// Semantic Colors
   static const Color success = Color(0xFF4CAF50);

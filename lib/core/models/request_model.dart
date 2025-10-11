@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Request model for State Dashboard Request & Approval System
@@ -231,10 +230,10 @@ class RequestModel {
       description: description ?? this.description,
       rationale: rationale ?? this.rationale,
       component: component ?? this.component,
-      projectName: projectName ?? this.projectName,
-      budgetAmount: budgetAmount ?? this.budgetAmount,
+      projectName: projectName ?? projectName,
+      budgetAmount: budgetAmount ?? budgetAmount,
       submittedAt: submittedAt ?? this.submittedAt,
-      createdAt: createdAt ?? this.createdAt,
+      createdAt: createdAt ?? createdAt,
       reviewedAt: reviewedAt ?? this.reviewedAt,
       reviewedBy: reviewedBy ?? this.reviewedBy,
       reviewerName: reviewerName ?? this.reviewerName,

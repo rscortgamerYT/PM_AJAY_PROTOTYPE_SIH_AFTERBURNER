@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
 import '../../../../core/theme/app_theme.dart';
 
 class SmartMilestoneClaimsWidget extends StatefulWidget {
@@ -245,7 +244,7 @@ class _SmartMilestoneClaimsWidgetState extends State<SmartMilestoneClaimsWidget>
             children: [
               Row(
                 children: [
-                  Icon(Icons.psychology, color: AppTheme.primaryIndigo),
+                  const Icon(Icons.psychology, color: AppTheme.primaryIndigo),
                   const SizedBox(width: 8),
                   Text(
                     'AI Validation Insights',
@@ -260,10 +259,10 @@ class _SmartMilestoneClaimsWidgetState extends State<SmartMilestoneClaimsWidget>
                       color: AppTheme.successGreen.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(Icons.check_circle, size: 16, color: AppTheme.successGreen),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(
                           'All Systems Ready',
                           style: TextStyle(
@@ -557,10 +556,10 @@ class _SmartMilestoneClaimsWidgetState extends State<SmartMilestoneClaimsWidget>
                         onPressed: () {},
                       ),
                     if (claim.status == ClaimStatus.approved)
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.check_circle, color: AppTheme.successGreen, size: 16),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4),
                           Text(
                             'Approved & Released',
                             style: TextStyle(

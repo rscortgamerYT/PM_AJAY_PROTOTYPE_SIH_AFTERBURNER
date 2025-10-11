@@ -225,7 +225,7 @@ class MockDashboardDataService {
     final now = DateTime.now();
     return List.generate(12, (index) {
       final date = DateTime(now.year, now.month - (11 - index), 1);
-      final baseScore = 75.0;
+      const baseScore = 75.0;
       final trend = index * 1.5;
       final noise = (index % 3) * 2.5;
       return PerformanceHistory(

@@ -202,7 +202,7 @@ class _ComponentTimelineSynchronizerWidgetState
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [AppTheme.stateOfficerColor, AppTheme.secondaryBlue],
           begin: Alignment.topLeft,
@@ -400,10 +400,10 @@ class _ComponentTimelineSynchronizerWidgetState
                       color: AppTheme.errorRed.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(Icons.warning, size: 16, color: AppTheme.errorRed),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(
                           'Conflicts',
                           style: TextStyle(
@@ -442,10 +442,10 @@ class _ComponentTimelineSynchronizerWidgetState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(Icons.warning, size: 20, color: AppTheme.errorRed),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         'Detected Conflicts',
                         style: TextStyle(
@@ -461,7 +461,7 @@ class _ComponentTimelineSynchronizerWidgetState
                       padding: const EdgeInsets.only(left: 28, top: 4),
                       child: Text(
                         '• $conflict',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppTheme.errorRed,
                           fontSize: 13,
                         ),

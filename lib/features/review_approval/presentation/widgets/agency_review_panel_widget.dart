@@ -264,7 +264,7 @@ class _AgencyReviewPanelWidgetState extends ConsumerState<AgencyReviewPanelWidge
           const SizedBox(width: 16),
           Expanded(
             child: DropdownButtonFormField<ProjectComponent>(
-              value: _selectedComponentFilter,
+              initialValue: _selectedComponentFilter,
               decoration: InputDecoration(
                 labelText: 'Component',
                 border: OutlineInputBorder(
@@ -289,7 +289,7 @@ class _AgencyReviewPanelWidgetState extends ConsumerState<AgencyReviewPanelWidge
           const SizedBox(width: 16),
           Expanded(
             child: DropdownButtonFormField<RequestStatus>(
-              value: _selectedStatusFilter,
+              initialValue: _selectedStatusFilter,
               decoration: InputDecoration(
                 labelText: 'Status',
                 border: OutlineInputBorder(
@@ -626,7 +626,7 @@ class _AgencyReviewPanelWidgetState extends ConsumerState<AgencyReviewPanelWidge
                             ],
                           ),
                         );
-                      }).toList(),
+                      }),
                     ],
                   ),
                   const SizedBox(height: 24),

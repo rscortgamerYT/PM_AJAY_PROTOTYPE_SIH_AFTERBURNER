@@ -572,7 +572,7 @@ class _QualityAssuranceCommandCenterWidgetState
                 padding: const EdgeInsets.only(left: 8, top: 2),
                 child: Row(
                   children: [
-                    Icon(Icons.warning, size: 14, color: AppTheme.errorRed),
+                    const Icon(Icons.warning, size: 14, color: AppTheme.errorRed),
                     const SizedBox(width: 4),
                     Text(issue, style: const TextStyle(fontSize: 12)),
                   ],

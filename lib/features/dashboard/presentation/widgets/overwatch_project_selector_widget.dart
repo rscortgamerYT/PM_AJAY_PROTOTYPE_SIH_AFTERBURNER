@@ -23,7 +23,7 @@ class OverwatchProjectSelectorWidget extends StatefulWidget {
 class _OverwatchProjectSelectorWidgetState
     extends State<OverwatchProjectSelectorWidget> {
   String _searchTerm = '';
-  ProjectFilterCriteria _filterCriteria = ProjectFilterCriteria();
+  final ProjectFilterCriteria _filterCriteria = ProjectFilterCriteria();
   bool _showFilters = false;
 
   List<OverwatchProject> get _filteredProjects {
@@ -62,13 +62,13 @@ class _OverwatchProjectSelectorWidgetState
       children: [
         Expanded(
           child: TextField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Search projects by name, agency, or location...',
-              prefixIcon: const Icon(Icons.search),
+              prefixIcon: Icon(Icons.search),
               border: OutlineInputBorder(
                 borderRadius: AppDesignSystem.radiusMedium,
               ),
-              contentPadding: const EdgeInsets.symmetric(
+              contentPadding: EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 12,
               ),
@@ -103,7 +103,7 @@ class _OverwatchProjectSelectorWidgetState
           padding: const EdgeInsets.all(48),
           child: Column(
             children: [
-              Icon(
+              const Icon(
                 Icons.search_off,
                 size: 64,
                 color: AppDesignSystem.neutral400,
@@ -197,7 +197,7 @@ class _OverwatchProjectSelectorWidgetState
             const SizedBox(height: 12),
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.location_on_outlined,
                   size: 16,
                   color: AppDesignSystem.neutral600,

@@ -34,17 +34,17 @@ class _CoverageCheckWidgetState extends ConsumerState<CoverageCheckWidget> {
         // Header
         Container(
           padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [AppTheme.primaryIndigo, AppTheme.secondaryBlue],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Check PM-AJAY Coverage',
                 style: TextStyle(
                   fontSize: 28,
@@ -52,8 +52,8 @@ class _CoverageCheckWidgetState extends ConsumerState<CoverageCheckWidget> {
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 8),
-              const Text(
+              SizedBox(height: 8),
+              Text(
                 'Verify if your village or locality is covered under any PM-AJAY project',
                 style: TextStyle(
                   fontSize: 16,
@@ -342,7 +342,7 @@ class _CoverageCheckWidgetState extends ConsumerState<CoverageCheckWidget> {
         const SizedBox(width: 8),
         Text(
           '$label: ',
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w600,
             color: AppTheme.neutralGray,
           ),
@@ -388,7 +388,7 @@ class _CoverageCheckWidgetState extends ConsumerState<CoverageCheckWidget> {
 
     // Mock: Convert PIN code to coordinates
     // In production, use geocoding API
-    final mockLocation = const LatLng(28.6139, 77.2090);
+    const mockLocation = LatLng(28.6139, 77.2090);
     
     await _searchNearbyProjects(mockLocation);
   }

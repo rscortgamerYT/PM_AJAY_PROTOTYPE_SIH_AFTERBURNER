@@ -57,21 +57,19 @@ class ThemeManager extends ChangeNotifier {
       brightness: Brightness.light,
       primaryColor: AppDesignSystem.deepIndigo,
       scaffoldBackgroundColor: AppDesignSystem.neutral50,
-      colorScheme: ColorScheme.light(
+      colorScheme: const ColorScheme.light(
         primary: AppDesignSystem.deepIndigo,
         secondary: AppDesignSystem.vibrantTeal,
         tertiary: AppDesignSystem.amber,
         error: AppDesignSystem.error,
-        background: AppDesignSystem.neutral50,
         surface: Colors.white,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onError: Colors.white,
-        onBackground: AppDesignSystem.neutral900,
         onSurface: AppDesignSystem.neutral900,
       ),
       textTheme: _buildTextTheme(false),
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: AppDesignSystem.neutral900,
@@ -89,7 +87,7 @@ class ThemeManager extends ChangeNotifier {
           backgroundColor: AppDesignSystem.deepIndigo,
           foregroundColor: Colors.white,
           elevation: 2,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: AppDesignSystem.space20,
             vertical: AppDesignSystem.space12,
           ),
@@ -103,22 +101,22 @@ class ThemeManager extends ChangeNotifier {
         fillColor: AppDesignSystem.neutral100,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppDesignSystem.neutral300),
+          borderSide: const BorderSide(color: AppDesignSystem.neutral300),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppDesignSystem.neutral300),
+          borderSide: const BorderSide(color: AppDesignSystem.neutral300),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppDesignSystem.deepIndigo, width: 2),
+          borderSide: const BorderSide(color: AppDesignSystem.deepIndigo, width: 2),
         ),
       ),
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         color: AppDesignSystem.neutral700,
         size: AppDesignSystem.iconMedium,
       ),
-      dividerTheme: DividerThemeData(
+      dividerTheme: const DividerThemeData(
         color: AppDesignSystem.neutral200,
         thickness: 1,
         space: AppDesignSystem.space16,
@@ -133,23 +131,21 @@ class ThemeManager extends ChangeNotifier {
       brightness: Brightness.dark,
       primaryColor: AppDesignSystem.deepIndigoLight,
       scaffoldBackgroundColor: const Color(0xFF121212),
-      colorScheme: ColorScheme.dark(
+      colorScheme: const ColorScheme.dark(
         primary: AppDesignSystem.deepIndigoLight,
         secondary: AppDesignSystem.vibrantTealLight,
         tertiary: AppDesignSystem.amberLight,
         error: AppDesignSystem.error,
-        background: const Color(0xFF121212),
-        surface: const Color(0xFF1E1E1E),
+        surface: Color(0xFF1E1E1E),
         onPrimary: AppDesignSystem.neutral900,
         onSecondary: AppDesignSystem.neutral900,
         onError: AppDesignSystem.neutral900,
-        onBackground: AppDesignSystem.neutral100,
         onSurface: AppDesignSystem.neutral100,
       ),
       textTheme: _buildTextTheme(true),
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         elevation: 0,
-        backgroundColor: const Color(0xFF1E1E1E),
+        backgroundColor: Color(0xFF1E1E1E),
         foregroundColor: AppDesignSystem.neutral100,
         iconTheme: IconThemeData(color: AppDesignSystem.neutral300),
       ),
@@ -165,7 +161,7 @@ class ThemeManager extends ChangeNotifier {
           backgroundColor: AppDesignSystem.deepIndigoLight,
           foregroundColor: AppDesignSystem.neutral900,
           elevation: 2,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: AppDesignSystem.space20,
             vertical: AppDesignSystem.space12,
           ),
@@ -179,22 +175,22 @@ class ThemeManager extends ChangeNotifier {
         fillColor: const Color(0xFF2A2A2A),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppDesignSystem.neutral700),
+          borderSide: const BorderSide(color: AppDesignSystem.neutral700),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppDesignSystem.neutral700),
+          borderSide: const BorderSide(color: AppDesignSystem.neutral700),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppDesignSystem.deepIndigoLight, width: 2),
+          borderSide: const BorderSide(color: AppDesignSystem.deepIndigoLight, width: 2),
         ),
       ),
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         color: AppDesignSystem.neutral300,
         size: AppDesignSystem.iconMedium,
       ),
-      dividerTheme: DividerThemeData(
+      dividerTheme: const DividerThemeData(
         color: AppDesignSystem.neutral700,
         thickness: 1,
         space: AppDesignSystem.space16,
@@ -234,10 +230,10 @@ class ThemeToggleButton extends StatelessWidget {
   final bool showLabel;
 
   const ThemeToggleButton({
-    Key? key,
+    super.key,
     required this.themeManager,
     this.showLabel = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -266,7 +262,7 @@ class ThemeToggleButton extends StatelessWidget {
               onTap: () => themeManager.toggleTheme(),
               borderRadius: BorderRadius.circular(20),
               child: Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: AppDesignSystem.space12,
                   vertical: AppDesignSystem.space8,
                 ),
@@ -294,7 +290,7 @@ class ThemeToggleButton extends StatelessWidget {
                       ),
                     ),
                     if (showLabel) ...[
-                      SizedBox(width: AppDesignSystem.space8),
+                      const SizedBox(width: AppDesignSystem.space8),
                       Text(
                         isDark ? 'Dark' : 'Light',
                         style: AppDesignSystem.bodySmall.copyWith(
@@ -319,9 +315,9 @@ class ThemeModeSelector extends StatelessWidget {
   final ThemeManager themeManager;
 
   const ThemeModeSelector({
-    Key? key,
+    super.key,
     required this.themeManager,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -330,7 +326,7 @@ class ThemeModeSelector extends StatelessWidget {
       builder: (context, child) {
         return Card(
           child: Padding(
-            padding: EdgeInsets.all(AppDesignSystem.space16),
+            padding: const EdgeInsets.all(AppDesignSystem.space16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -342,7 +338,7 @@ class ThemeModeSelector extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: AppDesignSystem.space12),
+                const SizedBox(height: AppDesignSystem.space12),
                 _buildThemeOption(
                   context,
                   AppThemeMode.light,
@@ -350,7 +346,7 @@ class ThemeModeSelector extends StatelessWidget {
                   'Light',
                   'Always use light theme',
                 ),
-                SizedBox(height: AppDesignSystem.space8),
+                const SizedBox(height: AppDesignSystem.space8),
                 _buildThemeOption(
                   context,
                   AppThemeMode.dark,
@@ -358,7 +354,7 @@ class ThemeModeSelector extends StatelessWidget {
                   'Dark',
                   'Always use dark theme',
                 ),
-                SizedBox(height: AppDesignSystem.space8),
+                const SizedBox(height: AppDesignSystem.space8),
                 _buildThemeOption(
                   context,
                   AppThemeMode.system,
@@ -404,7 +400,7 @@ class ThemeModeSelector extends StatelessWidget {
           onTap: () => themeManager.setThemeMode(mode),
           borderRadius: BorderRadius.circular(8),
           child: Padding(
-            padding: EdgeInsets.all(AppDesignSystem.space12),
+            padding: const EdgeInsets.all(AppDesignSystem.space12),
             child: Row(
               children: [
                 Icon(
@@ -414,7 +410,7 @@ class ThemeModeSelector extends StatelessWidget {
                       : Theme.of(context).iconTheme.color,
                   size: AppDesignSystem.iconMedium,
                 ),
-                SizedBox(width: AppDesignSystem.space12),
+                const SizedBox(width: AppDesignSystem.space12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -426,7 +422,7 @@ class ThemeModeSelector extends StatelessWidget {
                           fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                       ),
-                      SizedBox(height: AppDesignSystem.space4),
+                      const SizedBox(height: AppDesignSystem.space4),
                       Text(
                         subtitle,
                         style: AppDesignSystem.bodySmall.copyWith(

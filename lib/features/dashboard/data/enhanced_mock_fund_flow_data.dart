@@ -211,8 +211,8 @@ class EnhancedMockFundFlowData {
         lastUpdated: DateTime.now().subtract(Duration(days: _random.nextInt(3))),
         metadata: {
           'projectCode': 'PRJ${i + 1}',
-          'startDate': DateTime.now().subtract(Duration(days: 180)).toIso8601String(),
-          'endDate': DateTime.now().add(Duration(days: 180)).toIso8601String(),
+          'startDate': DateTime.now().subtract(const Duration(days: 180)).toIso8601String(),
+          'endDate': DateTime.now().add(const Duration(days: 180)).toIso8601String(),
         },
         childNodeIds: [],
         parentNodeId: parentId,

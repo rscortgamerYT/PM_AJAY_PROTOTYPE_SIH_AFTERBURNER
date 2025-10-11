@@ -22,7 +22,7 @@ class _AgencyPerformanceComparatorWidgetState
     extends State<AgencyPerformanceComparatorWidget> {
   
   String _selectedMetric = 'overall'; // 'overall', 'completion', 'quality', 'speed'
-  List<String> _selectedAgencies = ['agency_001', 'agency_002'];
+  final List<String> _selectedAgencies = ['agency_001', 'agency_002'];
 
   final List<AgencyPerformance> _mockAgencies = [
     AgencyPerformance(
@@ -117,7 +117,7 @@ class _AgencyPerformanceComparatorWidgetState
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [AppTheme.stateOfficerColor, AppTheme.secondaryBlue],
           begin: Alignment.topLeft,

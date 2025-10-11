@@ -123,7 +123,7 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
                     final status = FundStatus.values[group.x.toInt()];
                     return BarTooltipItem(
                       '${status.displayName}\n₹${rod.toY.toStringAsFixed(2)}L',
-                      TextStyle(
+                      const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),

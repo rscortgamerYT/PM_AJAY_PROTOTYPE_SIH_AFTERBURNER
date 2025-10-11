@@ -280,14 +280,12 @@ class _GeospatialFundMapState extends State<GeospatialFundMap>
 
     // Add agency markers
     for (final agency in widget.agencies) {
-      if (agency.location == null) continue;
-      
       final fundsReceived = _calculateAgencyFunds(agency.id);
       final markerSize = _calculateMarkerSizeForAgency(fundsReceived);
       
       markers.add(
         Marker(
-          point: agency.location!,
+          point: agency.location,
           width: markerSize,
           height: markerSize,
           child: MouseRegion(
@@ -526,7 +524,7 @@ class _GeospatialFundMapState extends State<GeospatialFundMap>
           children: [
             Row(
               children: [
-                Icon(Icons.business, color: Colors.orange),
+                const Icon(Icons.business, color: Colors.orange),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(

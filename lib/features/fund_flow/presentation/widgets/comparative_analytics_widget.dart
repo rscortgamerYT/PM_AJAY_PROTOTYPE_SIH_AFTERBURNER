@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import '../../../../core/models/fund_transaction_model.dart';
 
 /// Comparative Analytics Widget with peer benchmarking and heatmaps
 class ComparativeAnalyticsWidget extends StatefulWidget {
@@ -10,12 +9,12 @@ class ComparativeAnalyticsWidget extends StatefulWidget {
   final Function(String)? onEntityTap;
 
   const ComparativeAnalyticsWidget({
-    Key? key,
+    super.key,
     required this.comparisons,
     required this.currentEntityId,
     required this.currentEntityName,
     this.onEntityTap,
-  }) : super(key: key);
+  });
 
   @override
   State<ComparativeAnalyticsWidget> createState() => _ComparativeAnalyticsWidgetState();

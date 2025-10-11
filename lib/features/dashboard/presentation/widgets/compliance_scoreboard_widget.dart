@@ -392,7 +392,7 @@ class _ComplianceScoreboardWidgetState extends State<ComplianceScoreboardWidget>
         ),
         const SizedBox(width: 8),
         Text(
-          '${score.toStringAsFixed(0)}',
+          score.toStringAsFixed(0),
           style: TextStyle(
             fontSize: 12,
             color: _getScoreColor(score),

@@ -78,10 +78,10 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 32,
                     backgroundColor: AppTheme.primaryIndigo,
-                    child: const Icon(
+                    child: Icon(
                       Icons.public,
                       color: Colors.white,
                       size: 32,
@@ -228,11 +228,11 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.help, color: AppTheme.primaryIndigo),
-            const SizedBox(width: 12),
-            const Text('Help & Support'),
+            SizedBox(width: 12),
+            Text('Help & Support'),
           ],
         ),
         content: SingleChildScrollView(
@@ -240,9 +240,9 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'Welcome to the PM-AJAY Public Portal!',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               const Text(
@@ -308,11 +308,11 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.settings, color: AppTheme.primaryIndigo),
-            const SizedBox(width: 12),
-            const Text('Portal Settings'),
+            SizedBox(width: 12),
+            Text('Portal Settings'),
           ],
         ),
         content: Column(
@@ -340,7 +340,7 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
             ),
             const Divider(),
             ListTile(
-              leading: Icon(Icons.language, color: AppTheme.primaryIndigo),
+              leading: const Icon(Icons.language, color: AppTheme.primaryIndigo),
               title: const Text('Language'),
               subtitle: const Text('English'),
               trailing: const Icon(Icons.chevron_right),
@@ -350,7 +350,7 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
             ),
             const Divider(),
             ListTile(
-              leading: Icon(Icons.privacy_tip, color: AppTheme.primaryIndigo),
+              leading: const Icon(Icons.privacy_tip, color: AppTheme.primaryIndigo),
               title: const Text('Privacy Policy'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {

@@ -25,7 +25,7 @@ class _ResourceProximityWidgetState extends State<ResourceProximityWidget> {
   final DashboardAnalyticsService _analyticsService = DashboardAnalyticsService();
   
   double _searchRadius = 10.0; // km
-  List<String> _selectedResourceTypes = ['suppliers', 'equipment', 'services'];
+  final List<String> _selectedResourceTypes = ['suppliers', 'equipment', 'services'];
   Resource? _selectedResource;
 
   @override
@@ -78,13 +78,13 @@ class _ResourceProximityWidgetState extends State<ResourceProximityWidget> {
         }
 
         if (snapshot.hasError) {
-          return Center(
+          return const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.error_outline, size: 48, color: AppTheme.errorRed),
-                const SizedBox(height: 16),
-                const Text('Error loading resources'),
+                SizedBox(height: 16),
+                Text('Error loading resources'),
               ],
             ),
           );

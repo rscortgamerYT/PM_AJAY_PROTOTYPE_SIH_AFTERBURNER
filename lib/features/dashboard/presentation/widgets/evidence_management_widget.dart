@@ -4,7 +4,7 @@ import '../../models/evidence_models.dart';
 import '../../data/mock_evidence_data.dart';
 
 class EvidenceManagementWidget extends ConsumerStatefulWidget {
-  const EvidenceManagementWidget({Key? key}) : super(key: key);
+  const EvidenceManagementWidget({super.key});
 
   @override
   ConsumerState<EvidenceManagementWidget> createState() => _EvidenceManagementWidgetState();
@@ -654,7 +654,7 @@ class _EvidenceManagementWidgetState extends ConsumerState<EvidenceManagementWid
               Container(
                 width: 40,
                 height: 40,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.blue,
                   shape: BoxShape.circle,
                 ),

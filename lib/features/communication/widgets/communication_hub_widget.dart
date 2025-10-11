@@ -328,7 +328,7 @@ class _CommunicationHubWidgetState extends ConsumerState<CommunicationHubWidget>
                           spacing: 8,
                           children: message.attachments.map((attachment) {
                             return Chip(
-                              avatar: Icon(Icons.attach_file, size: 16),
+                              avatar: const Icon(Icons.attach_file, size: 16),
                               label: Text(attachment.fileName),
                             );
                           }).toList(),

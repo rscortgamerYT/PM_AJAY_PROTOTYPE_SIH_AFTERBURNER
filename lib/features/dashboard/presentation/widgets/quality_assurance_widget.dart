@@ -75,7 +75,7 @@ class _QualityAssuranceWidgetState extends State<QualityAssuranceWidget> {
             color: AppTheme.secondaryBlue.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(Icons.verified_user, color: AppTheme.secondaryBlue, size: 28),
+          child: const Icon(Icons.verified_user, color: AppTheme.secondaryBlue, size: 28),
         ),
         const SizedBox(width: 16),
         Expanded(

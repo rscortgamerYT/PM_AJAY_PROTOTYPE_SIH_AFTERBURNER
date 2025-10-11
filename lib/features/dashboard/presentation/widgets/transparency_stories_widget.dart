@@ -349,7 +349,7 @@ class _TransparencyStoriesWidgetState extends State<TransparencyStoriesWidget> {
                       ),
                     ),
                     const SizedBox(width: 16),
-                    Icon(Icons.arrow_forward, color: AppTheme.publicColor, size: 32),
+                    const Icon(Icons.arrow_forward, color: AppTheme.publicColor, size: 32),
                     const SizedBox(width: 16),
                     Expanded(
                       child: _buildBeforeAfterCard(

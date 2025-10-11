@@ -32,7 +32,7 @@ class _PublicFeedbackWidgetState extends ConsumerState<PublicFeedbackWidget> {
     'Maintenance',
   ];
   
-  Map<String, int> _categoryRatings = {};
+  final Map<String, int> _categoryRatings = {};
 
   @override
   void initState() {
@@ -62,10 +62,10 @@ class _PublicFeedbackWidgetState extends ConsumerState<PublicFeedbackWidget> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Public Feedback & Ratings',
                 style: TextStyle(
                   fontSize: 28,
@@ -73,8 +73,8 @@ class _PublicFeedbackWidgetState extends ConsumerState<PublicFeedbackWidget> {
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 8),
-              const Text(
+              SizedBox(height: 8),
+              Text(
                 'Share your experience with completed PM-AJAY projects in your area',
                 style: TextStyle(
                   fontSize: 16,
@@ -221,7 +221,7 @@ class _PublicFeedbackWidgetState extends ConsumerState<PublicFeedbackWidget> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: isSelected
-            ? BorderSide(color: AppTheme.primaryIndigo, width: 2)
+            ? const BorderSide(color: AppTheme.primaryIndigo, width: 2)
             : BorderSide.none,
       ),
       child: InkWell(
@@ -251,14 +251,14 @@ class _PublicFeedbackWidgetState extends ConsumerState<PublicFeedbackWidget> {
                       color: AppTheme.successGreen.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(
                           Icons.star,
                           size: 16,
                           color: AppTheme.successGreen,
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(
                           '4.5', // Mock rating
                           style: TextStyle(
@@ -370,7 +370,7 @@ class _PublicFeedbackWidgetState extends ConsumerState<PublicFeedbackWidget> {
               Center(
                 child: Text(
                   _getRatingText(_selectedRating),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppTheme.primaryIndigo,
@@ -566,7 +566,7 @@ class _PublicFeedbackWidgetState extends ConsumerState<PublicFeedbackWidget> {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.star, size: 20, color: AppTheme.warningOrange),
+                    const Icon(Icons.star, size: 20, color: AppTheme.warningOrange),
                     const SizedBox(width: 4),
                     Text(
                       feedback.rating.toString(),

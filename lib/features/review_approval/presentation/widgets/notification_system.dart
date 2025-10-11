@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../core/models/request_model.dart';
 
 /// Notification types for Review & Approval workflows
 enum NotificationType {

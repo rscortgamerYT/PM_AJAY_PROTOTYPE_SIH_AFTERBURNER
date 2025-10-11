@@ -103,8 +103,8 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
         const SizedBox(height: 16),
         
         // Tag Categories
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             children: [
               Text(
@@ -145,7 +145,7 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.label_off,
                         size: 64,
                         color: AppTheme.neutralGray,
@@ -221,7 +221,7 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
             const SizedBox(height: 4),
             Text(
               'Used ${tag.usageCount} times',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 11,
                 color: AppTheme.neutralGray,
               ),
@@ -302,7 +302,7 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
                         if (tag.description != null && tag.description!.isNotEmpty)
                           Text(
                             tag.description!,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: AppTheme.neutralGray,
                             ),
                           ),
@@ -354,11 +354,11 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
                 length: 2,
                 child: Column(
                   children: [
-                    TabBar(
+                    const TabBar(
                       labelColor: AppTheme.primaryIndigo,
                       unselectedLabelColor: AppTheme.neutralGray,
                       indicatorColor: AppTheme.primaryIndigo,
-                      tabs: const [
+                      tabs: [
                         Tab(text: 'Messages'),
                         Tab(text: 'Tickets'),
                       ],
@@ -394,16 +394,16 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(
                             Icons.auto_awesome,
                             color: AppTheme.primaryIndigo,
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text(
                             'Similar Tags',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -443,7 +443,7 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
                 const SizedBox(width: 8),
                 Text(
                   label,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: AppTheme.neutralGray,
                   ),
@@ -464,7 +464,7 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
   }
 
   Widget _buildTaggedMessagesList(String tagId) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -473,7 +473,7 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
             size: 48,
             color: AppTheme.neutralGray,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'No messages tagged yet',
             style: TextStyle(color: AppTheme.neutralGray),
@@ -484,7 +484,7 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
   }
 
   Widget _buildTaggedTicketsList(String tagId) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -493,7 +493,7 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
             size: 48,
             color: AppTheme.neutralGray,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'No tickets tagged yet',
             style: TextStyle(color: AppTheme.neutralGray),
@@ -517,7 +517,7 @@ class _TaggingModuleWidgetState extends ConsumerState<TaggingModuleWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.label_outline,
             size: 64,
             color: AppTheme.neutralGray,

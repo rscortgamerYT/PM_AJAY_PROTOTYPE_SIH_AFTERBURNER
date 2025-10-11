@@ -181,7 +181,7 @@ class _NationalPerformanceLeaderboardWidgetState
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [AppTheme.primaryIndigo, AppTheme.secondaryBlue],
           begin: Alignment.topLeft,
@@ -450,7 +450,7 @@ class _NationalPerformanceLeaderboardWidgetState
                           const SizedBox(width: 6),
                           Text(
                             _getBadgeName(badge),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: AppTheme.accentTeal,
                               fontSize: 11,
                               fontWeight: FontWeight.w600,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import '../../../../maps/widgets/interactive_map_widget.dart';
 import '../../../../../core/models/project_model.dart';
-import '../../../../../core/models/agency_model.dart';
 import '../../../models/overwatch_project_model.dart';
 
 /// Adapter widget that integrates InteractiveMapWidget with Overwatch data
@@ -87,7 +86,7 @@ class OverwatchMapWidget extends StatelessWidget {
     } else if (amount >= 100000) {
       return '${(amount / 100000).toStringAsFixed(2)}L';
     } else {
-      return '${amount.toStringAsFixed(0)}';
+      return amount.toStringAsFixed(0);
     }
   }
 
@@ -242,32 +241,29 @@ class _OverwatchMapWithFiltersState extends State<OverwatchMapWithFilters> {
           ),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: IntrinsicHeight(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildStat(
-                    'Total Projects',
-                    '${filteredProjects.length}',
-                    Icons.location_on,
-                    Colors.blue,
-                  ),
-                  const SizedBox(width: 16),
-                  _buildStat(
-                    'Active',
-                    '${filteredProjects.where((p) => p.status == OverwatchProjectStatus.active).length}',
-                    Icons.play_circle,
-                    Colors.green,
-                  ),
-                  const SizedBox(width: 16),
-                  _buildStat(
-                    'High Risk',
-                    '${filteredProjects.where((p) => p.riskLevel == RiskLevel.high).length}',
-                    Icons.warning,
-                    Colors.red,
-                  ),
-                ],
-              ),
+            child: Row(
+              children: [
+                _buildStat(
+                  'Total Projects',
+                  '${filteredProjects.length}',
+                  Icons.location_on,
+                  Colors.blue,
+                ),
+                const SizedBox(width: 16),
+                _buildStat(
+                  'Active',
+                  '${filteredProjects.where((p) => p.status == OverwatchProjectStatus.active).length}',
+                  Icons.play_circle,
+                  Colors.green,
+                ),
+                const SizedBox(width: 16),
+                _buildStat(
+                  'High Risk',
+                  '${filteredProjects.where((p) => p.riskLevel == RiskLevel.high).length}',
+                  Icons.warning,
+                  Colors.red,
+                ),
+              ],
             ),
           ),
         ),
@@ -277,7 +273,7 @@ class _OverwatchMapWithFiltersState extends State<OverwatchMapWithFilters> {
 
   Widget _buildStatusFilter() {
     return DropdownButtonFormField<OverwatchProjectStatus>(
-      value: _statusFilter,
+      initialValue: _statusFilter,
       decoration: const InputDecoration(
         labelText: 'Status',
         prefixIcon: Icon(Icons.filter_list),
@@ -303,7 +299,7 @@ class _OverwatchMapWithFiltersState extends State<OverwatchMapWithFilters> {
 
   Widget _buildRiskFilter() {
     return DropdownButtonFormField<RiskLevel>(
-      value: _riskFilter,
+      initialValue: _riskFilter,
       decoration: const InputDecoration(
         labelText: 'Risk Level',
         prefixIcon: Icon(Icons.speed),

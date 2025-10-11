@@ -51,7 +51,7 @@ class _OpenDataAnalyticsWidgetState extends State<OpenDataAnalyticsWidget> {
             color: AppTheme.secondaryBlue.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(Icons.analytics, color: AppTheme.secondaryBlue, size: 28),
+          child: const Icon(Icons.analytics, color: AppTheme.secondaryBlue, size: 28),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -470,7 +470,7 @@ class _OpenDataAnalyticsWidgetState extends State<OpenDataAnalyticsWidget> {
                     style: TextStyle(color: Colors.grey[600], fontSize: 12),
                   ),
                   const SizedBox(width: 16),
-                  Icon(Icons.star, size: 14, color: AppTheme.warningOrange),
+                  const Icon(Icons.star, size: 14, color: AppTheme.warningOrange),
                   const SizedBox(width: 4),
                   Text(
                     rating.toString(),

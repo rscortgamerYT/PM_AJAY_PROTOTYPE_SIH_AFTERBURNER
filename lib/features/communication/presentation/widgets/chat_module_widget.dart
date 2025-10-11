@@ -29,7 +29,7 @@ class _ChatModuleWidgetState extends ConsumerState<ChatModuleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final userId = 'current-user-id'; // TODO: Get from auth
+    const userId = 'current-user-id'; // TODO: Get from auth
 
     return Row(
       children: [
@@ -282,7 +282,7 @@ class _ChatModuleWidgetState extends ConsumerState<ChatModuleWidget> {
                       padding: const EdgeInsets.only(bottom: 4),
                       child: Text(
                         message.senderName,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                           color: AppTheme.neutralGray,
@@ -425,7 +425,7 @@ class _ChatModuleWidgetState extends ConsumerState<ChatModuleWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.chat_bubble_outline,
             size: 64,
             color: AppTheme.neutralGray,

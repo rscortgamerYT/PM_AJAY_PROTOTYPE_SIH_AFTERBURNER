@@ -82,7 +82,7 @@ class _MilestoneClaimApprovalWidgetState extends State<MilestoneClaimApprovalWid
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: AppDesignSystem.neutral300,
@@ -96,7 +96,7 @@ class _MilestoneClaimApprovalWidgetState extends State<MilestoneClaimApprovalWid
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Milestone Claims Approval',
                 style: AppDesignSystem.headlineMedium,
               ),
@@ -192,7 +192,7 @@ class _MilestoneClaimApprovalWidgetState extends State<MilestoneClaimApprovalWid
   Widget _buildStatusTabs() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: AppDesignSystem.neutral300,
@@ -256,7 +256,7 @@ class _MilestoneClaimApprovalWidgetState extends State<MilestoneClaimApprovalWid
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.inbox,
               size: 64,
               color: AppDesignSystem.neutral400,
@@ -354,7 +354,7 @@ class _MilestoneClaimApprovalWidgetState extends State<MilestoneClaimApprovalWid
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.currency_rupee,
                         size: 14,
                         color: AppDesignSystem.neutral600,
@@ -398,7 +398,7 @@ class _MilestoneClaimApprovalWidgetState extends State<MilestoneClaimApprovalWid
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Icon(
+                  const Icon(
                     Icons.chevron_right,
                     color: AppDesignSystem.neutral400,
                   ),
@@ -812,11 +812,11 @@ class _MilestoneClaimApprovalWidgetState extends State<MilestoneClaimApprovalWid
                       color: Colors.green.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
-                        const Icon(Icons.verified, color: Colors.green, size: 14),
-                        const SizedBox(width: 4),
-                        const Text(
+                        Icon(Icons.verified, color: Colors.green, size: 14),
+                        SizedBox(width: 4),
+                        Text(
                           'Verified',
                           style: TextStyle(
                             color: Colors.green,
@@ -876,7 +876,7 @@ class _MilestoneClaimApprovalWidgetState extends State<MilestoneClaimApprovalWid
         const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppDesignSystem.neutral100,
             borderRadius: AppDesignSystem.radiusMedium,
           ),
@@ -923,9 +923,9 @@ class _MilestoneClaimApprovalWidgetState extends State<MilestoneClaimApprovalWid
         TextField(
           controller: _notesController,
           maxLines: 4,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Enter your review notes here...',
-            border: const OutlineInputBorder(),
+            border: OutlineInputBorder(),
             filled: true,
             fillColor: AppDesignSystem.neutral100,
           ),

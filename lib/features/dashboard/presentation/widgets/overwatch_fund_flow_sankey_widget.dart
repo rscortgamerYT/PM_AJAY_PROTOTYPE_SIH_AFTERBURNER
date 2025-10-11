@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/overwatch_fund_flow_model.dart';
-import '../../models/overwatch_project_model.dart';
 import '../../../../core/theme/app_design_system.dart';
-import '../../../../core/utils/responsive_layout.dart';
 
 class OverwatchFundFlowSankeyWidget extends StatefulWidget {
   final CompleteFundFlowData fundFlowData;
@@ -67,7 +65,7 @@ class _OverwatchFundFlowSankeyWidgetState
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Complete Fund Flow Analysis',
               style: AppDesignSystem.headlineMedium,
             ),
@@ -132,7 +130,7 @@ class _OverwatchFundFlowSankeyWidgetState
   Widget _buildLevelSelector() {
     return Row(
       children: [
-        Text(
+        const Text(
           'View Level:',
           style: AppDesignSystem.labelMedium,
         ),
@@ -200,8 +198,8 @@ class _OverwatchFundFlowSankeyWidgetState
   }
 
   Widget _buildLevelConnector() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -260,7 +258,7 @@ class _OverwatchFundFlowSankeyWidgetState
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.person_outline,
                     size: 14,
                     color: AppDesignSystem.neutral600,
@@ -381,7 +379,7 @@ class _OverwatchFundFlowSankeyWidgetState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Project Summary',
           style: AppDesignSystem.titleMedium,
         ),

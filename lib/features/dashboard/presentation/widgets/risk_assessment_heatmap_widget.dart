@@ -76,10 +76,10 @@ class _RiskAssessmentHeatmapWidgetState extends State<RiskAssessmentHeatmapWidge
                   color: AppTheme.errorRed.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(Icons.warning, size: 16, color: AppTheme.errorRed),
-                    const SizedBox(width: 4),
+                    SizedBox(width: 4),
                     Text(
                       '5 High Risk',
                       style: TextStyle(
@@ -285,7 +285,7 @@ class _RiskAssessmentHeatmapWidgetState extends State<RiskAssessmentHeatmapWidge
                         ),
                       ),
                     ),
-                    gridData: FlGridData(
+                    gridData: const FlGridData(
                       show: true,
                       drawVerticalLine: true,
                       horizontalInterval: 1,
@@ -456,9 +456,9 @@ class _RiskAssessmentHeatmapWidgetState extends State<RiskAssessmentHeatmapWidge
                 const SizedBox(height: 16),
                 const Divider(),
                 const SizedBox(height: 16),
-                Text(
+                const Text(
                   'Recommended Actions',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
@@ -501,7 +501,7 @@ class _RiskAssessmentHeatmapWidgetState extends State<RiskAssessmentHeatmapWidge
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         children: [
-          Icon(Icons.check_circle_outline, size: 16, color: AppTheme.secondaryBlue),
+          const Icon(Icons.check_circle_outline, size: 16, color: AppTheme.secondaryBlue),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -527,7 +527,7 @@ class _RiskAssessmentHeatmapWidgetState extends State<RiskAssessmentHeatmapWidge
             children: [
               Row(
                 children: [
-                  Icon(Icons.psychology, color: AppTheme.primaryIndigo),
+                  const Icon(Icons.psychology, color: AppTheme.primaryIndigo),
                   const SizedBox(width: 8),
                   Text(
                     'ML Risk Predictions',
@@ -542,10 +542,10 @@ class _RiskAssessmentHeatmapWidgetState extends State<RiskAssessmentHeatmapWidge
                       color: AppTheme.successGreen.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(Icons.verified, size: 16, color: AppTheme.successGreen),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(
                           'Model Accuracy: 89%',
                           style: TextStyle(

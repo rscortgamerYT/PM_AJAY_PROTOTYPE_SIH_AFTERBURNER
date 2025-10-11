@@ -22,7 +22,7 @@ class _NotificationsCenterWidgetState extends ConsumerState<NotificationsCenterW
 
   @override
   Widget build(BuildContext context) {
-    final userId = 'current-user-id'; // TODO: Get from auth
+    const userId = 'current-user-id'; // TODO: Get from auth
 
     return Column(
       children: [
@@ -130,7 +130,7 @@ class _NotificationsCenterWidgetState extends ConsumerState<NotificationsCenterW
                           },
                         ),
                       );
-                    }).toList(),
+                    }),
                   ],
                 ),
               ),
@@ -178,7 +178,7 @@ class _NotificationsCenterWidgetState extends ConsumerState<NotificationsCenterW
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
                           group['date'] as String,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                             color: AppTheme.neutralGray,
@@ -237,7 +237,7 @@ class _NotificationsCenterWidgetState extends ConsumerState<NotificationsCenterW
             const SizedBox(height: 4),
             Text(
               _formatTimestamp(notification.timestamp),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 11,
                 color: AppTheme.neutralGray,
               ),
@@ -303,7 +303,7 @@ class _NotificationsCenterWidgetState extends ConsumerState<NotificationsCenterW
             _showUnreadOnly 
                 ? 'You\'re all caught up!'
                 : 'Notifications will appear here',
-            style: TextStyle(
+            style: const TextStyle(
               color: AppTheme.neutralGray,
               fontSize: 14,
             ),
@@ -468,7 +468,7 @@ class _NotificationsCenterWidgetState extends ConsumerState<NotificationsCenterW
             const SizedBox(height: 16),
             Text(
               _formatTimestamp(notification.timestamp),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: AppTheme.neutralGray,
               ),
@@ -477,9 +477,9 @@ class _NotificationsCenterWidgetState extends ConsumerState<NotificationsCenterW
               const SizedBox(height: 16),
               const Divider(),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 'Additional Details',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -567,7 +567,7 @@ class _NotificationsCenterWidgetState extends ConsumerState<NotificationsCenterW
                   value: true,
                   onChanged: (value) {},
                 );
-              }).toList(),
+              }),
             ],
           ),
         ),

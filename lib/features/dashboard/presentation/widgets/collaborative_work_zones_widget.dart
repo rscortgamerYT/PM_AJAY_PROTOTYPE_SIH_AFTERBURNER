@@ -82,7 +82,7 @@ class _CollaborativeWorkZonesWidgetState extends ConsumerState<CollaborativeWork
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, size: 48, color: AppTheme.errorRed),
+                const Icon(Icons.error_outline, size: 48, color: AppTheme.errorRed),
                 const SizedBox(height: 16),
                 Text('Error loading collaboration zones: ${snapshot.error}'),
               ],

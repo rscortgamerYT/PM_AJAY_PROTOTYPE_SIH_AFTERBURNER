@@ -22,7 +22,7 @@ class _ActiveProjectsTimelineWidgetState
     extends State<ActiveProjectsTimelineWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  DateTime _selectedMonth = DateTime.now();
+  final DateTime _selectedMonth = DateTime.now();
   String _filterStatus = 'All';
 
   @override
@@ -110,14 +110,14 @@ class _ActiveProjectsTimelineWidgetState
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Active Projects Timeline',
               style: AppDesignSystem.headlineMedium,
             ),
             const SizedBox(height: 4),
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.calendar_today,
                   size: 16,
                   color: AppDesignSystem.vibrantTeal,
@@ -147,7 +147,7 @@ class _ActiveProjectsTimelineWidgetState
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.view_timeline,
                     size: 16,
                     color: AppDesignSystem.neutral600,
@@ -410,7 +410,7 @@ class _ActiveProjectsTimelineWidgetState
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.location_on,
                     size: 18,
                     color: AppDesignSystem.neutral600,
@@ -441,7 +441,7 @@ class _ActiveProjectsTimelineWidgetState
               const SizedBox(height: 12),
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.calendar_today,
                     size: 13,
                     color: AppDesignSystem.neutral600,
@@ -460,7 +460,7 @@ class _ActiveProjectsTimelineWidgetState
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.business,
                     size: 13,
                     color: AppDesignSystem.neutral600,
@@ -566,14 +566,14 @@ class _ActiveProjectsTimelineWidgetState
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: AppDesignSystem.neutral100,
                     borderRadius: AppDesignSystem.radiusSmall,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.update,
                         size: 12,
                         color: AppDesignSystem.neutral500,
@@ -652,7 +652,7 @@ class _ActiveProjectsTimelineWidgetState
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.event_busy,
             size: 64,
             color: AppDesignSystem.neutral400,

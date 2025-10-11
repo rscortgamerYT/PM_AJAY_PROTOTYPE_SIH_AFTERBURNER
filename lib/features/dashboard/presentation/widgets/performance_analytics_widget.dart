@@ -23,7 +23,7 @@ class PerformanceAnalyticsWidget extends ConsumerStatefulWidget {
 
 class _PerformanceAnalyticsWidgetState extends ConsumerState<PerformanceAnalyticsWidget> {
   final DashboardAnalyticsService _analyticsService = DashboardAnalyticsService();
-  String _selectedMetric = 'overall';
+  final String _selectedMetric = 'overall';
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +204,7 @@ class _PerformanceAnalyticsWidgetState extends ConsumerState<PerformanceAnalytic
               height: 200,
               child: LineChart(
                 LineChartData(
-                  gridData: FlGridData(show: true, drawVerticalLine: false),
+                  gridData: const FlGridData(show: true, drawVerticalLine: false),
                   titlesData: FlTitlesData(
                     leftTitles: AxisTitles(
                       sideTitles: SideTitles(

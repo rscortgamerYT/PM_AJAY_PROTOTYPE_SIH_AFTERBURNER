@@ -134,7 +134,7 @@ class _DistrictCapacityPlannerWidgetState
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [AppTheme.stateOfficerColor, AppTheme.secondaryBlue],
           begin: Alignment.topLeft,
@@ -503,9 +503,9 @@ class _DistrictCapacityPlannerWidgetState
           children: [
             Row(
               children: [
-                Icon(Icons.psychology, color: AppTheme.accentTeal),
+                const Icon(Icons.psychology, color: AppTheme.accentTeal),
                 const SizedBox(width: 8),
-                Text(
+                const Text(
                   'AI Recommendation',
                   style: TextStyle(
                     color: AppTheme.accentTeal,
@@ -554,12 +554,12 @@ class _DistrictCapacityPlannerWidgetState
               ),
               child: Row(
                 children: [
-                  Icon(Icons.trending_up, size: 20, color: AppTheme.successGreen),
+                  const Icon(Icons.trending_up, size: 20, color: AppTheme.successGreen),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       recommendation.impact,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppTheme.successGreen,
                         fontSize: 13,
                       ),

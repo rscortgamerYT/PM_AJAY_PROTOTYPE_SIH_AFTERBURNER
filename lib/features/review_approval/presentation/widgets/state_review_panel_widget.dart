@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/models/request_model.dart';
-import '../../../../core/models/esign_model.dart';
 
 class StateReviewPanelWidget extends ConsumerStatefulWidget {
   const StateReviewPanelWidget({super.key});
@@ -497,7 +496,7 @@ class _StateReviewPanelWidgetState extends ConsumerState<StateReviewPanelWidget>
                               child: ElevatedButton.icon(
                                 onPressed: () => _handleApprove(request),
                                 icon: const Icon(Icons.check_circle),
-                                label: const Text('Approve'),
+                                label: const Text('E-sign & Approve'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.green,
                                   foregroundColor: Colors.white,

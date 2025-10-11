@@ -244,11 +244,11 @@ class _OpenDataExplorerWidgetState extends State<OpenDataExplorerWidget> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         Icon(Icons.dataset, color: AppTheme.publicColor),
-                        const SizedBox(width: 8),
-                        const Text(
+                        SizedBox(width: 8),
+                        Text(
                           'Select Dataset',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -256,7 +256,7 @@ class _OpenDataExplorerWidgetState extends State<OpenDataExplorerWidget> {
                     ),
                     const SizedBox(height: 12),
                     DropdownButtonFormField<String>(
-                      value: _selectedDataset,
+                      initialValue: _selectedDataset,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Choose a dataset...',
@@ -324,11 +324,11 @@ class _OpenDataExplorerWidgetState extends State<OpenDataExplorerWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.view_column, color: AppTheme.publicColor),
-                          const SizedBox(width: 8),
-                          const Text(
+                          SizedBox(width: 8),
+                          Text(
                             'Select Fields',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -363,24 +363,24 @@ class _OpenDataExplorerWidgetState extends State<OpenDataExplorerWidget> {
               const SizedBox(height: 16),
               
               // Filters
-              Card(
+              const Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Icon(Icons.filter_list, color: AppTheme.publicColor),
-                          const SizedBox(width: 8),
-                          const Text(
+                          SizedBox(width: 8),
+                          Text(
                             'Filters (Optional)',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 12),
-                      const Text(
+                      SizedBox(height: 12),
+                      Text(
                         'Add filters to refine your query',
                         style: TextStyle(fontSize: 12, color: Colors.grey),
                       ),
@@ -398,11 +398,11 @@ class _OpenDataExplorerWidgetState extends State<OpenDataExplorerWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.settings, color: AppTheme.publicColor),
-                          const SizedBox(width: 8),
-                          const Text(
+                          SizedBox(width: 8),
+                          Text(
                             'Query Options',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -410,7 +410,7 @@ class _OpenDataExplorerWidgetState extends State<OpenDataExplorerWidget> {
                       ),
                       const SizedBox(height: 12),
                       DropdownButtonFormField<String>(
-                        value: _sortBy,
+                        initialValue: _sortBy,
                         decoration: const InputDecoration(
                           labelText: 'Sort By',
                           border: OutlineInputBorder(),
@@ -662,11 +662,11 @@ class _OpenDataExplorerWidgetState extends State<OpenDataExplorerWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.download, color: AppTheme.successGreen),
-            const SizedBox(width: 12),
-            const Text('Download Ready'),
+            SizedBox(width: 12),
+            Text('Download Ready'),
           ],
         ),
         content: Column(

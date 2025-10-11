@@ -103,10 +103,10 @@ class _OpenDataExplorerWidgetState extends ConsumerState<OpenDataExplorerWidget>
               end: Alignment.bottomRight,
             ),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Open Data Explorer',
                 style: TextStyle(
                   fontSize: 28,
@@ -114,8 +114,8 @@ class _OpenDataExplorerWidgetState extends ConsumerState<OpenDataExplorerWidget>
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 8),
-              const Text(
+              SizedBox(height: 8),
+              Text(
                 'Query and visualize PM-AJAY public datasets with SQL-like syntax',
                 style: TextStyle(
                   fontSize: 16,
@@ -386,7 +386,7 @@ class _OpenDataExplorerWidgetState extends ConsumerState<OpenDataExplorerWidget>
 
             // Dataset Selector
             DropdownButtonFormField<String>(
-              value: _selectedDataset,
+              initialValue: _selectedDataset,
               decoration: InputDecoration(
                 labelText: 'Select Dataset',
                 border: OutlineInputBorder(
@@ -411,7 +411,7 @@ class _OpenDataExplorerWidgetState extends ConsumerState<OpenDataExplorerWidget>
               controller: _queryController,
               decoration: InputDecoration(
                 labelText: 'SQL Query',
-                hintText: 'SELECT * FROM ${_selectedDataset} LIMIT 100',
+                hintText: 'SELECT * FROM $_selectedDataset LIMIT 100',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -428,7 +428,7 @@ class _OpenDataExplorerWidgetState extends ConsumerState<OpenDataExplorerWidget>
               children: [
                 Expanded(
                   child: DropdownButtonFormField<String>(
-                    value: _selectedVisualization,
+                    initialValue: _selectedVisualization,
                     decoration: InputDecoration(
                       labelText: 'Visualization Type',
                       border: OutlineInputBorder(
@@ -630,13 +630,13 @@ class _OpenDataExplorerWidgetState extends ConsumerState<OpenDataExplorerWidget>
         padding: const EdgeInsets.all(20),
         child: Row(
           children: [
-            Icon(Icons.error_outline, color: AppTheme.errorRed),
+            const Icon(Icons.error_outline, color: AppTheme.errorRed),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Query Error',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

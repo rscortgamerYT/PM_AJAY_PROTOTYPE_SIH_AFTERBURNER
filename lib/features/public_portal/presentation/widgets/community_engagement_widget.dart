@@ -80,10 +80,10 @@ class _CommunityEngagementWidgetState extends ConsumerState<CommunityEngagementW
               end: Alignment.bottomRight,
             ),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Community Engagement',
                 style: TextStyle(
                   fontSize: 28,
@@ -91,8 +91,8 @@ class _CommunityEngagementWidgetState extends ConsumerState<CommunityEngagementW
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 8),
-              const Text(
+              SizedBox(height: 8),
+              Text(
                 'Share ideas, volunteer, attend events, and connect with your community',
                 style: TextStyle(
                   fontSize: 16,
@@ -168,7 +168,7 @@ class _CommunityEngagementWidgetState extends ConsumerState<CommunityEngagementW
                   const SizedBox(height: 16),
                   
                   DropdownButtonFormField<String>(
-                    value: _selectedIdeaCategory,
+                    initialValue: _selectedIdeaCategory,
                     decoration: InputDecoration(
                       labelText: 'Category',
                       border: OutlineInputBorder(
@@ -301,7 +301,7 @@ class _CommunityEngagementWidgetState extends ConsumerState<CommunityEngagementW
                   ),
                   child: Text(
                     idea.category,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: AppTheme.primaryIndigo,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
@@ -436,7 +436,7 @@ class _CommunityEngagementWidgetState extends ConsumerState<CommunityEngagementW
                   const SizedBox(height: 16),
                   
                   DropdownButtonFormField<String>(
-                    value: _selectedVolunteerArea,
+                    initialValue: _selectedVolunteerArea,
                     decoration: InputDecoration(
                       labelText: 'Area of Interest',
                       border: OutlineInputBorder(
@@ -504,7 +504,7 @@ class _CommunityEngagementWidgetState extends ConsumerState<CommunityEngagementW
           children: [
             Row(
               children: [
-                Icon(Icons.work, color: AppTheme.primaryIndigo),
+                const Icon(Icons.work, color: AppTheme.primaryIndigo),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -623,7 +623,7 @@ class _CommunityEngagementWidgetState extends ConsumerState<CommunityEngagementW
                     children: [
                       Text(
                         event.date.day.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: AppTheme.primaryIndigo,
@@ -631,7 +631,7 @@ class _CommunityEngagementWidgetState extends ConsumerState<CommunityEngagementW
                       ),
                       Text(
                         _getMonthName(event.date.month),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: AppTheme.primaryIndigo,
                         ),

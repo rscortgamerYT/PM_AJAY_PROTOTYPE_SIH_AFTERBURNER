@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 /// Utility class for handling gestures in mobile and tablet interfaces
 class GestureUtils {
@@ -77,14 +76,14 @@ class SwipeDetector extends StatelessWidget {
   final double sensitivity;
 
   const SwipeDetector({
-    Key? key,
+    super.key,
     required this.child,
     this.onSwipe,
     this.onTap,
     this.onDoubleTap,
     this.onLongPress,
     this.sensitivity = 1.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -121,14 +120,14 @@ class PinchZoomWidget extends StatefulWidget {
   final Function(Offset)? onTranslationChanged;
 
   const PinchZoomWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.minScale = 0.5,
     this.maxScale = 4.0,
     this.enablePan = true,
     this.onScaleChanged,
     this.onTranslationChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<PinchZoomWidget> createState() => _PinchZoomWidgetState();
@@ -200,7 +199,7 @@ class InteractiveGestureMap extends StatefulWidget {
   final Function(double)? onRotationChanged;
 
   const InteractiveGestureMap({
-    Key? key,
+    super.key,
     required this.child,
     this.initialScale = 1.0,
     this.minScale = 0.5,
@@ -208,7 +207,7 @@ class InteractiveGestureMap extends StatefulWidget {
     this.enableRotation = false,
     this.onScaleChanged,
     this.onRotationChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<InteractiveGestureMap> createState() => _InteractiveGestureMapState();
@@ -302,7 +301,7 @@ class GestureDraggableSheet extends StatefulWidget {
   final Function(double)? onDragUpdate;
 
   const GestureDraggableSheet({
-    Key? key,
+    super.key,
     required this.child,
     this.initialChildSize = 0.5,
     this.minChildSize = 0.25,
@@ -310,7 +309,7 @@ class GestureDraggableSheet extends StatefulWidget {
     this.snap = true,
     this.snapSizes,
     this.onDragUpdate,
-  }) : super(key: key);
+  });
 
   @override
   State<GestureDraggableSheet> createState() => _GestureDraggableSheetState();
@@ -388,14 +387,14 @@ class SwipeableCard extends StatefulWidget {
   final double threshold;
 
   const SwipeableCard({
-    Key? key,
+    super.key,
     required this.child,
     this.onSwipeLeft,
     this.onSwipeRight,
     this.onSwipeUp,
     this.onSwipeDown,
     this.threshold = 100.0,
-  }) : super(key: key);
+  });
 
   @override
   State<SwipeableCard> createState() => _SwipeableCardState();

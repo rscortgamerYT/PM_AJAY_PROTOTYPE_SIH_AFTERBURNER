@@ -155,11 +155,11 @@ class _NationalHeatmapWidgetState extends State<NationalHeatmapWidget> {
               DropdownButton<String?>(
                 value: _componentFilter,
                 hint: const Text('All Components'),
-                items: [
-                  const DropdownMenuItem(value: null, child: Text('All Components')),
-                  const DropdownMenuItem(value: 'adarsh_gram', child: Text('Adarsh Gram')),
-                  const DropdownMenuItem(value: 'gia', child: Text('GIA')),
-                  const DropdownMenuItem(value: 'hostel', child: Text('Hostel')),
+                items: const [
+                  DropdownMenuItem(value: null, child: Text('All Components')),
+                  DropdownMenuItem(value: 'adarsh_gram', child: Text('Adarsh Gram')),
+                  DropdownMenuItem(value: 'gia', child: Text('GIA')),
+                  DropdownMenuItem(value: 'hostel', child: Text('Hostel')),
                 ],
                 onChanged: (value) {
                   setState(() => _componentFilter = value);
@@ -172,10 +172,10 @@ class _NationalHeatmapWidgetState extends State<NationalHeatmapWidget> {
               DropdownButton<String?>(
                 value: _metricFilter,
                 hint: const Text('Performance'),
-                items: [
-                  const DropdownMenuItem(value: 'performance', child: Text('Performance')),
-                  const DropdownMenuItem(value: 'fund_utilization', child: Text('Fund Utilization')),
-                  const DropdownMenuItem(value: 'timeline', child: Text('Timeline Adherence')),
+                items: const [
+                  DropdownMenuItem(value: 'performance', child: Text('Performance')),
+                  DropdownMenuItem(value: 'fund_utilization', child: Text('Fund Utilization')),
+                  DropdownMenuItem(value: 'timeline', child: Text('Timeline Adherence')),
                 ],
                 onChanged: (value) {
                   setState(() => _metricFilter = value ?? 'performance');
@@ -209,7 +209,7 @@ class _NationalHeatmapWidgetState extends State<NationalHeatmapWidget> {
                       color: _getPerformanceColor(state.performanceScore),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.location_on,
                       color: Colors.white,
                       size: 28,
@@ -385,12 +385,12 @@ class _NationalHeatmapWidgetState extends State<NationalHeatmapWidget> {
 
             return FlutterMap(
               mapController: _mapController,
-              options: MapOptions(
-                initialCenter: const LatLng(20.5937, 78.9629), // India center
+              options: const MapOptions(
+                initialCenter: LatLng(20.5937, 78.9629), // India center
                 initialZoom: 5.0,
                 minZoom: 4.0,
                 maxZoom: 18.0,
-                interactionOptions: const InteractionOptions(
+                interactionOptions: InteractionOptions(
                   flags: InteractiveFlag.all,
                 ),
               ),

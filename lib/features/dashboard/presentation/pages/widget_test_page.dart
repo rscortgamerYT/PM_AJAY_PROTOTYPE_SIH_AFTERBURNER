@@ -7,7 +7,7 @@ import '../../../fund_flow/presentation/pages/fund_flow_demo_page.dart';
 
 /// Widget Test Page - Diagnostic page to test all dashboard widgets
 class WidgetTestPage extends StatefulWidget {
-  const WidgetTestPage({Key? key}) : super(key: key);
+  const WidgetTestPage({super.key});
 
   @override
   State<WidgetTestPage> createState() => _WidgetTestPageState();
@@ -102,7 +102,7 @@ class WidgetTestItem {
 class ErrorBoundary extends StatefulWidget {
   final Widget child;
 
-  const ErrorBoundary({Key? key, required this.child}) : super(key: key);
+  const ErrorBoundary({super.key, required this.child});
 
   @override
   State<ErrorBoundary> createState() => _ErrorBoundaryState();

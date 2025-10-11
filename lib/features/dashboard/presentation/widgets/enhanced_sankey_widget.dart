@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/models/enhanced_fund_flow_models.dart';
 import '../../../../core/theme/app_design_system.dart';
-import '../../../../core/utils/responsive_layout.dart';
-import 'dart:math' as math;
 
 /// Enhanced Interactive Sankey diagram with 5-level drill-down and analytics
 class EnhancedSankeyWidget extends ConsumerStatefulWidget {
@@ -35,8 +33,8 @@ class _EnhancedSankeyWidgetState extends ConsumerState<EnhancedSankeyWidget>
   late AnimationController _flowAnimationController;
   
   // Filter state
-  Set<FlowHealthStatus> _statusFilter = {};
-  double _minRiskFilter = 0.0;
+  final Set<FlowHealthStatus> _statusFilter = {};
+  final double _minRiskFilter = 0.0;
   bool _showAnomaliesOnly = false;
   
   // View mode
@@ -111,7 +109,7 @@ class _EnhancedSankeyWidgetState extends ConsumerState<EnhancedSankeyWidget>
   Widget _buildControlBar() {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(bottom: BorderSide(color: AppDesignSystem.neutral300)),
       ),
@@ -200,7 +198,7 @@ class _EnhancedSankeyWidgetState extends ConsumerState<EnhancedSankeyWidget>
     
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppDesignSystem.neutral100,
         border: Border(bottom: BorderSide(color: AppDesignSystem.neutral300)),
       ),
@@ -348,7 +346,7 @@ class _EnhancedSankeyWidgetState extends ConsumerState<EnhancedSankeyWidget>
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(top: BorderSide(color: AppDesignSystem.neutral300)),
+        border: const Border(top: BorderSide(color: AppDesignSystem.neutral300)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -454,8 +452,8 @@ class _EnhancedSankeyPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (nodes.isEmpty) return;
 
-    final nodeHeight = 60.0;
-    final nodeSpacing = 20.0;
+    const nodeHeight = 60.0;
+    const nodeSpacing = 20.0;
     final totalHeight = (nodes.length * nodeHeight) + ((nodes.length - 1) * nodeSpacing);
     final startY = (size.height - totalHeight) / 2;
 

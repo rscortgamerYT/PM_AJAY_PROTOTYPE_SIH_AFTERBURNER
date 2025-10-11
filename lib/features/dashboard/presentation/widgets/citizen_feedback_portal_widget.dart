@@ -51,7 +51,7 @@ class _CitizenFeedbackPortalWidgetState extends State<CitizenFeedbackPortalWidge
             color: AppTheme.publicColor.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(Icons.feedback, color: AppTheme.publicColor, size: 28),
+          child: const Icon(Icons.feedback, color: AppTheme.publicColor, size: 28),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -319,7 +319,7 @@ class _CitizenFeedbackPortalWidgetState extends State<CitizenFeedbackPortalWidge
                     const SizedBox(height: 16),
                     const Divider(),
                     const SizedBox(height: 8),
-                    Text(
+                    const Text(
                       'Net Sentiment Score: +35',
                       style: TextStyle(
                         color: AppTheme.successGreen,

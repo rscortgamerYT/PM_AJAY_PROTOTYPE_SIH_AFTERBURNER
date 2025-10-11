@@ -185,7 +185,9 @@ class CommunicationService {
             .where((ticket) {
               if (userId != null &&
                   ticket.creatorId != userId &&
-                  ticket.assigneeId != userId) return false;
+                  ticket.assigneeId != userId) {
+                return false;
+              }
               if (status != null && ticket.status != status) return false;
               if (priority != null && ticket.priority != priority) return false;
               if (projectId != null && ticket.projectId != projectId) return false;
@@ -345,7 +347,7 @@ class CommunicationService {
         })
         .single();
 
-    return response as Map<String, dynamic>;
+    return response;
   }
 
   // ========== TAGGING MODULE ==========

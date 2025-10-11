@@ -118,15 +118,15 @@ class _PMCalendarWidgetState extends State<PMCalendarWidget> with SingleTickerPr
     
     return Card(
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: AppDesignSystem.radiusLarge),
+      shape: const RoundedRectangleBorder(borderRadius: AppDesignSystem.radiusLarge),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildHeader(),
-          Divider(height: 1, color: AppDesignSystem.neutral300),
+          const Divider(height: 1, color: AppDesignSystem.neutral300),
           _buildCalendar(),
           if (widget.showAgenda && _selectedDay != null) ...[
-            Divider(height: 1, color: AppDesignSystem.neutral300),
+            const Divider(height: 1, color: AppDesignSystem.neutral300),
             _buildAgenda(),
           ],
         ],
@@ -137,20 +137,20 @@ class _PMCalendarWidgetState extends State<PMCalendarWidget> with SingleTickerPr
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(AppDesignSystem.space16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [AppDesignSystem.deepIndigo, AppDesignSystem.vibrantTeal],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
       ),
       child: Row(
         children: [
-          Icon(Icons.calendar_month, color: Colors.white, size: AppDesignSystem.iconMedium),
+          const Icon(Icons.calendar_month, color: Colors.white, size: AppDesignSystem.iconMedium),
           const SizedBox(width: AppDesignSystem.space8),
           Text(
             'Project Calendar',
@@ -236,11 +236,11 @@ class _PMCalendarWidgetState extends State<PMCalendarWidget> with SingleTickerPr
             color: AppDesignSystem.vibrantTeal.withValues(alpha: 0.3),
             shape: BoxShape.circle,
           ),
-          selectedDecoration: BoxDecoration(
+          selectedDecoration: const BoxDecoration(
             color: AppDesignSystem.deepIndigo,
             shape: BoxShape.circle,
           ),
-          markerDecoration: BoxDecoration(
+          markerDecoration: const BoxDecoration(
             color: AppDesignSystem.coral,
             shape: BoxShape.circle,
           ),
@@ -254,8 +254,8 @@ class _PMCalendarWidgetState extends State<PMCalendarWidget> with SingleTickerPr
             color: AppDesignSystem.deepIndigo,
             fontWeight: FontWeight.bold,
           ),
-          leftChevronIcon: Icon(Icons.chevron_left, color: AppDesignSystem.deepIndigo),
-          rightChevronIcon: Icon(Icons.chevron_right, color: AppDesignSystem.deepIndigo),
+          leftChevronIcon: const Icon(Icons.chevron_left, color: AppDesignSystem.deepIndigo),
+          rightChevronIcon: const Icon(Icons.chevron_right, color: AppDesignSystem.deepIndigo),
         ),
         calendarBuilders: CalendarBuilders(
           todayBuilder: (context, day, focusedDay) {
@@ -338,7 +338,7 @@ class _PMCalendarWidgetState extends State<PMCalendarWidget> with SingleTickerPr
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.event_busy,
             size: AppDesignSystem.iconXLarge,
             color: AppDesignSystem.neutral400,

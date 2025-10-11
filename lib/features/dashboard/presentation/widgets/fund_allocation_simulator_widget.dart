@@ -21,7 +21,7 @@ class FundAllocationSimulatorWidget extends StatefulWidget {
 class _FundAllocationSimulatorWidgetState 
     extends State<FundAllocationSimulatorWidget> {
   
-  double _totalBudget = 10000000; // 1 crore
+  final double _totalBudget = 10000000; // 1 crore
   
   final List<BudgetCategory> _categories = [
     BudgetCategory(
@@ -81,7 +81,7 @@ class _FundAllocationSimulatorWidgetState
     ),
   ];
 
-  List<ScenarioComparison> _scenarios = [];
+  final List<ScenarioComparison> _scenarios = [];
   int _activeScenarioIndex = 0;
 
   @override
@@ -175,7 +175,7 @@ class _FundAllocationSimulatorWidgetState
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [AppTheme.stateOfficerColor, AppTheme.secondaryBlue],
           begin: Alignment.topLeft,

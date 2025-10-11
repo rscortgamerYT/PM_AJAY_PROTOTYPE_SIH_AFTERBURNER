@@ -79,9 +79,9 @@ class DemoDataGenerator {
       final daysAgo = (i * 3) % 365;
       final transactionDate = now.subtract(Duration(days: daysAgo));
       
-      final stages = FundFlowStage.values;
-      final statuses = TransactionStatus.values;
-      final components = SchemeComponent.values;
+      const stages = FundFlowStage.values;
+      const statuses = TransactionStatus.values;
+      const components = SchemeComponent.values;
       
       transactions.add(FundTransaction(
         id: 'TXN${(i + 1).toString().padLeft(6, '0')}',
@@ -119,8 +119,8 @@ class DemoDataGenerator {
       final stateIndex = i % _indianStates.length;
       final state = _indianStates[stateIndex];
       final projectName = _projectNames[i % _projectNames.length];
-      final statuses = ProjectStatus.values;
-      final components = ProjectComponent.values;
+      const statuses = ProjectStatus.values;
+      const components = ProjectComponent.values;
       
       projects.add(ProjectModel(
         id: 'PRJ${(i + 1).toString().padLeft(5, '0')}',
@@ -152,7 +152,7 @@ class DemoDataGenerator {
     for (int i = 0; i < count; i++) {
       final stateIndex = i % _indianStates.length;
       final state = _indianStates[stateIndex];
-      final agencyTypes = AgencyType.values;
+      const agencyTypes = AgencyType.values;
       
       agencies.add(AgencyModel(
         id: 'AGY${(i + 1).toString().padLeft(4, '0')}',
@@ -189,8 +189,8 @@ class DemoDataGenerator {
         performanceScore: 60.0 + (i * 3.0),
         totalProjects: (i + 1) * 2 + 5,
         completedProjects: (i + 1) * 3,
-        createdAt: now.subtract(Duration(days: 1095)),
-        updatedAt: now.subtract(Duration(days: 7)),
+        createdAt: now.subtract(const Duration(days: 1095)),
+        updatedAt: now.subtract(const Duration(days: 7)),
         metadata: {
           'population': _generatePopulation(i),
           'area': _generateArea(i),
@@ -390,9 +390,9 @@ class DemoDataGenerator {
     for (int i = 0; i < count; i++) {
       final daysAgo = (i * 5) % 180;
       final createdDate = now.subtract(Duration(days: daysAgo));
-      final statuses = TicketStatus.values;
-      final priorities = TicketPriority.values;
-      final types = TicketType.values;
+      const statuses = TicketStatus.values;
+      const priorities = TicketPriority.values;
+      const types = TicketType.values;
       
       final status = statuses[i % statuses.length];
       final dueDate = status != TicketStatus.resolved && status != TicketStatus.closed

@@ -76,7 +76,7 @@ class _AuditLogWidgetState extends ConsumerState<AuditLogWidget> {
                 children: [
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedModule,
+                      initialValue: _selectedModule,
                       decoration: const InputDecoration(
                         labelText: 'Module',
                         border: OutlineInputBorder(),
@@ -93,7 +93,7 @@ class _AuditLogWidgetState extends ConsumerState<AuditLogWidget> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedAction,
+                      initialValue: _selectedAction,
                       decoration: const InputDecoration(
                         labelText: 'Action',
                         border: OutlineInputBorder(),
@@ -210,7 +210,7 @@ class _AuditLogWidgetState extends ConsumerState<AuditLogWidget> {
             const SizedBox(height: 4),
             Text(
               _formatTimestamp(log['timestamp']),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: AppTheme.neutralGray,
               ),
