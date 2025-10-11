@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_theme.dart';
 import '../widgets/submit_complaint_widget.dart';
 import '../widgets/project_ratings_feedback_widget.dart';
 import '../widgets/open_data_explorer_widget.dart';
@@ -9,6 +8,10 @@ import '../widgets/transparency_stories_widget.dart';
 import '../../../../core/theme/app_design_system.dart';
 import '../../../../core/widgets/dashboard_components.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
+import '../../../public_portal/presentation/widgets/eligibility_checker_widget.dart';
+import '../../../public_portal/presentation/widgets/application_tracker_widget.dart';
+import '../../../public_portal/presentation/widgets/coverage_checker_widget.dart';
+import '../../../public_portal/presentation/widgets/infrastructure_reports_widget.dart';
 
 class PublicDashboardPage extends ConsumerStatefulWidget {
   const PublicDashboardPage({super.key});
@@ -246,27 +249,7 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
   }
 
   Widget _buildCoverageChecker() {
-    return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.search, size: 80, color: AppTheme.secondaryBlue),
-            SizedBox(height: 16),
-            Text(
-              'Coverage Checker',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Check if PM-AJAY projects are available in your area',
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
+    return const CoverageCheckerWidget();
   }
 
   Widget _buildSubmitComplaint() {
@@ -293,9 +276,12 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       _buildHomePage(),
+      const EligibilityCheckerWidget(),
+      const ApplicationTrackerWidget(),
       _buildCoverageChecker(),
       _buildSubmitComplaint(),
       _buildOpenDataExplorer(),
+      const InfrastructureReportsWidget(),
     ];
 
     return Scaffold(
@@ -361,6 +347,16 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
             label: 'Home',
           ),
           NavigationDestination(
+            icon: Icon(Icons.calculate_outlined),
+            selectedIcon: Icon(Icons.calculate),
+            label: 'Eligibility',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.track_changes_outlined),
+            selectedIcon: Icon(Icons.track_changes),
+            label: 'Track',
+          ),
+          NavigationDestination(
             icon: Icon(Icons.search_outlined),
             selectedIcon: Icon(Icons.search),
             label: 'Coverage',
@@ -374,6 +370,11 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
             icon: Icon(Icons.data_exploration_outlined),
             selectedIcon: Icon(Icons.data_exploration),
             label: 'Data',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.location_city_outlined),
+            selectedIcon: Icon(Icons.location_city),
+            label: 'Projects',
           ),
         ],
       ),

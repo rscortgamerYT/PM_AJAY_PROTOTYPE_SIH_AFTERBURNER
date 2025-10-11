@@ -7,6 +7,10 @@ import '../widgets/public_feedback_widget.dart';
 import '../widgets/open_data_explorer_widget.dart';
 import '../widgets/community_engagement_widget.dart';
 import '../widgets/transparency_awareness_widget.dart';
+import '../widgets/eligibility_checker_widget.dart';
+import '../widgets/notification_center_widget.dart';
+import '../widgets/application_tracker_widget.dart';
+import '../widgets/infrastructure_reports_widget.dart';
 
 /// Public Portal Page
 /// 
@@ -22,6 +26,30 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
   int _selectedIndex = 0;
 
   final List<PortalFeature> _features = [
+    PortalFeature(
+      icon: Icons.calculate,
+      title: 'Eligibility Checker',
+      description: 'Check your eligibility for PM-AJAY schemes',
+      color: Colors.indigo,
+    ),
+    PortalFeature(
+      icon: Icons.notifications_active,
+      title: 'Notifications',
+      description: 'Manage alerts and stay updated',
+      color: Colors.amber,
+    ),
+    PortalFeature(
+      icon: Icons.track_changes,
+      title: 'Track Applications',
+      description: 'Monitor your application status in real-time',
+      color: Colors.cyan,
+    ),
+    PortalFeature(
+      icon: Icons.location_city,
+      title: 'Infrastructure',
+      description: 'View development projects in your area',
+      color: Colors.brown,
+    ),
     PortalFeature(
       icon: Icons.map,
       title: 'Coverage Check',
@@ -195,6 +223,10 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
                   child: IndexedStack(
                     index: _selectedIndex,
                     children: const [
+                      EligibilityCheckerWidget(),
+                      NotificationCenterWidget(),
+                      ApplicationTrackerWidget(),
+                      InfrastructureReportsWidget(),
                       CoverageCheckWidget(),
                       SubmitComplaintWidget(),
                       PublicFeedbackWidget(),
@@ -211,10 +243,10 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
       ),
 
       // Floating Action Button for quick actions
-      floatingActionButton: _selectedIndex != 1 // Don't show on Submit Complaint page
+      floatingActionButton: _selectedIndex != 5 // Don't show on Submit Complaint page
           ? FloatingActionButton.extended(
               onPressed: () {
-                setState(() => _selectedIndex = 1);
+                setState(() => _selectedIndex = 5);
               },
               icon: const Icon(Icons.report_problem),
               label: const Text('Report Issue'),
@@ -275,7 +307,7 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
           ElevatedButton.icon(
             onPressed: () {
               Navigator.pop(context);
-              setState(() => _selectedIndex = 5); // Go to Learn & Updates
+              setState(() => _selectedIndex = 9); // Go to Learn & Updates
             },
             icon: const Icon(Icons.school),
             label: const Text('View Tutorials'),

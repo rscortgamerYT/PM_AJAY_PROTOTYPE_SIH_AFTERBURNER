@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'claim_submission_dialog.dart';
 import '../../../../core/theme/app_theme.dart';
 
 class SmartMilestoneClaimsWidget extends StatefulWidget {
@@ -640,8 +641,10 @@ class _SmartMilestoneClaimsWidgetState extends State<SmartMilestoneClaimsWidget>
   }
 
   void _showNewClaimDialog() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Opening new claim form...')),
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const ClaimSubmissionDialog(),
     );
   }
 
