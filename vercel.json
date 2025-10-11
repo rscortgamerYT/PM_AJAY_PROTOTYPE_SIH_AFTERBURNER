@@ -4,28 +4,10 @@
   "github": {
     "silent": true
   },
-  "buildCommand": "flutter build web --release --web-renderer canvaskit",
-  "outputDirectory": "build/web",
-  "routes": [
+  "rewrites": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/canvaskit/(.*)",
-      "dest": "/canvaskit/$1"
-    },
-    {
-      "src": "/icons/(.*)",
-      "dest": "/icons/$1"
-    },
-    {
-      "src": "/(.*\\.(js|json|png|jpg|jpeg|gif|svg|wasm|ico|webmanifest))",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
@@ -45,19 +27,6 @@
     {
       "source": "/canvaskit/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*\\.(js|wasm))",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript"
-        },
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
