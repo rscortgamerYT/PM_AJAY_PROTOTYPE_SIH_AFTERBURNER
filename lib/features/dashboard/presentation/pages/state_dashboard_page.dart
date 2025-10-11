@@ -18,6 +18,7 @@ import '../../../../core/widgets/dashboard_components.dart';
 import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
+import '../../../../core/widgets/dashboard_switcher_widget.dart';
 
 class StateDashboardPage extends ConsumerStatefulWidget {
   const StateDashboardPage({super.key});
@@ -387,6 +388,7 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
         children: [
           pages[_selectedIndex],
           const EventCalendarWidget(),
+          const DashboardSwitcherWidget(),
         ],
       ),
       bottomNavigationBar: NavigationBar(

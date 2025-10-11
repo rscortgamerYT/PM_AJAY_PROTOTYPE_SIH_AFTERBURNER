@@ -16,6 +16,7 @@ import '../widgets/overwatch/milestone_claim_approval_widget.dart';
 import '../../../../core/theme/app_design_system.dart';
 import '../../../../core/utils/responsive_layout.dart';
 import '../../../../core/widgets/event_calendar_widget.dart';
+import '../../../../core/widgets/dashboard_switcher_widget.dart';
 
 class NewOverwatchDashboardPage extends ConsumerStatefulWidget {
   const NewOverwatchDashboardPage({super.key});
@@ -66,6 +67,7 @@ class _NewOverwatchDashboardPageState
             ],
           ),
           const EventCalendarWidget(),
+          const DashboardSwitcherWidget(),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigation(),

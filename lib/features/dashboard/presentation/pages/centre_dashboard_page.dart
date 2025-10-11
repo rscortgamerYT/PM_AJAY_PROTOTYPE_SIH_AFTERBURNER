@@ -16,6 +16,7 @@ import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
 import '../../data/mock_fund_flow_data.dart';
+import '../../../../core/widgets/dashboard_switcher_widget.dart';
 
 class CentreDashboardPage extends ConsumerStatefulWidget {
   const CentreDashboardPage({super.key});
@@ -370,6 +371,7 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
         children: [
           pages[_selectedIndex],
           const EventCalendarWidget(),
+          const DashboardSwitcherWidget(),
         ],
       ),
       bottomNavigationBar: NavigationBar(

@@ -16,6 +16,7 @@ import '../../../../core/widgets/dashboard_components.dart';
 import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
+import '../../../../core/widgets/dashboard_switcher_widget.dart';
 
 class AgencyDashboardPage extends ConsumerStatefulWidget {
   const AgencyDashboardPage({super.key});
@@ -536,6 +537,7 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
         children: [
           pages[_selectedIndex],
           const EventCalendarWidget(),
+          const DashboardSwitcherWidget(),
         ],
       ),
       bottomNavigationBar: NavigationBar(

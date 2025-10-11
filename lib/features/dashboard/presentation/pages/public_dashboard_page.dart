@@ -8,6 +8,7 @@ import '../widgets/citizen_idea_hub_widget.dart';
 import '../widgets/transparency_stories_widget.dart';
 import '../../../../core/theme/app_design_system.dart';
 import '../../../../core/widgets/dashboard_components.dart';
+import '../../../../core/widgets/dashboard_switcher_widget.dart';
 
 class PublicDashboardPage extends ConsumerStatefulWidget {
   const PublicDashboardPage({super.key});
@@ -342,7 +343,12 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
           ),
         ],
       ),
-      body: pages[_selectedIndex],
+      body: Stack(
+        children: [
+          pages[_selectedIndex],
+          const DashboardSwitcherWidget(),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) {
