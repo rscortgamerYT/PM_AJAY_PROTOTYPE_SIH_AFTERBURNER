@@ -15,6 +15,7 @@ import '../widgets/overwatch/milestone_claim_approval_widget.dart';
 import '../../../../core/theme/app_design_system.dart';
 import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
+import '../../../../core/widgets/app_footer.dart';
 
 class NewOverwatchDashboardPage extends ConsumerStatefulWidget {
   const NewOverwatchDashboardPage({super.key});
@@ -565,37 +566,43 @@ class _NewOverwatchDashboardPageState
   }
 
   Widget _buildBottomNavigation() {
-    return NavigationBar(
-      selectedIndex: _selectedTabIndex,
-      onDestinationSelected: (index) {
-        setState(() => _selectedTabIndex = index);
-      },
-      destinations: const [
-        NavigationDestination(
-          icon: Icon(Icons.dashboard_outlined),
-          selectedIcon: Icon(Icons.dashboard),
-          label: 'Fund Flow',
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        NavigationBar(
+          selectedIndex: _selectedTabIndex,
+          onDestinationSelected: (index) {
+            setState(() => _selectedTabIndex = index);
+          },
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.dashboard_outlined),
+              selectedIcon: Icon(Icons.dashboard),
+              label: 'Fund Flow',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.folder_outlined),
+              selectedIcon: Icon(Icons.folder),
+              label: 'Projects',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.map_outlined),
+              selectedIcon: Icon(Icons.map),
+              label: 'Maps',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.flag_outlined),
+              selectedIcon: Icon(Icons.flag),
+              label: 'Reports',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.approval_outlined),
+              selectedIcon: Icon(Icons.approval),
+              label: 'Claims',
+            ),
+          ],
         ),
-        NavigationDestination(
-          icon: Icon(Icons.folder_outlined),
-          selectedIcon: Icon(Icons.folder),
-          label: 'Projects',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.map_outlined),
-          selectedIcon: Icon(Icons.map),
-          label: 'Maps',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.flag_outlined),
-          selectedIcon: Icon(Icons.flag),
-          label: 'Reports',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.approval_outlined),
-          selectedIcon: Icon(Icons.approval),
-          label: 'Claims',
-        ),
+        const AppFooter(),
       ],
     );
   }
