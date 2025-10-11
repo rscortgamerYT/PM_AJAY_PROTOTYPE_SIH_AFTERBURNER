@@ -17,7 +17,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _passwordController = TextEditingController();
   bool _isLoading = false;
   bool _obscurePassword = true;
-  bool _showBypass = kDebugMode; // Only show in debug mode
 
   @override
   void dispose() {
@@ -49,7 +48,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         if (role == null) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('User role not found. Please contact administrator.'),
+              content: const Text('User role not found. Please contact administrator.'),
               backgroundColor: Theme.of(context).colorScheme.error,
             ),
           );
@@ -123,7 +122,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       case 'agency':
         return AppRouter.agencyDashboard;
       case 'overwatch':
-        return AppRouter.overwatchDashboard;
+        return AppRouter.newOverwatchDashboard;
       case 'public':
         return AppRouter.publicDashboard;
       default:
@@ -176,7 +175,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           TextFormField(
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Email',
                               prefixIcon: Icon(Icons.email_outlined),
                             ),
@@ -196,7 +195,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             obscureText: _obscurePassword,
                             decoration: InputDecoration(
                               labelText: 'Password',
-                              prefixIcon: Icon(Icons.lock_outlined),
+                              prefixIcon: const Icon(Icons.lock_outlined),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   _obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
@@ -222,7 +221,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: _isLoading
-                                  ? SizedBox(
+                                  ? const SizedBox(
                                       height: 20,
                                       width: 20,
                                       child: CircularProgressIndicator(
@@ -230,73 +229,71 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                       ),
                                     )
-                                  : Text('Sign In'),
+                                  : const Text('Sign In'),
                             ),
                           ),
                           const SizedBox(height: 16),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Don\'t have an account? '),
+                              const Text('Don\'t have an account? '),
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pushReplacementNamed(AppRouter.register);
                                 },
-                                child: Text('Register'),
+                                child: const Text('Register'),
                               ),
                             ],
                           ),
-                          if (_showBypass) ...[
-                            const SizedBox(height: 24),
-                            const Divider(),
-                            const SizedBox(height: 16),
-                            Text(
-                              'Testing Bypass (Debug Only)',
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: Colors.orange,
-                                fontWeight: FontWeight.bold,
+                          const SizedBox(height: 24),
+                          const Divider(),
+                          const SizedBox(height: 16),
+                          Text(
+                            'Quick Access',
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 12),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            alignment: WrapAlignment.center,
+                            children: [
+                              _BypassButton(
+                                label: 'Centre',
+                                icon: Icons.account_balance,
+                                color: Colors.blue,
+                                onPressed: () => _bypassLogin('centre'),
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 12),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              alignment: WrapAlignment.center,
-                              children: [
-                                _BypassButton(
-                                  label: 'Centre',
-                                  icon: Icons.account_balance,
-                                  color: Colors.blue,
-                                  onPressed: () => _bypassLogin('centre'),
-                                ),
-                                _BypassButton(
-                                  label: 'State',
-                                  icon: Icons.location_city,
-                                  color: Colors.green,
-                                  onPressed: () => _bypassLogin('state'),
-                                ),
-                                _BypassButton(
-                                  label: 'Agency',
-                                  icon: Icons.business,
-                                  color: Colors.purple,
-                                  onPressed: () => _bypassLogin('agency'),
-                                ),
-                                _BypassButton(
-                                  label: 'Overwatch',
-                                  icon: Icons.visibility,
-                                  color: Colors.red,
-                                  onPressed: () => _bypassLogin('overwatch'),
-                                ),
-                                _BypassButton(
-                                  label: 'Public',
-                                  icon: Icons.public,
-                                  color: Colors.teal,
-                                  onPressed: () => _bypassLogin('public'),
-                                ),
-                              ],
-                            ),
-                          ],
+                              _BypassButton(
+                                label: 'State',
+                                icon: Icons.location_city,
+                                color: Colors.green,
+                                onPressed: () => _bypassLogin('state'),
+                              ),
+                              _BypassButton(
+                                label: 'Agency',
+                                icon: Icons.business,
+                                color: Colors.purple,
+                                onPressed: () => _bypassLogin('agency'),
+                              ),
+                              _BypassButton(
+                                label: 'Overwatch',
+                                icon: Icons.visibility,
+                                color: Colors.red,
+                                onPressed: () => _bypassLogin('overwatch'),
+                              ),
+                              _BypassButton(
+                                label: 'Public',
+                                icon: Icons.public,
+                                color: Colors.teal,
+                                onPressed: () => _bypassLogin('public'),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),

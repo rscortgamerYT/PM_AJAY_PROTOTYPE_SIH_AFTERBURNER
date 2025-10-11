@@ -160,52 +160,61 @@ class _QualityAssuranceWidgetState extends State<QualityAssuranceWidget> {
   }
 
   Widget _buildQualityMetrics() {
-    return Row(
-      children: [
-        Expanded(
-          child: _buildMetricCard(
-            'Overall Quality Score',
-            '91',
-            '+5%',
-            Icons.grade,
-            AppTheme.successGreen,
-            '%',
-          ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            SizedBox(
+              width: 220,
+              child: _buildMetricCard(
+                'Overall Quality Score',
+                '91',
+                '+5%',
+                Icons.grade,
+                AppTheme.successGreen,
+                '%',
+              ),
+            ),
+            const SizedBox(width: 16),
+            SizedBox(
+              width: 220,
+              child: _buildMetricCard(
+                'Compliance Rate',
+                '96',
+                '+2%',
+                Icons.check_circle,
+                AppTheme.secondaryBlue,
+                '%',
+              ),
+            ),
+            const SizedBox(width: 16),
+            SizedBox(
+              width: 220,
+              child: _buildMetricCard(
+                'Audits Completed',
+                '847',
+                '+23',
+                Icons.assignment_turned_in,
+                AppTheme.warningOrange,
+                '',
+              ),
+            ),
+            const SizedBox(width: 16),
+            SizedBox(
+              width: 220,
+              child: _buildMetricCard(
+                'Issues Resolved',
+                '1,234',
+                '+89',
+                Icons.build,
+                AppTheme.successGreen,
+                '',
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: _buildMetricCard(
-            'Compliance Rate',
-            '96',
-            '+2%',
-            Icons.check_circle,
-            AppTheme.secondaryBlue,
-            '%',
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: _buildMetricCard(
-            'Audits Completed',
-            '847',
-            '+23',
-            Icons.assignment_turned_in,
-            AppTheme.warningOrange,
-            '',
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: _buildMetricCard(
-            'Issues Resolved',
-            '1,234',
-            '+89',
-            Icons.build,
-            AppTheme.successGreen,
-            '',
-          ),
-        ),
-      ],
+      ),
     );
   }
 

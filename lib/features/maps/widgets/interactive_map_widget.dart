@@ -107,8 +107,9 @@ class _InteractiveMapWidgetState extends State<InteractiveMapWidget> {
       
       return Marker(
         point: project.location!,
-        width: isSelected ? 60 : 40,
-        height: isSelected ? 60 : 40,
+        width: isSelected ? 50 : 36,
+        height: isSelected ? 50 : 36,
+        alignment: Alignment.center,
         child: GestureDetector(
           onTap: () {
             setState(() {
@@ -118,25 +119,29 @@ class _InteractiveMapWidgetState extends State<InteractiveMapWidget> {
             widget.onProjectTap?.call(project.id);
           },
           child: Container(
+            width: isSelected ? 50 : 36,
+            height: isSelected ? 50 : 36,
             decoration: BoxDecoration(
               color: color,
               shape: BoxShape.circle,
               border: Border.all(
                 color: Colors.white,
-                width: isSelected ? 3 : 2,
+                width: isSelected ? 2.5 : 2,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: color.withOpacity(0.5),
-                  blurRadius: isSelected ? 10 : 6,
-                  spreadRadius: isSelected ? 3 : 2,
+                  color: color.withOpacity(0.4),
+                  blurRadius: isSelected ? 8 : 5,
+                  spreadRadius: isSelected ? 2 : 1,
                 ),
               ],
             ),
-            child: Icon(
-              _getStatusIcon(project.status),
-              color: Colors.white,
-              size: isSelected ? 30 : 20,
+            child: Center(
+              child: Icon(
+                _getStatusIcon(project.status),
+                color: Colors.white,
+                size: isSelected ? 24 : 18,
+              ),
             ),
           ),
         ),
@@ -153,8 +158,9 @@ class _InteractiveMapWidgetState extends State<InteractiveMapWidget> {
       
       return Marker(
         point: agency.location,
-        width: isSelected ? 50 : 35,
-        height: isSelected ? 50 : 35,
+        width: isSelected ? 44 : 32,
+        height: isSelected ? 44 : 32,
+        alignment: Alignment.center,
         child: GestureDetector(
           onTap: () {
             setState(() {
@@ -164,25 +170,29 @@ class _InteractiveMapWidgetState extends State<InteractiveMapWidget> {
             widget.onAgencyTap?.call(agency.id);
           },
           child: Container(
+            width: isSelected ? 44 : 32,
+            height: isSelected ? 44 : 32,
             decoration: BoxDecoration(
               color: AppTheme.accentTeal,
               shape: BoxShape.circle,
               border: Border.all(
                 color: Colors.white,
-                width: isSelected ? 3 : 2,
+                width: isSelected ? 2.5 : 2,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppTheme.accentTeal.withOpacity(0.5),
-                  blurRadius: isSelected ? 8 : 5,
-                  spreadRadius: isSelected ? 2 : 1,
+                  color: AppTheme.accentTeal.withOpacity(0.4),
+                  blurRadius: isSelected ? 7 : 4,
+                  spreadRadius: isSelected ? 1.5 : 0.5,
                 ),
               ],
             ),
-            child: Icon(
-              Icons.business,
-              color: Colors.white,
-              size: isSelected ? 25 : 18,
+            child: Center(
+              child: Icon(
+                Icons.business,
+                color: Colors.white,
+                size: isSelected ? 22 : 16,
+              ),
             ),
           ),
         ),

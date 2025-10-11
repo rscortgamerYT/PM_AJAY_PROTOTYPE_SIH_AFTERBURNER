@@ -43,6 +43,12 @@ class AppDesignSystem {
   static const Color error = Color(0xFFF44336);
   static const Color info = Color(0xFF2196F3);
   
+  /// Extended Color Palette
+  static const Color sunsetOrange = Color(0xFFFF6B35);
+  static const Color forestGreen = Color(0xFF2D6A4F);
+  static const Color royalPurple = Color(0xFF7209B7);
+  static const Color skyBlue = Color(0xFF4CC9F0);
+  
   // ==================== TYPOGRAPHY ====================
   
   /// Display Styles - Large headings
@@ -182,6 +188,12 @@ class AppDesignSystem {
   static const double space40 = 40.0;
   static const double space48 = 48.0;
   static const double space64 = 64.0;
+  
+  // Spacing Aliases
+  static const double spacingSmall = space8;
+  static const double spacingMedium = space16;
+  static const double spacingLarge = space24;
+  static const double spacingXLarge = space32;
   
   // ==================== ELEVATION & SHADOWS ====================
   

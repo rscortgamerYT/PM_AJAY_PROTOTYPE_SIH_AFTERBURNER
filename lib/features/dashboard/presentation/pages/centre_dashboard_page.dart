@@ -7,9 +7,15 @@ import '../widgets/national_performance_leaderboard_widget.dart';
 import '../widgets/fund_flow_waterfall_widget.dart';
 import '../widgets/predictive_analytics_widget.dart';
 import '../widgets/request_review_panel_widget.dart';
+import '../widgets/interactive_sankey_widget.dart';
 import '../../../communication/presentation/pages/communication_hub_page.dart';
 import '../../../../core/widgets/calendar_widget.dart';
+import '../../../../core/widgets/dashboard_components.dart';
 import '../../../../core/theme/app_design_system.dart';
+import '../../../../core/widgets/event_calendar_widget.dart';
+import '../../../../core/widgets/notification_panel_widget.dart';
+import '../../../../core/utils/responsive_layout.dart';
+import '../../data/mock_fund_flow_data.dart';
 
 class CentreDashboardPage extends ConsumerStatefulWidget {
   const CentreDashboardPage({super.key});
@@ -18,40 +24,116 @@ class CentreDashboardPage extends ConsumerStatefulWidget {
   ConsumerState<CentreDashboardPage> createState() => _CentreDashboardPageState();
 }
 
-class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> with SingleTickerProviderStateMixin {
+class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
   int _selectedIndex = 0;
-  bool _isCalendarExpanded = false;
-  late AnimationController _calendarAnimationController;
-  late Animation<double> _calendarAnimation;
+  List<NotificationItem> _notifications = [];
+  
+  // Mock KPI data - to be replaced with real data
+  final int _totalStates = 28;
+  final int _pendingApprovals = 12;
+  final double _fundsAllocated = 5000.0; // in Crores
+  final int _activeProjects = 342;
 
   @override
   void initState() {
     super.initState();
-    _calendarAnimationController = AnimationController(
-      vsync: this,
-      duration: AppDesignSystem.durationNormal,
-    );
-    _calendarAnimation = CurvedAnimation(
-      parent: _calendarAnimationController,
-      curve: AppDesignSystem.curveStandard,
-    );
+    _loadNotifications();
   }
 
-  @override
-  void dispose() {
-    _calendarAnimationController.dispose();
-    super.dispose();
+  void _loadNotifications() {
+    final now = DateTime.now();
+    _notifications = [
+      NotificationItem(
+        id: '1',
+        title: 'Budget Approval Pending',
+        message: 'Central budget allocation of ₹500Cr requires your approval.',
+        type: NotificationType.approval,
+        priority: NotificationPriority.high,
+        timestamp: now.subtract(const Duration(minutes: 30)),
+        actionRoute: '/approvals',
+      ),
+      NotificationItem(
+        id: '2',
+        title: 'State Fund Request',
+        message: 'Maharashtra has submitted an emergency fund request for disaster relief.',
+        type: NotificationType.alert,
+        priority: NotificationPriority.high,
+        timestamp: now.subtract(const Duration(hours: 1)),
+        actionRoute: '/requests',
+      ),
+      NotificationItem(
+        id: '3',
+        title: 'Compliance Report Due',
+        message: 'Q4 national compliance report deadline is in 2 days.',
+        type: NotificationType.deadline,
+        priority: NotificationPriority.medium,
+        timestamp: now.subtract(const Duration(hours: 3)),
+      ),
+    ];
   }
 
-  void _toggleCalendar() {
-    setState(() {
-      _isCalendarExpanded = !_isCalendarExpanded;
-      if (_isCalendarExpanded) {
-        _calendarAnimationController.forward();
-      } else {
-        _calendarAnimationController.reverse();
-      }
-    });
+  void _showNotificationPanel() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.5),
+      builder: (context) => Dialog(
+        alignment: Alignment.topRight,
+        insetPadding: EdgeInsets.only(
+          top: ResponsiveLayout.valueByDevice(
+            context: context,
+            mobile: 0,
+            mobileWide: 60,
+            tablet: 80,
+            desktop: 80,
+          ),
+          right: ResponsiveLayout.valueByDevice(
+            context: context,
+            mobile: 0,
+            mobileWide: 16,
+            tablet: 24,
+            desktop: 24,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        child: NotificationPanelWidget(
+          notifications: _notifications,
+          onNotificationTap: (notification) {
+            if (notification.actionRoute != null) {
+              Navigator.pop(context);
+              // Navigate to action route
+            }
+          },
+          onMarkAsRead: (id) {
+            setState(() {
+              final index = _notifications.indexWhere((n) => n.id == id);
+              if (index != -1) {
+                _notifications[index] = NotificationItem(
+                  id: _notifications[index].id,
+                  title: _notifications[index].title,
+                  message: _notifications[index].message,
+                  type: _notifications[index].type,
+                  priority: _notifications[index].priority,
+                  timestamp: _notifications[index].timestamp,
+                  isRead: true,
+                  actionRoute: _notifications[index].actionRoute,
+                );
+              }
+            });
+          },
+          onDeleteNotification: (id) {
+            setState(() {
+              _notifications.removeWhere((n) => n.id == id);
+            });
+          },
+          onClearAll: () {
+            setState(() {
+              _notifications.clear();
+            });
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
   }
 
   List<CalendarEvent> _getSampleEvents() {
@@ -112,7 +194,32 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> with 
   }
 
   Widget _buildFundFlowView() {
-    return const FundFlowWaterfallWidget();
+    return SingleChildScrollView(
+      padding: ResponsiveLayout.getResponsivePadding(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const DashboardSectionHeader(
+            title: 'Multi-Stage Fund Flow',
+            subtitle: 'Real-time tracking of fund movements from Centre to beneficiaries',
+            icon: Icons.account_tree,
+          ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context)),
+          SizedBox(
+            height: ResponsiveLayout.getChartHeight(context),
+            child: InteractiveSankeyWidget(
+              initialData: MockFundFlowData.generateMockData(),
+              onNodeTap: (nodeId) {
+                debugPrint('Node tapped: $nodeId');
+              },
+              onLinkTap: (linkId) {
+                debugPrint('Link tapped: $linkId');
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildAnalyticsView() {
@@ -127,127 +234,142 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> with 
     return const RequestReviewPanelWidget();
   }
 
+  Widget _buildKpiSection() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return GridView.count(
+            crossAxisCount: 4,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
+            childAspectRatio: 1.5,
+            children: [
+          DashboardKpiCard(
+            label: 'States Participating',
+            value: '$_totalStates',
+            icon: Icons.location_city,
+            color: Colors.blue,
+            subtitle: 'Active states',
+          ),
+          DashboardKpiCard(
+            label: 'Pending Approvals',
+            value: '$_pendingApprovals',
+            icon: Icons.pending_actions,
+            color: Colors.orange,
+            subtitle: 'Requires action',
+            onTap: () {
+              setState(() => _selectedIndex = 1);
+            },
+          ),
+          DashboardKpiCard(
+            label: 'Funds Allocated',
+            value: '₹${_fundsAllocated.toStringAsFixed(0)}Cr',
+            icon: Icons.account_balance_wallet,
+            color: Colors.green,
+            subtitle: 'Total disbursed',
+          ),
+          DashboardKpiCard(
+            label: 'Active Projects',
+            value: '$_activeProjects',
+            icon: Icons.work,
+            color: Colors.purple,
+            subtitle: 'In progress',
+          ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildOverviewPage() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildKpiSection(),
+          const DashboardSectionHeader(
+            title: 'National Overview',
+            subtitle: 'Geographic distribution of projects',
+            icon: Icons.map,
+          ),
+          SizedBox(
+            height: 600,
+            child: _buildNationalHeatmap(),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      _buildNationalHeatmap(),
+      _buildOverviewPage(),
       _buildRequestReviewPanel(),
-      _buildCollaborationNetwork(),
       _buildPerformanceLeaderboard(),
       _buildComplianceScoreboard(),
       _buildFundFlowView(),
-      _buildAnalyticsView(),
       _buildCommunicationHub(),
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Centre Dashboard'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: AnimatedRotation(
-              turns: _isCalendarExpanded ? 0.5 : 0,
-              duration: AppDesignSystem.durationNormal,
-              child: Icon(
-                _isCalendarExpanded ? Icons.close : Icons.calendar_today,
-                color: _isCalendarExpanded ? AppDesignSystem.vibrantTeal : null,
-              ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blue.shade700, Colors.indigo.shade700],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-            onPressed: _toggleCalendar,
-            tooltip: _isCalendarExpanded ? 'Close Calendar' : 'Open Calendar',
+          ),
+        ),
+        title: const Text('Centre Dashboard', style: TextStyle(color: Colors.white)),
+        actions: [
+          Stack(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.notifications_outlined, color: Colors.white),
+                onPressed: _showNotificationPanel,
+              ),
+              if (_notifications.where((n) => !n.isRead).isNotEmpty)
+                Positioned(
+                  right: 8,
+                  top: 8,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.red, width: 2),
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 20,
+                      minHeight: 20,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${_notifications.where((n) => !n.isRead).length}',
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
           ),
         ],
       ),
       body: Stack(
         children: [
           pages[_selectedIndex],
-          // Expandable Calendar Overlay
-          Positioned(
-            top: 0,
-            right: 0,
-            child: AnimatedBuilder(
-              animation: _calendarAnimation,
-              builder: (context, child) {
-                return Transform.translate(
-                  offset: Offset(
-                    MediaQuery.of(context).size.width * 0.35 * (1 - _calendarAnimation.value),
-                    0,
-                  ),
-                  child: Opacity(
-                    opacity: _calendarAnimation.value,
-                    child: child,
-                  ),
-                );
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.35,
-                height: MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  boxShadow: AppDesignSystem.elevation4,
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(12),
-                  ),
-                ),
-                child: _isCalendarExpanded
-                    ? Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  AppDesignSystem.deepIndigo,
-                                  AppDesignSystem.vibrantTeal,
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(12),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.event_available,
-                                  color: Colors.white,
-                                  size: 24,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Schedule',
-                                  style: AppDesignSystem.headlineSmall.copyWith(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: PMCalendarWidget(
-                              events: _getSampleEvents(),
-                              onEventTap: (event) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('Selected: ${event.title}'),
-                                    behavior: SnackBarBehavior.floating,
-                                    duration: const Duration(seconds: 2),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      )
-                    : const SizedBox.shrink(),
-              ),
-            ),
-          ),
+          const EventCalendarWidget(),
         ],
       ),
       bottomNavigationBar: NavigationBar(
@@ -257,24 +379,19 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> with 
         },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.map_outlined),
-            selectedIcon: Icon(Icons.map),
-            label: 'Map',
+            icon: Icon(Icons.dashboard_outlined),
+            selectedIcon: Icon(Icons.dashboard),
+            label: 'Overview',
           ),
           NavigationDestination(
             icon: Icon(Icons.approval_outlined),
             selectedIcon: Icon(Icons.approval),
-            label: 'Requests',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.hub_outlined),
-            selectedIcon: Icon(Icons.hub),
-            label: 'Network',
+            label: 'Approvals',
           ),
           NavigationDestination(
             icon: Icon(Icons.emoji_events_outlined),
             selectedIcon: Icon(Icons.emoji_events),
-            label: 'Leaderboard',
+            label: 'Performance',
           ),
           NavigationDestination(
             icon: Icon(Icons.rule_outlined),
@@ -287,14 +404,9 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> with 
             label: 'Funds',
           ),
           NavigationDestination(
-            icon: Icon(Icons.analytics_outlined),
-            selectedIcon: Icon(Icons.analytics),
-            label: 'Analytics',
-          ),
-          NavigationDestination(
             icon: Icon(Icons.chat_bubble_outline),
             selectedIcon: Icon(Icons.chat_bubble),
-            label: 'Chat',
+            label: 'Communication',
           ),
         ],
       ),

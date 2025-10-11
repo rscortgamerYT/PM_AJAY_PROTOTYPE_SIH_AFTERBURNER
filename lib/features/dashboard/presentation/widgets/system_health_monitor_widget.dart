@@ -143,48 +143,57 @@ class _SystemHealthMonitorWidgetState extends State<SystemHealthMonitorWidget> {
   }
 
   Widget _buildSystemStatus() {
-    return Row(
-      children: [
-        Expanded(
-          child: _buildStatusCard(
-            'Uptime',
-            '99.98%',
-            '45d 12h',
-            Icons.timer,
-            AppTheme.successGreen,
-          ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            SizedBox(
+              width: 200,
+              child: _buildStatusCard(
+                'Uptime',
+                '99.98%',
+                '45d 12h',
+                Icons.timer,
+                AppTheme.successGreen,
+              ),
+            ),
+            const SizedBox(width: 16),
+            SizedBox(
+              width: 200,
+              child: _buildStatusCard(
+                'Response Time',
+                '124ms',
+                'Avg',
+                Icons.speed,
+                AppTheme.secondaryBlue,
+              ),
+            ),
+            const SizedBox(width: 16),
+            SizedBox(
+              width: 200,
+              child: _buildStatusCard(
+                'API Calls',
+                '2.4M',
+                'Today',
+                Icons.api,
+                AppTheme.warningOrange,
+              ),
+            ),
+            const SizedBox(width: 16),
+            SizedBox(
+              width: 200,
+              child: _buildStatusCard(
+                'Error Rate',
+                '0.02%',
+                'Last 24h',
+                Icons.error_outline,
+                AppTheme.successGreen,
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: _buildStatusCard(
-            'Response Time',
-            '124ms',
-            'Avg',
-            Icons.speed,
-            AppTheme.secondaryBlue,
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: _buildStatusCard(
-            'API Calls',
-            '2.4M',
-            'Today',
-            Icons.api,
-            AppTheme.warningOrange,
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: _buildStatusCard(
-            'Error Rate',
-            '0.02%',
-            'Last 24h',
-            Icons.error_outline,
-            AppTheme.successGreen,
-          ),
-        ),
-      ],
+      ),
     );
   }
 

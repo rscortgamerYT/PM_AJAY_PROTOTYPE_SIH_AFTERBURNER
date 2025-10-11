@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/models/request_model.dart';
+import '../../../../core/models/esign_model.dart';
 
 class StateReviewPanelWidget extends ConsumerStatefulWidget {
   const StateReviewPanelWidget({super.key});
@@ -24,15 +25,41 @@ class _StateReviewPanelWidgetState extends ConsumerState<StateReviewPanelWidget>
       type: RequestType.projectAssignment,
       priority: RequestPriority.high,
       status: RequestStatus.pending,
-      title: 'Agency Onboarding Request',
-      description: 'Request for onboarding as implementing agency',
-      rationale: 'Expanding PM-AJAY implementation in Maharashtra',
+      title: 'Agency Project Assignment Request',
+      description: 'Request for project assignment in Adarsh Gram component',
+      rationale: 'Expanding PM-AJAY implementation in Maharashtra districts',
       component: ProjectComponent.adarshGram,
       stateId: 'state_001',
       districtId: 'dist_001',
       submittedBy: 'agency_mh_001',
       submittedAt: DateTime.now().subtract(const Duration(days: 3)),
       createdAt: DateTime.now().subtract(const Duration(days: 3)),
+      supportingDocuments: [
+        RequestDocument(
+          id: 'doc_001',
+          name: 'Agency_Registration_Certificate.pdf',
+          url: 'https://example.com/docs/reg_cert.pdf',
+          type: 'application/pdf',
+          size: 245678,
+          uploadedAt: DateTime.now().subtract(const Duration(days: 3)),
+        ),
+        RequestDocument(
+          id: 'doc_002',
+          name: 'GST_Certificate.pdf',
+          url: 'https://example.com/docs/gst_cert.pdf',
+          type: 'application/pdf',
+          size: 156789,
+          uploadedAt: DateTime.now().subtract(const Duration(days: 3)),
+        ),
+        RequestDocument(
+          id: 'doc_003',
+          name: 'Capacity_Assessment_Report.pdf',
+          url: 'https://example.com/docs/capacity.pdf',
+          type: 'application/pdf',
+          size: 567890,
+          uploadedAt: DateTime.now().subtract(const Duration(days: 3)),
+        ),
+      ],
       metadata: {
         'agencyType': 'implementing_agency',
         'legalStatus': 'Registered Society',
@@ -50,15 +77,33 @@ class _StateReviewPanelWidgetState extends ConsumerState<StateReviewPanelWidget>
       type: RequestType.projectAssignment,
       priority: RequestPriority.medium,
       status: RequestStatus.pending,
-      title: 'Agency Onboarding Request',
-      description: 'Request for onboarding as nodal agency',
-      rationale: 'Coordinating PM-AJAY implementation in Karnataka',
+      title: 'Agency Project Assignment Request',
+      description: 'Request for project assignment in Hostel component',
+      rationale: 'Coordinating PM-AJAY Hostel construction in Karnataka',
       component: ProjectComponent.hostel,
       stateId: 'state_002',
       districtId: 'dist_002',
       submittedBy: 'agency_ka_001',
       submittedAt: DateTime.now().subtract(const Duration(days: 1)),
       createdAt: DateTime.now().subtract(const Duration(days: 1)),
+      supportingDocuments: [
+        RequestDocument(
+          id: 'doc_004',
+          name: 'Board_Resolution.pdf',
+          url: 'https://example.com/docs/resolution.pdf',
+          type: 'application/pdf',
+          size: 345678,
+          uploadedAt: DateTime.now().subtract(const Duration(days: 1)),
+        ),
+        RequestDocument(
+          id: 'doc_005',
+          name: 'Financial_Statements_2024.pdf',
+          url: 'https://example.com/docs/financials.pdf',
+          type: 'application/pdf',
+          size: 789012,
+          uploadedAt: DateTime.now().subtract(const Duration(days: 1)),
+        ),
+      ],
       metadata: {
         'agencyType': 'nodal_agency',
         'legalStatus': 'Government Board',
@@ -124,44 +169,52 @@ class _StateReviewPanelWidgetState extends ConsumerState<StateReviewPanelWidget>
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient: LinearGradient(
+          colors: [Colors.green.shade700, Colors.teal.shade700],
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
             offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Row(
         children: [
-          Icon(Icons.business, size: 32, color: Colors.green.shade700),
-          const SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Agency Onboarding Requests',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green.shade900,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'Review and approve agency participation',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey.shade600,
-                ),
-              ),
-            ],
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(Icons.approval, color: Colors.white, size: 32),
           ),
-          const Spacer(),
-          _buildStatCard('Pending', _mockRequests.where((r) => r.status == RequestStatus.pending).length, Colors.amber),
           const SizedBox(width: 16),
-          _buildStatCard('Under Review', _mockRequests.where((r) => r.status == RequestStatus.underReview).length, Colors.blue),
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'State Review & Approval Panel',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Review and approve Agency requests with document verification',
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.help_outline, color: Colors.white),
+            onPressed: () => _showHelpDialog(context),
+          ),
         ],
       ),
     );
@@ -405,6 +458,14 @@ class _StateReviewPanelWidgetState extends ConsumerState<StateReviewPanelWidget>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  _buildSectionTitle('Request Information'),
+                  _buildDetailRow('Request ID', request.id),
+                  _buildDetailRow('Agency Name', request.agencyName),
+                  _buildDetailRow('Component', request.component?.displayName ?? 'N/A'),
+                  _buildDetailRow('Priority', request.priority.displayName.toUpperCase()),
+                  _buildDetailRow('Submitted', _formatDate(request.submittedAt)),
+                  const SizedBox(height: 24),
+                  
                   _buildSectionTitle('Basic Information'),
                   _buildDetailRow('Agency Type', (metadata['agencyType'] as String?)?.replaceAll('_', ' ').toUpperCase() ?? 'N/A'),
                   _buildDetailRow('Legal Status', metadata['legalStatus'] as String? ?? 'N/A'),
@@ -420,38 +481,59 @@ class _StateReviewPanelWidgetState extends ConsumerState<StateReviewPanelWidget>
                     _buildDetailRow('Capacity Rating', '${(metadata['capacityRating'] as num).toStringAsFixed(1)}/10'),
                   if (metadata['geographicCoverage'] != null)
                     _buildDetailRow('Geographic Coverage', (metadata['geographicCoverage'] as List).join(', ')),
-                  _buildDetailRow('Component', request.component?.displayName ?? 'N/A'),
                   const SizedBox(height: 24),
                   
-                  _buildSectionTitle('Actions'),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed: () => _handleApprove(request),
-                          icon: const Icon(Icons.check_circle),
-                          label: const Text('Approve'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.all(16),
+                  _buildSectionTitle('Supporting Documents'),
+                  _buildDocumentsList(request),
+                  const SizedBox(height: 24),
+                  
+                  _buildSectionTitle('Review Actions'),
+                  if (request.status == RequestStatus.pending || request.status == RequestStatus.infoRequested)
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton.icon(
+                                onPressed: () => _handleApprove(request),
+                                icon: const Icon(Icons.check_circle),
+                                label: const Text('Approve'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.all(16),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: ElevatedButton.icon(
+                                onPressed: () => _handleReject(request),
+                                icon: const Icon(Icons.cancel),
+                                label: const Text('Reject'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red,
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.all(16),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton.icon(
+                            onPressed: () => _handleRequestInfo(request),
+                            icon: const Icon(Icons.info_outline),
+                            label: const Text('Request More Information'),
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.all(16),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () => _handleReject(request),
-                          icon: const Icon(Icons.cancel),
-                          label: const Text('Reject'),
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.red,
-                            padding: const EdgeInsets.all(16),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -502,17 +584,342 @@ class _StateReviewPanelWidgetState extends ConsumerState<StateReviewPanelWidget>
     );
   }
 
-  void _handleApprove(RequestModel request) {
-    // TODO: Implement approval logic with e-sign
+  Widget _buildDocumentsList(RequestModel request) {
+    final documents = request.supportingDocuments ?? [];
+    
+    if (documents.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: const Row(
+          children: [
+            Icon(Icons.info_outline, color: Colors.grey),
+            SizedBox(width: 12),
+            Text('No documents attached', style: TextStyle(color: Colors.grey)),
+          ],
+        ),
+      );
+    }
+    
+    return Column(
+      children: documents.map((doc) {
+        return Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade300),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.blue.shade50,
+              child: const Icon(Icons.description, color: Colors.blue),
+            ),
+            title: Text(doc.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+            subtitle: Text('${(doc.size / 1024).toStringAsFixed(2)} KB • ${doc.type}'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.visibility),
+                  onPressed: () => _viewDocument(doc),
+                  tooltip: 'View Document',
+                ),
+                IconButton(
+                  icon: const Icon(Icons.download),
+                  onPressed: () => _downloadDocument(doc),
+                  tooltip: 'Download Document',
+                ),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  void _viewDocument(RequestDocument doc) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Approving ${request.agencyName}...')),
+      SnackBar(content: Text('Opening ${doc.name}...')),
+    );
+  }
+
+  void _downloadDocument(RequestDocument doc) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Downloading ${doc.name}...')),
+    );
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
+  }
+
+  void _handleApprove(RequestModel request) {
+    showDialog(
+      context: context,
+      builder: (context) => _ESignApprovalDialog(request: request),
     );
   }
 
   void _handleReject(RequestModel request) {
-    // TODO: Implement rejection logic
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Rejecting ${request.agencyName}...')),
+    final reasonController = TextEditingController();
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Reject Request'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Are you sure you want to reject the request from ${request.agencyName}?'),
+            const SizedBox(height: 16),
+            TextField(
+              controller: reasonController,
+              maxLines: 4,
+              decoration: const InputDecoration(
+                labelText: 'Rejection Reason',
+                hintText: 'Provide reason for rejection...',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (reasonController.text.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Rejection reason is required')),
+                );
+                return;
+              }
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Request rejected: ${request.agencyName}'),
+                  backgroundColor: Colors.red,
+                ),
+              );
+              setState(() => _selectedRequest = null);
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('Reject'),
+          ),
+        ],
+      ),
     );
+  }
+
+  void _handleRequestInfo(RequestModel request) {
+    final questionController = TextEditingController();
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Request Additional Information'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Request additional information from ${request.agencyName}:'),
+            const SizedBox(height: 16),
+            TextField(
+              controller: questionController,
+              maxLines: 4,
+              decoration: const InputDecoration(
+                labelText: 'Information Required',
+                hintText: 'Specify what information is needed...',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (questionController.text.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Please specify information required')),
+                );
+                return;
+              }
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Information request sent to ${request.agencyName}'),
+                  backgroundColor: Colors.blue,
+                ),
+              );
+            },
+            child: const Text('Send Request'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showHelpDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.help_outline, color: Colors.green),
+            SizedBox(width: 8),
+            Text('State Review Panel Help'),
+          ],
+        ),
+        content: const SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Purpose',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Review and approve Agency requests for project assignments. Verify all supporting documents before approval.',
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Features',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              SizedBox(height: 8),
+              Text('• Filter requests by component, status, and priority'),
+              Text('• View detailed agency profiles and capacity'),
+              Text('• Review and verify supporting documents'),
+              Text('• Approve requests with e-signature'),
+              Text('• Reject with mandatory reason'),
+              Text('• Request additional information from agencies'),
+              Text('• Full audit trail and notifications'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Got it'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+}
+
+class _ESignApprovalDialog extends StatefulWidget {
+  final RequestModel request;
+
+  const _ESignApprovalDialog({required this.request});
+
+  @override
+  State<_ESignApprovalDialog> createState() => _ESignApprovalDialogState();
+}
+
+class _ESignApprovalDialogState extends State<_ESignApprovalDialog> {
+  final TextEditingController _otpController = TextEditingController();
+  bool _isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Row(
+        children: [
+          Icon(Icons.verified_user, color: Colors.green),
+          SizedBox(width: 8),
+          Text('E-Sign Approval'),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Approve request from ${widget.request.agencyName}',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          const Text('Enter OTP sent to your registered mobile number:'),
+          const SizedBox(height: 12),
+          TextField(
+            controller: _otpController,
+            keyboardType: TextInputType.number,
+            maxLength: 6,
+            decoration: const InputDecoration(
+              labelText: 'OTP',
+              hintText: 'Enter 6-digit OTP',
+              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.lock),
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: _isLoading ? null : _handleESignApproval,
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+          child: _isLoading
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Text('Approve'),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _handleESignApproval() async {
+    if (_otpController.text.length != 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter valid 6-digit OTP')),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    // Simulate e-sign process
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (!mounted) return;
+
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Request approved: ${widget.request.agencyName}'),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _otpController.dispose();
+    super.dispose();
   }
 }

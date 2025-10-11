@@ -6,6 +6,7 @@ import '../../features/dashboard/presentation/pages/centre_dashboard_page.dart';
 import '../../features/dashboard/presentation/pages/state_dashboard_page.dart';
 import '../../features/dashboard/presentation/pages/agency_dashboard_page.dart';
 import '../../features/dashboard/presentation/pages/overwatch_dashboard_page.dart';
+import '../../features/dashboard/presentation/pages/new_overwatch_dashboard_page.dart';
 import '../../features/dashboard/presentation/pages/public_dashboard_page.dart';
 import '../../features/communication/presentation/pages/communication_hub_page.dart';
 import '../../features/public_portal/presentation/pages/public_portal_page.dart';
@@ -20,6 +21,7 @@ class AppRouter {
   static const String stateDashboard = '/state-dashboard';
   static const String agencyDashboard = '/agency-dashboard';
   static const String overwatchDashboard = '/overwatch-dashboard';
+  static const String newOverwatchDashboard = '/new-overwatch-dashboard';
   static const String publicDashboard = '/public-dashboard';
   static const String communicationHub = '/communication-hub';
   static const String publicPortal = '/public-portal';
@@ -42,6 +44,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const AgencyDashboardPage());
       case overwatchDashboard:
         return MaterialPageRoute(builder: (_) => const OverwatchDashboardPage());
+      case newOverwatchDashboard:
+        return MaterialPageRoute(builder: (_) => const NewOverwatchDashboardPage());
       case publicDashboard:
         return MaterialPageRoute(builder: (_) => const PublicDashboardPage());
       case communicationHub:

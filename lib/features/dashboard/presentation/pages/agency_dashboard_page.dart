@@ -12,6 +12,10 @@ import '../widgets/performance_analytics_widget.dart';
 import '../../../communication/presentation/pages/communication_hub_page.dart';
 import '../../../../core/widgets/calendar_widget.dart';
 import '../../../../core/theme/app_design_system.dart';
+import '../../../../core/widgets/dashboard_components.dart';
+import '../../../../core/widgets/event_calendar_widget.dart';
+import '../../../../core/widgets/notification_panel_widget.dart';
+import '../../../../core/utils/responsive_layout.dart';
 
 class AgencyDashboardPage extends ConsumerStatefulWidget {
   const AgencyDashboardPage({super.key});
@@ -26,11 +30,125 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
   // Mock data - will be replaced with actual Supabase data
   final List<ProjectModel> _projects = [];
   final List<AgencyModel> _agencies = [];
+  List<NotificationItem> _notifications = [];
+  
+  // Mock KPI data
+  final Map<String, dynamic> _kpiData = {
+    'activeProjects': 3,
+    'completionRate': 78.5,
+    'pendingClaims': 5,
+    'performanceScore': 92.0,
+  };
 
   @override
   void initState() {
     super.initState();
     _loadMockData();
+    _loadNotifications();
+  }
+
+  void _loadNotifications() {
+    final now = DateTime.now();
+    _notifications = [
+      NotificationItem(
+        id: '1',
+        title: 'Milestone Claim Approved',
+        message: 'Your claim for Milestone M3 has been approved. ₹10Cr will be disbursed.',
+        type: NotificationType.success,
+        priority: NotificationPriority.high,
+        timestamp: now.subtract(const Duration(minutes: 30)),
+      ),
+      NotificationItem(
+        id: '2',
+        title: 'Pending Claims Review',
+        message: '5 milestone claims are pending review by state authorities.',
+        type: NotificationType.warning,
+        priority: NotificationPriority.high,
+        timestamp: now.subtract(const Duration(hours: 2)),
+      ),
+      NotificationItem(
+        id: '3',
+        title: 'Document Upload Required',
+        message: 'Please upload completion certificates for Project ABC Phase 2.',
+        type: NotificationType.deadline,
+        priority: NotificationPriority.medium,
+        timestamp: now.subtract(const Duration(hours: 5)),
+        isRead: true,
+      ),
+      NotificationItem(
+        id: '4',
+        title: 'Performance Review Scheduled',
+        message: 'Quarterly performance review meeting scheduled for next week.',
+        type: NotificationType.info,
+        priority: NotificationPriority.medium,
+        timestamp: now.subtract(const Duration(days: 1)),
+      ),
+    ];
+  }
+
+  void _showNotificationPanel() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.5),
+      builder: (context) => Dialog(
+        alignment: Alignment.topRight,
+        insetPadding: EdgeInsets.only(
+          top: ResponsiveLayout.valueByDevice(
+            context: context,
+            mobile: 0,
+            mobileWide: 60,
+            tablet: 80,
+            desktop: 80,
+          ),
+          right: ResponsiveLayout.valueByDevice(
+            context: context,
+            mobile: 0,
+            mobileWide: 16,
+            tablet: 16,
+            desktop: 16,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        child: NotificationPanelWidget(
+          notifications: _notifications,
+          onNotificationTap: (notification) {
+            if (notification.actionRoute != null) {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Navigate to: ${notification.actionRoute}'),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            }
+          },
+          onMarkAsRead: (id) {
+            setState(() {
+              final index = _notifications.indexWhere((n) => n.id == id);
+              if (index != -1) {
+                _notifications[index] = _notifications[index].copyWith(isRead: true);
+              }
+            });
+          },
+          onMarkAllAsRead: () {
+            setState(() {
+              _notifications = _notifications.map((n) => n.copyWith(isRead: true)).toList();
+            });
+          },
+          onDeleteNotification: (id) {
+            setState(() {
+              _notifications.removeWhere((n) => n.id == id);
+            });
+          },
+          onClearAll: () {
+            setState(() {
+              _notifications.clear();
+            });
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
   }
 
   void _loadMockData() {
@@ -91,6 +209,104 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
         updatedAt: DateTime.now(),
       ),
     ]);
+  }
+
+  Widget _buildKpiSection() {
+    return Padding(
+      padding: ResponsiveLayout.getResponsivePadding(context),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return GridView.count(
+            crossAxisCount: ResponsiveLayout.getKpiGridColumns(context),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: ResponsiveLayout.getResponsiveSpacing(context),
+            crossAxisSpacing: ResponsiveLayout.getResponsiveSpacing(context),
+            childAspectRatio: ResponsiveLayout.getKpiAspectRatio(context),
+            children: [
+          DashboardKpiCard(
+            label: 'Active Projects',
+            value: '${_kpiData['activeProjects']}',
+            icon: Icons.assignment,
+            color: AppDesignSystem.deepIndigo,
+            onTap: () {
+              setState(() => _selectedIndex = 1);
+            },
+          ),
+          DashboardKpiCard(
+            label: 'Completion Rate',
+            value: '${(_kpiData['completionRate'] as double).toStringAsFixed(1)}%',
+            icon: Icons.trending_up,
+            color: AppDesignSystem.forestGreen,
+          ),
+          DashboardKpiCard(
+            label: 'Pending Claims',
+            value: '${_kpiData['pendingClaims']}',
+            icon: Icons.pending_actions,
+            color: AppDesignSystem.sunsetOrange,
+            onTap: () {
+              setState(() => _selectedIndex = 2);
+            },
+          ),
+          DashboardKpiCard(
+            label: 'Performance Score',
+            value: '${(_kpiData['performanceScore'] as double).toStringAsFixed(0)}%',
+            icon: Icons.star,
+            color: AppDesignSystem.vibrantTeal,
+          ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildOverviewPage() {
+    return SingleChildScrollView(
+      padding: ResponsiveLayout.getResponsivePadding(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildKpiSection(),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
+          ResponsiveLayout.responsiveFlex(
+            context: context,
+            spacing: ResponsiveLayout.getResponsiveSpacing(context),
+            children: [
+              Expanded(
+                child: DashboardActionButton(
+                  label: 'Submit Milestone',
+                  icon: Icons.flag,
+                  onPressed: () {
+                    setState(() => _selectedIndex = 2);
+                  },
+                ),
+              ),
+              Expanded(
+                child: DashboardActionButton(
+                  label: 'View Analytics',
+                  icon: Icons.analytics,
+                  isOutlined: true,
+                  onPressed: () {
+                    setState(() => _selectedIndex = 4);
+                  },
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
+          DashboardSectionHeader(
+            title: 'Project Locations',
+            subtitle: 'Geographic distribution of your projects',
+          ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context)),
+          SizedBox(
+            height: ResponsiveLayout.getMapHeight(context),
+            child: _buildMapView(),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildMapView() {
@@ -209,100 +425,6 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
     ];
   }
 
-  void _showCalendarBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.7,
-        minChildSize: 0.5,
-        maxChildSize: 0.95,
-        builder: (context, scrollController) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-              boxShadow: AppDesignSystem.elevation4,
-            ),
-            child: Column(
-              children: [
-                // Handle bar
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 12),
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: AppDesignSystem.neutral400,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                // Header
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        AppDesignSystem.deepIndigo,
-                        AppDesignSystem.vibrantTeal,
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.calendar_today,
-                        color: Colors.white,
-                        size: 28,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          'Agency Calendar',
-                          style: AppDesignSystem.headlineMedium.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.white,
-                        ),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                    ],
-                  ),
-                ),
-                // Calendar content
-                Expanded(
-                  child: PMCalendarWidget(
-                    events: _getSampleEvents(),
-                    onEventTap: (event) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Selected: ${event.title}'),
-                          behavior: SnackBarBehavior.floating,
-                          duration: const Duration(seconds: 2),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
 
   Color _getStatusColor(ProjectStatus status) {
     switch (status) {
@@ -341,10 +463,9 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      _buildMapView(),
+      _buildOverviewPage(),
       _buildProjectsList(),
       _buildMilestonesView(),
-      _buildSmartMilestoneWorkflow(),
       _buildResourceProximityMap(),
       _buildPerformanceView(),
       _buildCommunicationHub(),
@@ -352,25 +473,70 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agency Dashboard'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppDesignSystem.royalPurple,
+                AppDesignSystem.deepIndigo,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: const Text(
+          'Agency Dashboard',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
+          Stack(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.notifications_outlined, color: Colors.white),
+                onPressed: _showNotificationPanel,
+              ),
+              if (_notifications.where((n) => !n.isRead).isNotEmpty)
+                Positioned(
+                  right: 8,
+                  top: 8,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: AppDesignSystem.sunsetOrange,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 20,
+                      minHeight: 20,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${_notifications.where((n) => !n.isRead).length}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
           ),
           IconButton(
-            icon: const Icon(Icons.settings_outlined),
+            icon: const Icon(Icons.settings_outlined, color: Colors.white),
             onPressed: () {},
           ),
         ],
       ),
-      body: pages[_selectedIndex],
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showCalendarBottomSheet(context),
-        icon: const Icon(Icons.event),
-        label: const Text('Schedule'),
-        backgroundColor: AppDesignSystem.vibrantTeal,
-        elevation: 6,
+      body: Stack(
+        children: [
+          pages[_selectedIndex],
+          const EventCalendarWidget(),
+        ],
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
@@ -379,9 +545,9 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
         },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.map_outlined),
-            selectedIcon: Icon(Icons.map),
-            label: 'Map',
+            icon: Icon(Icons.dashboard_outlined),
+            selectedIcon: Icon(Icons.dashboard),
+            label: 'Overview',
           ),
           NavigationDestination(
             icon: Icon(Icons.list_alt_outlined),
@@ -392,11 +558,6 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
             icon: Icon(Icons.flag_outlined),
             selectedIcon: Icon(Icons.flag),
             label: 'Claims',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.auto_awesome_outlined),
-            selectedIcon: Icon(Icons.auto_awesome),
-            label: 'Workflow',
           ),
           NavigationDestination(
             icon: Icon(Icons.place_outlined),
@@ -411,7 +572,7 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
           NavigationDestination(
             icon: Icon(Icons.chat_bubble_outline),
             selectedIcon: Icon(Icons.chat_bubble),
-            label: 'Comm',
+            label: 'Comms',
           ),
         ],
       ),

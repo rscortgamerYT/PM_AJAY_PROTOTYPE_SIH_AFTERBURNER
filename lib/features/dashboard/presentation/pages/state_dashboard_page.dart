@@ -11,8 +11,13 @@ import '../widgets/district_capacity_planner_widget.dart';
 import '../widgets/component_timeline_synchronizer_widget.dart';
 import '../widgets/agency_performance_comparator_widget.dart';
 import '../../../communication/presentation/pages/communication_hub_page.dart';
+import '../../../review_approval/presentation/widgets/state_review_panel_widget.dart';
 import '../../../../core/widgets/calendar_widget.dart';
 import '../../../../core/theme/app_design_system.dart';
+import '../../../../core/widgets/dashboard_components.dart';
+import '../../../../core/widgets/event_calendar_widget.dart';
+import '../../../../core/widgets/notification_panel_widget.dart';
+import '../../../../core/utils/responsive_layout.dart';
 
 class StateDashboardPage extends ConsumerStatefulWidget {
   const StateDashboardPage({super.key});
@@ -26,39 +31,125 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
   final String _stateId = 'state_001'; // Mock state ID
   final List<ProjectModel> _projects = [];
   final List<AgencyModel> _agencies = [];
-  bool _isCalendarExpanded = false;
-  late AnimationController _sidebarAnimationController;
-  late Animation<double> _sidebarAnimation;
+  List<NotificationItem> _notifications = [];
+
+  // Mock KPI data
+  final Map<String, dynamic> _kpiData = {
+    'districts': 25,
+    'pendingRequests': 8,
+    'fundsAllocated': 2500.0,
+    'activeAgencies': 42,
+  };
 
   @override
   void initState() {
     super.initState();
     _loadMockData();
-    _sidebarAnimationController = AnimationController(
-      vsync: this,
-      duration: AppDesignSystem.durationNormal,
-    );
-    _sidebarAnimation = CurvedAnimation(
-      parent: _sidebarAnimationController,
-      curve: AppDesignSystem.curveStandard,
-    );
+    _loadNotifications();
   }
 
-  @override
-  void dispose() {
-    _sidebarAnimationController.dispose();
-    super.dispose();
+  void _loadNotifications() {
+    final now = DateTime.now();
+    _notifications = [
+      NotificationItem(
+        id: '1',
+        title: 'Pending Fund Requests',
+        message: '8 agencies have submitted fund allocation requests requiring approval.',
+        type: NotificationType.approval,
+        priority: NotificationPriority.high,
+        timestamp: now.subtract(const Duration(hours: 1)),
+      ),
+      NotificationItem(
+        id: '2',
+        title: 'District Report Due',
+        message: 'District XYZ quarterly report submission deadline is tomorrow.',
+        type: NotificationType.deadline,
+        priority: NotificationPriority.high,
+        timestamp: now.subtract(const Duration(hours: 3)),
+      ),
+      NotificationItem(
+        id: '3',
+        title: 'New Agency Registration',
+        message: 'Agency ABC has completed registration and awaits verification.',
+        type: NotificationType.info,
+        priority: NotificationPriority.medium,
+        timestamp: now.subtract(const Duration(hours: 6)),
+        isRead: true,
+      ),
+      NotificationItem(
+        id: '4',
+        title: 'Budget Allocation Approved',
+        message: '₹50Cr budget allocation for infrastructure projects has been approved.',
+        type: NotificationType.success,
+        priority: NotificationPriority.medium,
+        timestamp: now.subtract(const Duration(days: 1)),
+      ),
+    ];
   }
 
-  void _toggleCalendar() {
-    setState(() {
-      _isCalendarExpanded = !_isCalendarExpanded;
-      if (_isCalendarExpanded) {
-        _sidebarAnimationController.forward();
-      } else {
-        _sidebarAnimationController.reverse();
-      }
-    });
+  void _showNotificationPanel() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.5),
+      builder: (context) => Dialog(
+        alignment: Alignment.topRight,
+        insetPadding: EdgeInsets.only(
+          top: ResponsiveLayout.valueByDevice(
+            context: context,
+            mobile: 0,
+            mobileWide: 60,
+            tablet: 80,
+            desktop: 80,
+          ),
+          right: ResponsiveLayout.valueByDevice(
+            context: context,
+            mobile: 0,
+            mobileWide: 16,
+            tablet: 16,
+            desktop: 16,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        child: NotificationPanelWidget(
+          notifications: _notifications,
+          onNotificationTap: (notification) {
+            if (notification.actionRoute != null) {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Navigate to: ${notification.actionRoute}'),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            }
+          },
+          onMarkAsRead: (id) {
+            setState(() {
+              final index = _notifications.indexWhere((n) => n.id == id);
+              if (index != -1) {
+                _notifications[index] = _notifications[index].copyWith(isRead: true);
+              }
+            });
+          },
+          onMarkAllAsRead: () {
+            setState(() {
+              _notifications = _notifications.map((n) => n.copyWith(isRead: true)).toList();
+            });
+          },
+          onDeleteNotification: (id) {
+            setState(() {
+              _notifications.removeWhere((n) => n.id == id);
+            });
+          },
+          onClearAll: () {
+            setState(() {
+              _notifications.clear();
+            });
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
   }
 
   List<CalendarEvent> _getSampleEvents() {
@@ -113,6 +204,75 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
     ]);
   }
 
+  Widget _buildKpiSection() {
+    return Padding(
+      padding: ResponsiveLayout.getResponsivePadding(context),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return GridView.count(
+            crossAxisCount: ResponsiveLayout.getKpiGridColumns(context),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: ResponsiveLayout.getResponsiveSpacing(context),
+            crossAxisSpacing: ResponsiveLayout.getResponsiveSpacing(context),
+            childAspectRatio: ResponsiveLayout.getKpiAspectRatio(context),
+            children: [
+          DashboardKpiCard(
+            label: 'Districts',
+            value: '${_kpiData['districts']}',
+            icon: Icons.location_city,
+            color: AppDesignSystem.deepIndigo,
+          ),
+          DashboardKpiCard(
+            label: 'Pending Requests',
+            value: '${_kpiData['pendingRequests']}',
+            icon: Icons.pending_actions,
+            color: AppDesignSystem.sunsetOrange,
+            onTap: () {
+              setState(() => _selectedIndex = 1);
+            },
+          ),
+          DashboardKpiCard(
+            label: 'Funds Allocated',
+            value: '₹${(_kpiData['fundsAllocated'] as double).toStringAsFixed(1)}Cr',
+            icon: Icons.account_balance,
+            color: AppDesignSystem.forestGreen,
+          ),
+          DashboardKpiCard(
+            label: 'Active Agencies',
+            value: '${_kpiData['activeAgencies']}',
+            icon: Icons.business,
+            color: AppDesignSystem.vibrantTeal,
+          ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildOverviewPage() {
+    return SingleChildScrollView(
+      padding: ResponsiveLayout.getResponsivePadding(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildKpiSection(),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
+          DashboardSectionHeader(
+            title: 'District Overview',
+            subtitle: 'Geographic distribution of projects and agencies',
+          ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context)),
+          SizedBox(
+            height: ResponsiveLayout.getMapHeight(context),
+            child: _buildDistrictMap(),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildDistrictMap() {
     return InteractiveMapWidget(
       projects: _projects,
@@ -151,128 +311,82 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
     return const CommunicationHubPage();
   }
 
+  Widget _buildReviewPanel() {
+    return const StateReviewPanelWidget();
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      _buildDistrictMap(),
+      _buildOverviewPage(),
+      _buildReviewPanel(),
       _buildDistrictCapacityPlanner(),
-      _buildComponentTimeline(),
       _buildFundSimulator(),
       _buildAgencyComparator(),
-      _buildAgencyOptimizer(),
       _buildCommunicationHub(),
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('State Dashboard'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: AnimatedRotation(
-              turns: _isCalendarExpanded ? 0.25 : 0,
-              duration: AppDesignSystem.durationNormal,
-              child: Icon(
-                _isCalendarExpanded ? Icons.calendar_view_day : Icons.calendar_month,
-                color: _isCalendarExpanded ? AppDesignSystem.vibrantTeal : null,
-              ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppDesignSystem.deepIndigo,
+                AppDesignSystem.vibrantTeal,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-            onPressed: _toggleCalendar,
-            tooltip: _isCalendarExpanded ? 'Collapse Calendar' : 'Expand Calendar',
           ),
-        ],
-      ),
-      body: Row(
-        children: [
-          Expanded(
-            child: pages[_selectedIndex],
-          ),
-          // Collapsible Calendar Sidebar
-          AnimatedBuilder(
-            animation: _sidebarAnimation,
-            builder: (context, child) {
-              return Container(
-                width: 320 * _sidebarAnimation.value,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  boxShadow: _sidebarAnimation.value > 0
-                      ? AppDesignSystem.elevation4
-                      : [],
-                  border: Border(
-                    left: BorderSide(
-                      color: AppDesignSystem.neutral300.withValues(alpha: _sidebarAnimation.value),
-                      width: 1,
+        ),
+        title: const Text(
+          'State Dashboard',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          Stack(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.notifications_outlined, color: Colors.white),
+                onPressed: _showNotificationPanel,
+              ),
+              if (_notifications.where((n) => !n.isRead).isNotEmpty)
+                Positioned(
+                  right: 8,
+                  top: 8,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: AppDesignSystem.sunsetOrange,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 20,
+                      minHeight: 20,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${_notifications.where((n) => !n.isRead).length}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                child: _sidebarAnimation.value > 0.3
-                    ? Opacity(
-                        opacity: (_sidebarAnimation.value - 0.3) / 0.7,
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    AppDesignSystem.deepIndigo,
-                                    AppDesignSystem.vibrantTeal,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                              ),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.event_note,
-                                    color: Colors.white,
-                                    size: 24,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: Text(
-                                      'State Schedule',
-                                      style: AppDesignSystem.headlineSmall.copyWith(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.close,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: _toggleCalendar,
-                                    tooltip: 'Close Calendar',
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: PMCalendarWidget(
-                                events: _getSampleEvents(),
-                                onEventTap: (event) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Selected: ${event.title}'),
-                                      behavior: SnackBarBehavior.floating,
-                                      duration: const Duration(seconds: 2),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-              );
-            },
+            ],
           ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          pages[_selectedIndex],
+          const EventCalendarWidget(),
         ],
       ),
       bottomNavigationBar: NavigationBar(
@@ -282,34 +396,29 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
         },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.map_outlined),
-            selectedIcon: Icon(Icons.map),
-            label: 'Map',
+            icon: Icon(Icons.dashboard_outlined),
+            selectedIcon: Icon(Icons.dashboard),
+            label: 'Overview',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.approval_outlined),
+            selectedIcon: Icon(Icons.approval),
+            label: 'Requests',
           ),
           NavigationDestination(
             icon: Icon(Icons.analytics_outlined),
             selectedIcon: Icon(Icons.analytics),
-            label: 'Capacity',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.timeline_outlined),
-            selectedIcon: Icon(Icons.timeline),
-            label: 'Timeline',
+            label: 'Planning',
           ),
           NavigationDestination(
             icon: Icon(Icons.calculate_outlined),
             selectedIcon: Icon(Icons.calculate),
-            label: 'Simulator',
+            label: 'Funds',
           ),
           NavigationDestination(
             icon: Icon(Icons.leaderboard_outlined),
             selectedIcon: Icon(Icons.leaderboard),
-            label: 'Compare',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.people_outlined),
-            selectedIcon: Icon(Icons.people),
-            label: 'Agencies',
+            label: 'Performance',
           ),
           NavigationDestination(
             icon: Icon(Icons.chat_bubble_outline),
