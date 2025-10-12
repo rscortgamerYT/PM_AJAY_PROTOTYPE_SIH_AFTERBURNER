@@ -28,6 +28,32 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         _emailController.text.trim(),
         _passwordController.text,
       );
+      
+      // Navigate to appropriate dashboard after successful login
+      final authState = ref.read(authProvider);
+      if (authState.isAuthenticated && authState.user != null) {
+        if (!mounted) return;
+        
+        switch (authState.user!.role.toString()) {
+          case 'UserRole.centreAdmin':
+            Navigator.of(context).pushReplacementNamed('/centre-dashboard');
+            break;
+          case 'UserRole.stateOfficer':
+            Navigator.of(context).pushReplacementNamed('/state-dashboard');
+            break;
+          case 'UserRole.agencyUser':
+            Navigator.of(context).pushReplacementNamed('/agency-dashboard');
+            break;
+          case 'UserRole.overwatch':
+            Navigator.of(context).pushReplacementNamed('/new-overwatch-dashboard');
+            break;
+          case 'UserRole.public':
+            Navigator.of(context).pushReplacementNamed('/public-dashboard');
+            break;
+          default:
+            Navigator.of(context).pushReplacementNamed('/centre-dashboard');
+        }
+      }
     }
   }
 

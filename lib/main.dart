@@ -9,6 +9,10 @@ import 'core/router/app_router.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/auth/presentation/pages/login_page.dart';
 import 'features/dashboard/presentation/pages/new_overwatch_dashboard_page.dart';
+import 'features/dashboard/presentation/pages/centre_dashboard_page.dart';
+import 'features/dashboard/presentation/pages/state_dashboard_page.dart';
+import 'features/dashboard/presentation/pages/agency_dashboard_page.dart';
+import 'features/dashboard/presentation/pages/public_dashboard_page.dart';
 import 'core/providers/auth_provider.dart';
 
 void main() async {
@@ -41,73 +45,8 @@ class PMAjayApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: AuthWrapper(),
+      initialRoute: '/',
       onGenerateRoute: AppRouter.generateRoute,
-    );
-  }
-}
-
-class AuthWrapper extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.watch(authProvider);
-    
-    // Show loading screen while checking auth state
-    if (authState.isLoading) {
-      return Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 16),
-              Text('Loading...'),
-            ],
-          ),
-        ),
-      );
-    }
-    
-    // Show login page if not authenticated
-    if (!authState.isAuthenticated) {
-      return LoginPage();
-    }
-    
-    // Show dashboard if authenticated
-    return DashboardWrapper();
-  }
-}
-
-class DashboardWrapper extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.watch(authProvider);
-    
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Overwatch Portal'),
-        backgroundColor: Colors.blue.shade600,
-        foregroundColor: Colors.white,
-        actions: [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Center(
-              child: Text(
-                'Welcome, ${authState.user?.fullName ?? 'User'}',
-                style: TextStyle(fontSize: 14),
-              ),
-            ),
-          ),
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () {
-              ref.read(authProvider.notifier).signOut();
-            },
-            tooltip: 'Sign Out',
-          ),
-        ],
-      ),
-      body: NewOverwatchDashboardPage(),
     );
   }
 }

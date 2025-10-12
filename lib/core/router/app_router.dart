@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../features/auth/presentation/pages/splash_page.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/register_page.dart';
@@ -12,6 +13,8 @@ import '../../features/communication/presentation/pages/communication_hub_page.d
 import '../../features/public_portal/presentation/pages/public_portal_page.dart';
 import '../../features/review_approval/presentation/pages/review_approval_page.dart';
 import '../../features/dashboard/presentation/pages/widget_test_page.dart';
+import '../providers/auth_provider.dart';
+import '../models/user_model.dart';
 
 class AppRouter {
   static const String splash = '/';
@@ -37,23 +40,23 @@ class AppRouter {
       case register:
         return MaterialPageRoute(builder: (_) => const RegisterPage());
       case centreDashboard:
-        return MaterialPageRoute(builder: (_) => const CentreDashboardPage());
+        return _createAuthGuardedRoute(const CentreDashboardPage(), 'centre');
       case stateDashboard:
-        return MaterialPageRoute(builder: (_) => const StateDashboardPage());
+        return _createAuthGuardedRoute(const StateDashboardPage(), 'state');
       case agencyDashboard:
-        return MaterialPageRoute(builder: (_) => const AgencyDashboardPage());
+        return _createAuthGuardedRoute(const AgencyDashboardPage(), 'agency');
       case overwatchDashboard:
-        return MaterialPageRoute(builder: (_) => const OverwatchDashboardPage());
+        return _createAuthGuardedRoute(const OverwatchDashboardPage(), 'overwatch');
       case newOverwatchDashboard:
-        return MaterialPageRoute(builder: (_) => const NewOverwatchDashboardPage());
+        return _createAuthGuardedRoute(const NewOverwatchDashboardPage(), 'overwatch');
       case publicDashboard:
-        return MaterialPageRoute(builder: (_) => const PublicDashboardPage());
+        return _createAuthGuardedRoute(const PublicDashboardPage(), 'public');
       case communicationHub:
-        return MaterialPageRoute(builder: (_) => const CommunicationHubPage());
+        return _createAuthGuardedRoute(const CommunicationHubPage(), null);
       case publicPortal:
         return MaterialPageRoute(builder: (_) => const PublicPortalPage());
       case reviewApproval:
-        return MaterialPageRoute(builder: (_) => const ReviewApprovalPage());
+        return _createAuthGuardedRoute(const ReviewApprovalPage(), null);
       case widgetTest:
         return MaterialPageRoute(builder: (_) => const WidgetTestPage());
       default:
@@ -64,6 +67,98 @@ class AppRouter {
             ),
           ),
         );
+    }
+  }
+
+  static MaterialPageRoute _createAuthGuardedRoute(Widget page, String? requiredRole) {
+    return MaterialPageRoute(
+      builder: (context) => AuthGuard(
+        child: page,
+        requiredRole: requiredRole,
+      ),
+    );
+  }
+}
+
+class AuthGuard extends ConsumerWidget {
+  final Widget child;
+  final String? requiredRole;
+
+  const AuthGuard({
+    Key? key,
+    required this.child,
+    this.requiredRole,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authProvider);
+    
+    if (!authState.isAuthenticated || authState.user == null) {
+      // Not authenticated, redirect to login
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacementNamed(AppRouter.login);
+      });
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    // Check role if required
+    if (requiredRole != null) {
+      final userRole = _mapUserRoleToString(authState.user!.role);
+      
+      if (userRole != requiredRole) {
+        // Wrong role, redirect to appropriate dashboard based on user's actual role
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          switch (authState.user!.role) {
+            case UserRole.centreAdmin:
+              Navigator.of(context).pushReplacementNamed(AppRouter.centreDashboard);
+              break;
+            case UserRole.stateOfficer:
+              Navigator.of(context).pushReplacementNamed(AppRouter.stateDashboard);
+              break;
+            case UserRole.agencyUser:
+              Navigator.of(context).pushReplacementNamed(AppRouter.agencyDashboard);
+              break;
+            case UserRole.overwatch:
+              Navigator.of(context).pushReplacementNamed(AppRouter.newOverwatchDashboard);
+              break;
+            case UserRole.public:
+              Navigator.of(context).pushReplacementNamed(AppRouter.publicDashboard);
+              break;
+            default:
+              Navigator.of(context).pushReplacementNamed(AppRouter.login);
+          }
+        });
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      }
+    }
+
+    // Authenticated and authorized, show the page
+    return child;
+  }
+
+  String _mapUserRoleToString(UserRole role) {
+    switch (role) {
+      case UserRole.centreAdmin:
+        return 'centre';
+      case UserRole.stateOfficer:
+        return 'state';
+      case UserRole.agencyUser:
+        return 'agency';
+      case UserRole.overwatch:
+        return 'overwatch';
+      case UserRole.public:
+        return 'public';
+      default:
+        return '';
     }
   }
 }
