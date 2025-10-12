@@ -107,12 +107,12 @@ class CollapsibleSection extends StatefulWidget {
   final IconData? icon;
 
   const CollapsibleSection({
-    Key? key,
+    super.key,
     required this.title,
     required this.child,
     this.initiallyExpanded = false,
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   State<CollapsibleSection> createState() => _CollapsibleSectionState();
@@ -170,12 +170,12 @@ class ResponsiveGrid extends StatelessWidget {
   final double mainAxisSpacing;
 
   const ResponsiveGrid({
-    Key? key,
+    super.key,
     required this.children,
     this.childAspectRatio = 1.0,
     this.crossAxisSpacing = 16.0,
     this.mainAxisSpacing = 16.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -198,11 +198,11 @@ class ResponsiveRowColumn extends StatelessWidget {
   final CrossAxisAlignment crossAxisAlignment;
 
   const ResponsiveRowColumn({
-    Key? key,
+    super.key,
     required this.children,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -230,12 +230,12 @@ class MobileOptimizedCard extends StatelessWidget {
   final bool collapsible;
 
   const MobileOptimizedCard({
-    Key? key,
+    super.key,
     required this.child,
     this.title,
     this.padding,
     this.collapsible = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -280,10 +280,10 @@ class ResponsiveDialog extends StatelessWidget {
   final String? title;
 
   const ResponsiveDialog({
-    Key? key,
+    super.key,
     required this.child,
     this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

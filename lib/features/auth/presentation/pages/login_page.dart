@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../../core/router/app_router.dart';
+import '../../../../core/providers/auth_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   ConsumerState<LoginPage> createState() => _LoginPageState();
@@ -14,7 +13,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isLoading = false;
   bool _obscurePassword = true;
 
   @override
@@ -24,312 +22,260 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     super.dispose();
   }
 
-  Future<void> _signIn() async {
-    if (!_formKey.currentState!.validate()) return;
-
-    setState(() => _isLoading = true);
-
-    try {
-      final response = await Supabase.instance.client.auth.signInWithPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
+  void _handleLogin() async {
+    if (_formKey.currentState!.validate()) {
+      await ref.read(authProvider.notifier).signIn(
+        _emailController.text.trim(),
+        _passwordController.text,
       );
-
-      if (!mounted) return;
-
-      if (response.session != null) {
-        // Get role from user metadata
-        final userMetadata = response.user!.userMetadata;
-        final role = userMetadata?['role'] as String?;
-
-        if (!mounted) return;
-
-        if (role == null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('User role not found. Please contact administrator.'),
-              backgroundColor: Theme.of(context).colorScheme.error,
-            ),
-          );
-          await Supabase.instance.client.auth.signOut();
-          return;
-        }
-
-        switch (role) {
-          case 'centre':
-            Navigator.of(context).pushReplacementNamed(AppRouter.centreDashboard);
-            break;
-          case 'state':
-            Navigator.of(context).pushReplacementNamed(AppRouter.stateDashboard);
-            break;
-          case 'agency':
-            Navigator.of(context).pushReplacementNamed(AppRouter.agencyDashboard);
-            break;
-          case 'overwatch':
-            Navigator.of(context).pushReplacementNamed(AppRouter.overwatchDashboard);
-            break;
-          case 'public':
-            Navigator.of(context).pushReplacementNamed(AppRouter.publicDashboard);
-            break;
-          default:
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Invalid user role: $role'),
-                backgroundColor: Theme.of(context).colorScheme.error,
-              ),
-            );
-            await Supabase.instance.client.auth.signOut();
-        }
-      }
-    } on AuthException catch (error) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(error.message),
-            backgroundColor: Theme.of(context).colorScheme.error,
-          ),
-        );
-      }
-    } catch (error) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('An unexpected error occurred: ${error.toString()}'),
-            backgroundColor: Theme.of(context).colorScheme.error,
-          ),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() => _isLoading = false);
-      }
-    }
-  }
-
-  void _bypassLogin(String role) {
-    Navigator.of(context).pushReplacementNamed(
-      _getRouteForRole(role),
-    );
-  }
-
-  String _getRouteForRole(String role) {
-    switch (role) {
-      case 'centre':
-        return AppRouter.centreDashboard;
-      case 'state':
-        return AppRouter.stateDashboard;
-      case 'agency':
-        return AppRouter.agencyDashboard;
-      case 'overwatch':
-        return AppRouter.newOverwatchDashboard;
-      case 'public':
-        return AppRouter.publicDashboard;
-      default:
-        return AppRouter.login;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authProvider);
+    
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.location_on,
-                  size: 80,
-                  color: Theme.of(context).colorScheme.primary,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue.shade800,
+              Colors.blue.shade600,
+              Colors.blue.shade400,
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24.0),
+              child: Card(
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                const SizedBox(height: 24),
-                Text(
-                  'PM-AJAY Platform',
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Agency Mapping & Monitoring',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-                      ),
-                ),
-                const SizedBox(height: 48),
-                Card(
-                  elevation: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            'Sign In',
-                            style: Theme.of(context).textTheme.headlineMedium,
+                child: Container(
+                  padding: const EdgeInsets.all(32.0),
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Logo and Title
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.blue.shade50,
+                            shape: BoxShape.circle,
                           ),
-                          const SizedBox(height: 24),
-                          TextFormField(
-                            controller: _emailController,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                              labelText: 'Email',
-                              prefixIcon: Icon(Icons.email_outlined),
+                          child: Icon(
+                            Icons.admin_panel_settings,
+                            size: 48,
+                            color: Colors.blue.shade700,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Text(
+                          'Central Admin Portal',
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade800,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Sign in to continue',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+
+                        // Email Field
+                        TextFormField(
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'Enter your email',
+                            prefixIcon: const Icon(Icons.email_outlined),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your email';
-                              }
-                              if (!value.contains('@')) {
-                                return 'Please enter a valid email';
-                              }
-                              return null;
-                            },
                           ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            controller: _passwordController,
-                            obscureText: _obscurePassword,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              prefixIcon: const Icon(Icons.lock_outlined),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email';
+                            }
+                            if (!value.contains('@')) {
+                              return 'Please enter a valid email';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Password Field
+                        TextFormField(
+                          controller: _passwordController,
+                          obscureText: _obscurePassword,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            hintText: 'Enter your password',
+                            prefixIcon: const Icon(Icons.lock_outlined),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _obscurePassword 
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            if (value.length < 6) {
+                              return 'Password must be at least 6 characters';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Error Message
+                        if (authState.error != null)
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            margin: const EdgeInsets.only(bottom: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.red.shade50,
+                              border: Border.all(color: Colors.red.shade200),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(Icons.error_outline, color: Colors.red.shade600),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    authState.error!,
+                                    style: TextStyle(color: Colors.red.shade600),
+                                  ),
                                 ),
-                                onPressed: () {
-                                  setState(() => _obscurePassword = !_obscurePassword);
-                                },
+                              ],
+                            ),
+                          ),
+
+                        // Login Button
+                        SizedBox(
+                          width: double.infinity,
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: authState.isLoading ? null : _handleLogin,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue.shade600,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
+                              elevation: 2,
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your password';
-                              }
-                              if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
-                              }
-                              return null;
-                            },
+                            child: authState.isLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  ),
+                                )
+                              : const Text(
+                                  'Sign In',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                           ),
-                          const SizedBox(height: 24),
-                          ElevatedButton(
-                            onPressed: _isLoading ? null : _signIn,
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: _isLoading
-                                  ? const SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                      ),
-                                    )
-                                  : const Text('Sign In'),
-                            ),
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Demo Credentials
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade50,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.grey.shade200),
                           ),
-                          const SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Don\'t have an account? '),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(AppRouter.register);
-                                },
-                                child: const Text('Register'),
+                              Text(
+                                'Demo Credentials:',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey.shade700,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              _buildDemoCredential('Centre Admin', 'centre@admin.gov.in'),
+                              _buildDemoCredential('Overwatch', 'overwatch@monitor.gov.in'),
+                              _buildDemoCredential('State Officer', 'state@officer.gov.in'),
+                              _buildDemoCredential('Agency User', 'agency@user.gov.in'),
+                              const SizedBox(height: 8),
+                              Text(
+                                'Password: demo123',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey.shade600,
+                                  fontStyle: FontStyle.italic,
+                                ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 24),
-                          const Divider(),
-                          const SizedBox(height: 16),
-                          Text(
-                            'Quick Access',
-                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: Colors.orange,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 12),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            alignment: WrapAlignment.center,
-                            children: [
-                              _BypassButton(
-                                label: 'Centre',
-                                icon: Icons.account_balance,
-                                color: Colors.blue,
-                                onPressed: () => _bypassLogin('centre'),
-                              ),
-                              _BypassButton(
-                                label: 'State',
-                                icon: Icons.location_city,
-                                color: Colors.green,
-                                onPressed: () => _bypassLogin('state'),
-                              ),
-                              _BypassButton(
-                                label: 'Agency',
-                                icon: Icons.business,
-                                color: Colors.purple,
-                                onPressed: () => _bypassLogin('agency'),
-                              ),
-                              _BypassButton(
-                                label: 'Overwatch',
-                                icon: Icons.visibility,
-                                color: Colors.red,
-                                onPressed: () => _bypassLogin('overwatch'),
-                              ),
-                              _BypassButton(
-                                label: 'Public',
-                                icon: Icons.public,
-                                color: Colors.teal,
-                                onPressed: () => _bypassLogin('public'),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
-}
 
-class _BypassButton extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final Color color;
-  final VoidCallback onPressed;
-
-  const _BypassButton({
-    required this.label,
-    required this.icon,
-    required this.color,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton.icon(
-      onPressed: onPressed,
-      icon: Icon(icon, size: 18),
-      label: Text(label),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: color,
-        side: BorderSide(color: color),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+  Widget _buildDemoCredential(String role, String email) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: GestureDetector(
+        onTap: () {
+          _emailController.text = email;
+          _passwordController.text = 'demo123';
+        },
+        child: Text(
+          '$role: $email',
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.blue.shade600,
+            decoration: TextDecoration.underline,
+          ),
+        ),
       ),
     );
   }
