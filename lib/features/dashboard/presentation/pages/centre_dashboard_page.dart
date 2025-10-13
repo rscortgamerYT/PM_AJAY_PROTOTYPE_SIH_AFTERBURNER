@@ -16,6 +16,7 @@ import '../../../../core/utils/responsive_layout.dart';
 import '../../data/mock_fund_flow_data.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
 import '../../../fund_flow/widgets/dual_entry_reconciliation_widget.dart';
+import '../../../../core/utils/page_transitions.dart';
 
 class CentreDashboardPage extends ConsumerStatefulWidget {
   const CentreDashboardPage({super.key});
@@ -384,7 +385,10 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
       ),
       body: Stack(
         children: [
-          pages[_selectedIndex],
+          AnimatedIndexedStack(
+            index: _selectedIndex,
+            children: pages,
+          ),
           const EventCalendarWidget(),
           const DashboardSwitcherWidget(),
         ],

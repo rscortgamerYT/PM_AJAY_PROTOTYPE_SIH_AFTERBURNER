@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'core/config/supabase_config.dart';
 import 'core/theme/app_theme.dart';
 import 'core/router/app_router.dart';
+import 'core/utils/page_transitions.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,8 +35,28 @@ class PMAjayApp extends StatelessWidget {
     return MaterialApp(
       title: 'PM-AJAY Agency Mapping Platform',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme.copyWith(
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: CustomPageTransitionsBuilder(),
+            TargetPlatform.iOS: CustomPageTransitionsBuilder(),
+            TargetPlatform.linux: CustomPageTransitionsBuilder(),
+            TargetPlatform.macOS: CustomPageTransitionsBuilder(),
+            TargetPlatform.windows: CustomPageTransitionsBuilder(),
+          },
+        ),
+      ),
+      darkTheme: AppTheme.darkTheme.copyWith(
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: CustomPageTransitionsBuilder(),
+            TargetPlatform.iOS: CustomPageTransitionsBuilder(),
+            TargetPlatform.linux: CustomPageTransitionsBuilder(),
+            TargetPlatform.macOS: CustomPageTransitionsBuilder(),
+            TargetPlatform.windows: CustomPageTransitionsBuilder(),
+          },
+        ),
+      ),
       themeMode: ThemeMode.system,
       initialRoute: '/',
       onGenerateRoute: AppRouter.generateRoute,

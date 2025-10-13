@@ -20,6 +20,7 @@ import '../../../../core/utils/responsive_layout.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
 import '../../../fund_flow/widgets/dual_entry_reconciliation_widget.dart';
 import '../widgets/enhanced_planning_dashboard_widget.dart';
+import '../../../../core/utils/page_transitions.dart';
 
 class StateDashboardPage extends ConsumerStatefulWidget {
   const StateDashboardPage({super.key});
@@ -401,7 +402,10 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
       ),
       body: Stack(
         children: [
-          pages[_selectedIndex],
+          AnimatedIndexedStack(
+            index: _selectedIndex,
+            children: pages,
+          ),
           const EventCalendarWidget(),
           const DashboardSwitcherWidget(),
         ],

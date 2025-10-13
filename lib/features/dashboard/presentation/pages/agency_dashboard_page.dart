@@ -17,6 +17,7 @@ import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
+import '../../../../core/utils/page_transitions.dart';
 
 class AgencyDashboardPage extends ConsumerStatefulWidget {
   const AgencyDashboardPage({super.key});
@@ -536,7 +537,10 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
       ),
       body: Stack(
         children: [
-          pages[_selectedIndex],
+          AnimatedIndexedStack(
+            index: _selectedIndex,
+            children: pages,
+          ),
           const EventCalendarWidget(),
           const DashboardSwitcherWidget(),
         ],

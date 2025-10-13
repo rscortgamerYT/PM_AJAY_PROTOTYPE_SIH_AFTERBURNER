@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/comprehensive_claim_review_dialog.dart';
 import '../../../evidence/widgets/tamper_evident_evidence_widget.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
+import '../../../../core/utils/page_transitions.dart';
 
 class NewOverwatchDashboardPage extends ConsumerStatefulWidget {
   const NewOverwatchDashboardPage({super.key});
@@ -179,20 +180,16 @@ class _NewOverwatchDashboardPageState
   }
 
   Widget _buildCurrentPage() {
-    switch (_selectedIndex) {
-      case 0:
-        return _buildOverviewPage();
-      case 1:
-        return _buildClaimsPage();
-      case 2:
-        return _buildFundFlowPage();
-      case 3:
-        return _buildFraudCommandPage();
-      case 4:
-        return _buildArchivePage();
-      default:
-        return _buildOverviewPage();
-    }
+    return AnimatedIndexedStack(
+      index: _selectedIndex,
+      children: [
+        _buildOverviewPage(),
+        _buildClaimsPage(),
+        _buildFundFlowPage(),
+        _buildFraudCommandPage(),
+        _buildArchivePage(),
+      ],
+    );
   }
 
   // OVERVIEW PAGE
