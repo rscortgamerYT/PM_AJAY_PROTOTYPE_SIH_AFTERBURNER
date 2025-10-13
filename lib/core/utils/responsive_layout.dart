@@ -395,4 +395,361 @@ class ResponsiveLayout {
   static bool shouldShowNavDrawer(BuildContext context) {
     return isDesktop(context);
   }
+  // ==================== MOBILE/TABLET OPTIMIZATION ====================
+  
+  /// Get responsive icon size
+  static double getResponsiveIconSize(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 20.0,
+      mobileWide: 22.0,
+      tablet: 24.0,
+      desktop: 24.0,
+    );
+  }
+  
+  /// Get responsive button height
+  static double getResponsiveButtonHeight(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 44.0,
+      mobileWide: 48.0,
+      tablet: 52.0,
+      desktop: 56.0,
+    );
+  }
+  
+  /// Get responsive card padding
+  static EdgeInsets getResponsiveCardPadding(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: const EdgeInsets.all(12),
+      mobileWide: const EdgeInsets.all(14),
+      tablet: const EdgeInsets.all(16),
+      desktop: const EdgeInsets.all(20),
+    );
+  }
+  
+  /// Get responsive dialog padding
+  static EdgeInsets getResponsiveDialogPadding(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: const EdgeInsets.all(16),
+      mobileWide: const EdgeInsets.all(20),
+      tablet: const EdgeInsets.all(24),
+      desktop: const EdgeInsets.all(28),
+    );
+  }
+  
+  /// Get responsive dialog width
+  static double getResponsiveDialogWidth(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return valueByDevice(
+      context: context,
+      mobile: screenWidth * 0.9,
+      mobileWide: screenWidth * 0.85,
+      tablet: 600,
+      desktop: 700,
+    );
+  }
+  
+  /// Get responsive dialog max height
+  static double getResponsiveDialogMaxHeight(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    return valueByDevice(
+      context: context,
+      mobile: screenHeight * 0.8,
+      mobileWide: screenHeight * 0.85,
+      tablet: screenHeight * 0.9,
+      desktop: screenHeight * 0.9,
+    );
+  }
+  
+  /// Get responsive card elevation
+  static double getResponsiveCardElevation(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 1.0,
+      mobileWide: 2.0,
+      tablet: 2.0,
+      desktop: 3.0,
+    );
+  }
+  
+  /// Get responsive border radius
+  static BorderRadius getResponsiveBorderRadius(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: BorderRadius.circular(8),
+      mobileWide: BorderRadius.circular(10),
+      tablet: BorderRadius.circular(12),
+      desktop: BorderRadius.circular(12),
+    );
+  }
+  
+  /// Get responsive font size for headings
+  static double getResponsiveHeadingSize(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 18.0,
+      mobileWide: 20.0,
+      tablet: 22.0,
+      desktop: 24.0,
+    );
+  }
+  
+  /// Get responsive font size for titles
+  static double getResponsiveTitleSize(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 16.0,
+      mobileWide: 17.0,
+      tablet: 18.0,
+      desktop: 20.0,
+    );
+  }
+  
+  /// Get responsive font size for body text
+  static double getResponsiveBodySize(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 14.0,
+      mobileWide: 14.5,
+      tablet: 15.0,
+      desktop: 16.0,
+    );
+  }
+  
+  /// Get responsive font size for captions
+  static double getResponsiveCaptionSize(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 12.0,
+      mobileWide: 12.5,
+      tablet: 13.0,
+      desktop: 14.0,
+    );
+  }
+  
+  /// Get responsive app bar height
+  static double getResponsiveAppBarHeight(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 56.0,
+      mobileWide: 60.0,
+      tablet: 64.0,
+      desktop: 64.0,
+    );
+  }
+  
+  /// Get responsive list tile height
+  static double getResponsiveListTileHeight(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 56.0,
+      mobileWide: 64.0,
+      tablet: 72.0,
+      desktop: 80.0,
+    );
+  }
+  
+  /// Get responsive chip height
+  static double getResponsiveChipHeight(BuildContext context) {
+    return valueByDevice(
+      context: context,
+      mobile: 28.0,
+      mobileWide: 30.0,
+      tablet: 32.0,
+      desktop: 32.0,
+    );
+  }
+  
+  /// Build responsive container with constraints
+  static Widget responsiveContainer({
+    required BuildContext context,
+    required Widget child,
+    EdgeInsets? padding,
+    Color? color,
+    BoxDecoration? decoration,
+    double? maxWidth,
+  }) {
+    return Container(
+      constraints: BoxConstraints(
+        maxWidth: maxWidth ?? getMaxContentWidth(context),
+      ),
+      padding: padding ?? getResponsiveCardPadding(context),
+      decoration: decoration,
+      color: decoration == null ? color : null,
+      child: child,
+    );
+  }
+  
+  /// Build responsive text with automatic overflow handling
+  static Widget responsiveText(
+    String text, {
+    required BuildContext context,
+    TextStyle? style,
+    TextAlign? textAlign,
+    int? maxLines,
+    TextOverflow? overflow,
+  }) {
+    return Text(
+      text,
+      style: style,
+      textAlign: textAlign ?? TextAlign.start,
+      maxLines: maxLines,
+      overflow: overflow ?? TextOverflow.ellipsis,
+      textScaler: TextScaler.linear(getTextScaleFactor(context)),
+    );
+  }
+  
+  /// Build responsive card
+  static Widget responsiveCard({
+    required BuildContext context,
+    required Widget child,
+    EdgeInsets? padding,
+    EdgeInsets? margin,
+    Color? color,
+    double? elevation,
+    VoidCallback? onTap,
+  }) {
+    final card = Card(
+      elevation: elevation ?? getResponsiveCardElevation(context),
+      color: color,
+      shape: RoundedRectangleBorder(
+        borderRadius: getResponsiveBorderRadius(context),
+      ),
+      margin: margin ?? EdgeInsets.zero,
+      child: Padding(
+        padding: padding ?? getResponsiveCardPadding(context),
+        child: child,
+      ),
+    );
+    
+    if (onTap != null) {
+      return InkWell(
+        onTap: onTap,
+        borderRadius: getResponsiveBorderRadius(context),
+        child: card,
+      );
+    }
+    
+    return card;
+  }
+  
+  /// Build responsive dialog
+  static Widget responsiveDialog({
+    required BuildContext context,
+    required Widget child,
+    String? title,
+    List<Widget>? actions,
+    EdgeInsets? contentPadding,
+  }) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: getResponsiveBorderRadius(context),
+      ),
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: getResponsiveDialogWidth(context),
+          maxHeight: getResponsiveDialogMaxHeight(context),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (title != null)
+              Padding(
+                padding: getResponsiveDialogPadding(context).copyWith(bottom: 0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: responsiveText(
+                        title,
+                        context: context,
+                        style: TextStyle(
+                          fontSize: getResponsiveHeadingSize(context),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      iconSize: getResponsiveIconSize(context),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
+              ),
+            Flexible(
+              child: SingleChildScrollView(
+                padding: contentPadding ?? getResponsiveDialogPadding(context),
+                child: child,
+              ),
+            ),
+            if (actions != null && actions.isNotEmpty)
+              Padding(
+                padding: getResponsiveDialogPadding(context).copyWith(top: 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: actions,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  /// Build responsive button
+  static Widget responsiveButton({
+    required BuildContext context,
+    required String label,
+    required VoidCallback onPressed,
+    bool isPrimary = true,
+    IconData? icon,
+    bool isFullWidth = false,
+  }) {
+    final buttonHeight = getResponsiveButtonHeight(context);
+    final buttonStyle = isPrimary
+        ? ElevatedButton.styleFrom(
+            minimumSize: Size(isFullWidth ? double.infinity : 0, buttonHeight),
+            shape: RoundedRectangleBorder(
+              borderRadius: getResponsiveBorderRadius(context),
+            ),
+          )
+        : OutlinedButton.styleFrom(
+            minimumSize: Size(isFullWidth ? double.infinity : 0, buttonHeight),
+            shape: RoundedRectangleBorder(
+              borderRadius: getResponsiveBorderRadius(context),
+            ),
+          );
+    
+    final buttonChild = Row(
+      mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (icon != null) ...[
+          Icon(icon, size: getResponsiveIconSize(context)),
+          SizedBox(width: getResponsiveSpacing(context) / 2),
+        ],
+        responsiveText(
+          label,
+          context: context,
+          style: TextStyle(fontSize: getResponsiveBodySize(context)),
+        ),
+      ],
+    );
+    
+    return isPrimary
+        ? ElevatedButton(
+            onPressed: onPressed,
+            style: buttonStyle,
+            child: buttonChild,
+          )
+        : OutlinedButton(
+            onPressed: onPressed,
+            style: buttonStyle,
+            child: buttonChild,
+          );
+  }
 }
