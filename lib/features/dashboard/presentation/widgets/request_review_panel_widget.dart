@@ -304,7 +304,9 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
                 const SizedBox(height: 4),
                 Text(
                   request.description,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.grey.shade300, // Light text for dark background
+                  ),
                 ),
                 
                 if (request.documents.isNotEmpty) ...[
@@ -313,7 +315,7 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
                     'Attachments',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Colors.grey.shade600,
+                          color: Colors.grey.shade400, // Lighter for visibility
                         ),
                   ),
                   const SizedBox(height: 8),
@@ -322,9 +324,9 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
                     runSpacing: 8,
                     children: request.documents.map((doc) {
                       return Chip(
-                        avatar: const Icon(Icons.attach_file, size: 16),
-                        label: Text(doc),
-                        backgroundColor: Colors.grey.shade100,
+                        avatar: const Icon(Icons.attach_file, size: 16, color: Colors.white70),
+                        label: Text(doc, style: const TextStyle(color: Colors.white)),
+                        backgroundColor: Colors.grey.shade800, // Dark background for chips
                       );
                     }).toList(),
                   ),
@@ -345,14 +347,14 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
                       Text(
                         '${request.status.toUpperCase()} by ${request.approvedBy ?? "Unknown"}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.grey.shade600,
+                              color: Colors.grey.shade300, // Lighter for visibility
                             ),
                       ),
                       const Spacer(),
                       Text(
                         _formatDate(request.approvedDate ?? DateTime.now()),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.grey.shade600,
+                              color: Colors.grey.shade300, // Lighter for visibility
                             ),
                       ),
                     ],
@@ -367,7 +369,7 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.grey.shade50,
+                color: Colors.grey.shade900, // Dark background for action buttons
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(12),
                   bottomRight: Radius.circular(12),
@@ -412,18 +414,19 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          Icon(icon, size: 16, color: Colors.grey.shade600),
+          Icon(icon, size: 16, color: Colors.grey.shade400),
           const SizedBox(width: 8),
           Text(
             '$label: ',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.grey.shade600,
+                  color: Colors.grey.shade400, // Lighter for visibility
                 ),
           ),
           Text(
             value,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w600,
+                  color: Colors.grey.shade200, // Light text for dark background
                 ),
           ),
         ],
