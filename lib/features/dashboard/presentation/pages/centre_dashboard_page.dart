@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/national_heatmap_widget.dart';
 import '../widgets/collaboration_network_widget.dart';
 import '../widgets/compliance_scoreboard_widget.dart';
+import '../widgets/overwatch_alerts_widget.dart';
+import '../widgets/overwatch_status_widget.dart';
 import '../widgets/national_performance_leaderboard_widget.dart';
 import '../widgets/predictive_analytics_widget.dart';
 import '../widgets/request_review_panel_widget.dart';
@@ -186,8 +188,32 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
     return const CollaborationNetworkWidget();
   }
 
-  Widget _buildComplianceScoreboard() {
-    return const ComplianceScoreboardWidget();
+  Widget _buildOverwatchAlertsAndStatus() {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      padding: ResponsiveLayout.getResponsivePadding(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const DashboardSectionHeader(
+            title: 'Overwatch Alerts',
+            subtitle: 'Projects flagged by the monitoring system',
+            icon: Icons.warning_amber_rounded,
+          ),
+          const SizedBox(height: 16),
+          const OverwatchAlertsWidget(),
+          const SizedBox(height: 32),
+          const DashboardSectionHeader(
+            title: 'Overwatch Status',
+            subtitle: 'Audit activities and monitoring overview',
+            icon: Icons.monitor_heart_outlined,
+          ),
+          const SizedBox(height: 16),
+          const OverwatchStatusWidget(),
+          const SizedBox(height: 24),
+        ],
+      ),
+    );
   }
 
   Widget _buildPerformanceLeaderboard() {
@@ -210,7 +236,7 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
           SizedBox(
             height: ResponsiveLayout.getChartHeight(context),
             child: InteractiveSankeyWidget(
-              initialData: MockFundFlowData.generateMockData(),
+              initialData: MockFundFlowData.generateCentreToAgenciesData(),
               onNodeTap: (nodeId) {
                 debugPrint('Node tapped: $nodeId');
               },
@@ -328,7 +354,7 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
       _buildOverviewPage(),
       _buildRequestReviewPanel(),
       _buildPerformanceLeaderboard(),
-      _buildComplianceScoreboard(),
+      _buildOverwatchAlertsAndStatus(),
       _buildFundFlowView(),
       _buildCommunicationHub(),
     ];
@@ -415,9 +441,9 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
             label: 'Performance',
           ),
           NavigationDestination(
-            icon: Icon(Icons.rule_outlined),
-            selectedIcon: Icon(Icons.rule),
-            label: 'Compliance',
+            icon: Icon(Icons.shield_outlined),
+            selectedIcon: Icon(Icons.shield),
+            label: 'Overwatch',
           ),
           NavigationDestination(
             icon: Icon(Icons.account_balance_outlined),
