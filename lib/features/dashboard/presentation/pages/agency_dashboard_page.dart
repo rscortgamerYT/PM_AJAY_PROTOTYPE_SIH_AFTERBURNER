@@ -264,6 +264,7 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
 
   Widget _buildOverviewPage() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       padding: ResponsiveLayout.getResponsivePadding(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

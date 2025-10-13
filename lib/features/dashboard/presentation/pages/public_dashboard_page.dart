@@ -137,6 +137,7 @@ class _PublicDashboardPageState extends ConsumerState<PublicDashboardPage> {
 
   Widget _buildHomePage() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           _buildHeroSection(),

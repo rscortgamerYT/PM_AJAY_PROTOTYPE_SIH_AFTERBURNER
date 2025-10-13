@@ -195,6 +195,7 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
 
   Widget _buildFundFlowView() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       padding: ResponsiveLayout.getResponsivePadding(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -301,6 +302,7 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
 
   Widget _buildOverviewPage() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

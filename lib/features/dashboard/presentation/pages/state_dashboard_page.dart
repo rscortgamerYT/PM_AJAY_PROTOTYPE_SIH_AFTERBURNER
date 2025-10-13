@@ -255,6 +255,7 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
 
   Widget _buildOverviewPage() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       padding: ResponsiveLayout.getResponsivePadding(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

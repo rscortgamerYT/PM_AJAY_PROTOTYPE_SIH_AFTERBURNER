@@ -198,6 +198,7 @@ class _NewOverwatchDashboardPageState
   // OVERVIEW PAGE
   Widget _buildOverviewPage() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -554,6 +555,7 @@ class _NewOverwatchDashboardPageState
   // CLAIMS PAGE
   Widget _buildClaimsPage() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -801,6 +803,7 @@ class _NewOverwatchDashboardPageState
   // COMPREHENSIVE FUND FLOW PAGE - State-of-the-art implementation
   Widget _buildFundFlowPage() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -952,6 +955,7 @@ class _NewOverwatchDashboardPageState
 
   Widget _buildEnhancedFundSummaryRow() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
@@ -1072,6 +1076,7 @@ class _NewOverwatchDashboardPageState
               animation: _flowAnimation,
               builder: (context, child) {
                 return SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -1953,6 +1958,7 @@ class _NewOverwatchDashboardPageState
   // FRAUD & COMMAND PAGE
   Widget _buildFraudCommandPage() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -2500,6 +2506,7 @@ class _NewOverwatchDashboardPageState
     }).toList();
 
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
