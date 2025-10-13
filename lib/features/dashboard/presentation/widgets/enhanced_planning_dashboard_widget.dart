@@ -314,14 +314,14 @@ class _EnhancedPlanningDashboardWidgetState
             ),
             child: Row(
               children: [
-                Icon(Icons.pending_actions, color: Colors.orange.shade300, size: 20),
+                Icon(Icons.pending_actions, color: Colors.orange.shade700, size: 20),
                 const SizedBox(width: 8),
                 Text(
                   'Pending Projects (${_pendingProjects.length})',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.orange.shade300,
+                    color: Colors.orange.shade800,
                   ),
                 ),
                 const Spacer(),
@@ -329,7 +329,7 @@ class _EnhancedPlanningDashboardWidgetState
                   'Click on a project to see AI recommendations →',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.orange.shade400,
+                    color: Colors.orange.shade700,
                     fontStyle: FontStyle.italic,
                   ),
                 ),
@@ -488,14 +488,14 @@ class _EnhancedPlanningDashboardWidgetState
             ),
             child: Row(
               children: [
-                Icon(Icons.psychology, color: Colors.blue.shade300, size: 20),
+                Icon(Icons.psychology, color: Colors.blue.shade700, size: 20),
                 const SizedBox(width: 8),
                 Text(
                   'AI Recommendations',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue.shade300,
+                    color: Colors.blue.shade800,
                   ),
                 ),
                 const Spacer(),
@@ -504,7 +504,7 @@ class _EnhancedPlanningDashboardWidgetState
                     'For: ${_selectedProject!.name}',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.blue.shade400,
+                      color: Colors.blue.shade700,
                       fontStyle: FontStyle.italic,
                     ),
                   ),
@@ -845,22 +845,22 @@ class _EnhancedPlanningDashboardWidgetState
             ),
             child: Row(
               children: [
-                Icon(Icons.assignment_turned_in, color: Colors.green.shade300, size: 20),
+                Icon(Icons.assignment_turned_in, color: Colors.green.shade700, size: 20),
                 const SizedBox(width: 8),
                 Text(
                   'Assigned Projects (${_assignedProjects.length})',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green.shade300,
+                    color: Colors.green.shade800,
                   ),
                 ),
                 const Spacer(),
                 Text(
-                  'Drop agencies here →',
+                  'Approve agency to assign →',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.green.shade400,
+                    color: Colors.green.shade700,
                     fontStyle: FontStyle.italic,
                   ),
                 ),
