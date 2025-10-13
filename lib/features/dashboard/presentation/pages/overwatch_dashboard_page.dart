@@ -13,6 +13,7 @@ import '../../../../core/widgets/dashboard_components.dart';
 import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
+import '../../../../core/widgets/dashboard_switcher_widget.dart';
 
 class OverwatchDashboardPage extends ConsumerStatefulWidget {
   const OverwatchDashboardPage({super.key});
@@ -502,6 +503,7 @@ class _OverwatchDashboardPageState extends ConsumerState<OverwatchDashboardPage>
         children: [
           pages[_selectedIndex],
           const EventCalendarWidget(),
+          const DashboardSwitcherWidget(),
         ],
       ),
       bottomNavigationBar: NavigationBar(

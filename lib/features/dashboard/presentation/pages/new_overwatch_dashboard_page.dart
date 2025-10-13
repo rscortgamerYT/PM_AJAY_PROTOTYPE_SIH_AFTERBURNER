@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/comprehensive_claim_review_dialog.dart';
 import '../../../evidence/widgets/tamper_evident_evidence_widget.dart';
+import '../../../../core/widgets/dashboard_switcher_widget.dart';
 
 class NewOverwatchDashboardPage extends ConsumerStatefulWidget {
   const NewOverwatchDashboardPage({super.key});
@@ -139,7 +140,12 @@ class _NewOverwatchDashboardPageState
           ),
         ],
       ),
-      body: _buildCurrentPage(),
+      body: Stack(
+        children: [
+          _buildCurrentPage(),
+          const DashboardSwitcherWidget(),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) {
