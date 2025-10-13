@@ -107,21 +107,24 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildFilterBar(),
-        Expanded(
-          child: _filteredRequests.isEmpty
-              ? _buildEmptyState()
-              : ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: _filteredRequests.length,
-                  itemBuilder: (context, index) {
-                    return _buildRequestCard(_filteredRequests[index]);
-                  },
-                ),
-        ),
-      ],
+    return Container(
+      color: Colors.black, // Black background as requested
+      child: Column(
+        children: [
+          _buildFilterBar(),
+          Expanded(
+            child: _filteredRequests.isEmpty
+                ? _buildEmptyState()
+                : ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: _filteredRequests.length,
+                    itemBuilder: (context, index) {
+                      return _buildRequestCard(_filteredRequests[index]);
+                    },
+                  ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -129,14 +132,10 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: Colors.black, // Black background
+        border: Border(
+          bottom: BorderSide(color: Colors.grey.shade800, width: 1),
+        ),
       ),
       child: Row(
         children: [
@@ -176,19 +175,19 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.inbox, size: 64, color: Colors.grey.shade400),
+          Icon(Icons.inbox, size: 64, color: Colors.grey.shade600),
           const SizedBox(height: 16),
           Text(
             'No requests found',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.grey.shade600,
+                  color: Colors.grey.shade300, // Light text for black background
                 ),
           ),
           const SizedBox(height: 8),
           Text(
             'Requests matching your filter will appear here',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.grey.shade500,
+                  color: Colors.grey.shade400, // Light text for black background
                 ),
           ),
         ],
@@ -200,6 +199,7 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
+      color: Colors.grey[900], // Dark grey card background for better contrast
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -236,6 +236,7 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
                     request.id,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
+                          color: Colors.white, // White text for dark background
                         ),
                   ),
                 ),
@@ -297,7 +298,7 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
                   'Description',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade600,
+                        color: Colors.grey.shade400, // Light text for dark background
                       ),
                 ),
                 const SizedBox(height: 4),

@@ -25,7 +25,7 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: PMAjayApp(),
+          child: const PMAjayApp(),
         ),
       );
 
@@ -54,7 +54,7 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: PMAjayApp(),
+          child: const PMAjayApp(),
         ),
       );
 
@@ -87,7 +87,7 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: PMAjayApp(),
+          child: const PMAjayApp(),
         ),
       );
 
@@ -177,7 +177,7 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: PMAjayApp(),
+          child: const PMAjayApp(),
         ),
       );
 

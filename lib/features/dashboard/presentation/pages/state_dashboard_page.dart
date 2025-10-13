@@ -18,6 +18,8 @@ import '../../../../core/widgets/event_calendar_widget.dart';
 import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
+import '../../../fund_flow/widgets/dual_entry_reconciliation_widget.dart';
+import '../widgets/enhanced_planning_dashboard_widget.dart';
 
 class StateDashboardPage extends ConsumerStatefulWidget {
   const StateDashboardPage({super.key});
@@ -268,6 +270,19 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
             height: ResponsiveLayout.getMapHeight(context),
             child: _buildDistrictMap(),
           ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
+          const DashboardSectionHeader(
+            title: 'Fund Overview - Reconciliation Ledger',
+            subtitle: 'State-level PFMS vs Bank statement reconciliation',
+          ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context)),
+          SizedBox(
+            height: ResponsiveLayout.getChartHeight(context),
+            child: const DualEntryReconciliationWidget(
+              title: 'State Fund Reconciliation',
+              showDetailsPanel: false, // Compact view for dashboard integration
+            ),
+          ),
         ],
       ),
     );
@@ -320,7 +335,7 @@ class _StateDashboardPageState extends ConsumerState<StateDashboardPage> with Si
     final List<Widget> pages = [
       _buildOverviewPage(),
       _buildReviewPanel(),
-      _buildDistrictCapacityPlanner(),
+      EnhancedPlanningDashboardWidget(stateId: _stateId),
       _buildFundSimulator(),
       _buildAgencyComparator(),
       _buildCommunicationHub(),

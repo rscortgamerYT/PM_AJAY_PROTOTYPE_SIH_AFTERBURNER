@@ -11,6 +11,7 @@ import '../widgets/eligibility_checker_widget.dart';
 import '../widgets/notification_center_widget.dart';
 import '../widgets/application_tracker_widget.dart';
 import '../widgets/infrastructure_reports_widget.dart';
+import '../../../evidence/widgets/tamper_evident_evidence_widget.dart';
 
 /// Public Portal Page
 /// 
@@ -79,6 +80,12 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
       title: 'Community',
       description: 'Engage through ideas, volunteering, and events',
       color: Colors.purple,
+    ),
+    PortalFeature(
+      icon: Icons.photo_library,
+      title: 'Evidence Gallery',
+      description: 'View watermarked project evidence and photos',
+      color: Colors.deepPurple,
     ),
     PortalFeature(
       icon: Icons.school,
@@ -222,17 +229,45 @@ class _PublicPortalPageState extends ConsumerState<PublicPortalPage> {
                 Expanded(
                   child: IndexedStack(
                     index: _selectedIndex,
-                    children: const [
-                      EligibilityCheckerWidget(),
-                      NotificationCenterWidget(),
-                      ApplicationTrackerWidget(),
-                      InfrastructureReportsWidget(),
-                      CoverageCheckWidget(),
-                      SubmitComplaintWidget(),
-                      PublicFeedbackWidget(),
-                      OpenDataExplorerWidget(),
-                      CommunityEngagementWidget(),
-                      TransparencyAwarenessWidget(),
+                    children: [
+                      const EligibilityCheckerWidget(),
+                      const NotificationCenterWidget(),
+                      const ApplicationTrackerWidget(),
+                      const InfrastructureReportsWidget(),
+                      const CoverageCheckWidget(),
+                      const SubmitComplaintWidget(),
+                      const PublicFeedbackWidget(),
+                      const OpenDataExplorerWidget(),
+                      const CommunityEngagementWidget(),
+                      Container(
+                        padding: const EdgeInsets.all(24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Public Evidence Gallery',
+                              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'View watermarked project evidence and photos for transparency',
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            const Expanded(
+                              child: TamperEvidentEvidenceWidget(
+                                projectId: 'public_gallery',
+                                uploaderName: 'Public Portal',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const TransparencyAwarenessWidget(),
                     ],
                   ),
                 ),

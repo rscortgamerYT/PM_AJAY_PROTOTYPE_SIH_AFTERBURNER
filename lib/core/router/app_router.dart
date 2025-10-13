@@ -50,7 +50,7 @@ class AppRouter {
       case newOverwatchDashboard:
         return _createAuthGuardedRoute(const NewOverwatchDashboardPage(), 'overwatch');
       case publicDashboard:
-        return _createAuthGuardedRoute(const PublicDashboardPage(), 'public');
+        return MaterialPageRoute(builder: (_) => const PublicDashboardPage());
       case communicationHub:
         return _createAuthGuardedRoute(const CommunicationHubPage(), null);
       case publicPortal:
@@ -73,8 +73,8 @@ class AppRouter {
   static MaterialPageRoute _createAuthGuardedRoute(Widget page, String? requiredRole) {
     return MaterialPageRoute(
       builder: (context) => AuthGuard(
-        child: page,
         requiredRole: requiredRole,
+        child: page,
       ),
     );
   }
@@ -85,10 +85,10 @@ class AuthGuard extends ConsumerWidget {
   final String? requiredRole;
 
   const AuthGuard({
-    Key? key,
+    super.key,
     required this.child,
     this.requiredRole,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

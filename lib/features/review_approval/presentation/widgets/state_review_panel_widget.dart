@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/models/request_model.dart';
+import '../../../evidence/widgets/tamper_evident_evidence_widget.dart';
 
 class StateReviewPanelWidget extends ConsumerStatefulWidget {
   const StateReviewPanelWidget({super.key});
@@ -484,6 +485,16 @@ class _StateReviewPanelWidgetState extends ConsumerState<StateReviewPanelWidget>
                   
                   _buildSectionTitle('Supporting Documents'),
                   _buildDocumentsList(request),
+                  const SizedBox(height: 16),
+                  
+                  _buildSectionTitle('Evidence Submission & Verification'),
+                  SizedBox(
+                    height: 400,
+                    child: TamperEvidentEvidenceWidget(
+                      projectId: request.id,
+                      uploaderName: request.agencyName,
+                    ),
+                  ),
                   const SizedBox(height: 24),
                   
                   _buildSectionTitle('Review Actions'),

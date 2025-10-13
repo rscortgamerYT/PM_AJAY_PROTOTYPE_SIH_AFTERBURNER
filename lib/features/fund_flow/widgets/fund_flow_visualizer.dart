@@ -107,6 +107,7 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
           'Fund Flow Waterfall',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
         ),
         const SizedBox(height: 24),
@@ -209,6 +210,7 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
           'Status Distribution',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
         ),
         const SizedBox(height: 24),
@@ -268,7 +270,10 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
                   ),
                 ),
                 const SizedBox(width: 4),
-                Text(status.displayName),
+                Text(
+                  status.displayName,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ],
             );
           }).toList(),
@@ -285,6 +290,7 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
           'Recent Transactions',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
         ),
         const SizedBox(height: 16),
@@ -296,6 +302,7 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
             final transaction = _filteredTransactions[index];
             return Card(
               margin: const EdgeInsets.only(bottom: 8),
+              color: Colors.grey[800],
               child: ListTile(
                 leading: Container(
                   padding: const EdgeInsets.all(8),
@@ -308,9 +315,13 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
                     color: transaction.status.color,
                   ),
                 ),
-                title: Text('${transaction.fromEntity} → ${transaction.toEntity}'),
+                title: Text(
+                  '${transaction.fromEntity} → ${transaction.toEntity}',
+                  style: const TextStyle(color: Colors.white),
+                ),
                 subtitle: Text(
                   '${transaction.component} • ${transaction.status.displayName}',
+                  style: const TextStyle(color: Colors.white70),
                 ),
                 trailing: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -325,7 +336,9 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
                     ),
                     Text(
                       '${transaction.transactionDate.day}/${transaction.transactionDate.month}/${transaction.transactionDate.year}',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.white70,
+                      ),
                     ),
                   ],
                 ),
@@ -345,6 +358,7 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Card(
+            color: Colors.black,
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: _buildWaterfallChart(),
@@ -352,13 +366,21 @@ class _FundFlowVisualizerState extends State<FundFlowVisualizer> {
           ),
           const SizedBox(height: 16),
           Card(
+            color: Colors.black,
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: _buildPieChart(),
             ),
           ),
           const SizedBox(height: 16),
-          _buildTransactionList(),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            padding: const EdgeInsets.all(16),
+            child: _buildTransactionList(),
+          ),
         ],
       ),
     );

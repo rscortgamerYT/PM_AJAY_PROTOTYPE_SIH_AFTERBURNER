@@ -6,14 +6,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'core/config/supabase_config.dart';
 import 'core/theme/app_theme.dart';
 import 'core/router/app_router.dart';
-import 'features/auth/presentation/pages/splash_page.dart';
-import 'features/auth/presentation/pages/login_page.dart';
-import 'features/dashboard/presentation/pages/new_overwatch_dashboard_page.dart';
-import 'features/dashboard/presentation/pages/centre_dashboard_page.dart';
-import 'features/dashboard/presentation/pages/state_dashboard_page.dart';
-import 'features/dashboard/presentation/pages/agency_dashboard_page.dart';
-import 'features/dashboard/presentation/pages/public_dashboard_page.dart';
-import 'core/providers/auth_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

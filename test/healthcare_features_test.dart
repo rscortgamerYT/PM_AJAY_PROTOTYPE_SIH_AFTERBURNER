@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pm_ajay_platform/main.dart';
@@ -24,7 +23,7 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: PMAjayApp(),
+          child: const PMAjayApp(),
         ),
       );
 
@@ -50,7 +49,7 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: PMAjayApp(),
+          child: const PMAjayApp(),
         ),
       );
 

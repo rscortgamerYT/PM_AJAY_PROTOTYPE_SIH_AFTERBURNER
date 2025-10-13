@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/providers/auth_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   ConsumerState<LoginPage> createState() => _LoginPageState();
@@ -235,6 +235,33 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Public Dashboard Button
+                        SizedBox(
+                          width: double.infinity,
+                          height: 48,
+                          child: OutlinedButton.icon(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed('/public-dashboard');
+                            },
+                            icon: const Icon(Icons.public),
+                            label: const Text(
+                              'View Public Dashboard',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.blue.shade600,
+                              side: BorderSide(color: Colors.blue.shade600, width: 2),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 24),

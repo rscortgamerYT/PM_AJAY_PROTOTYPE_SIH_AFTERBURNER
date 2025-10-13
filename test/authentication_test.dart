@@ -9,7 +9,7 @@ void main() {
   group('Authentication Tests', () {
     testWidgets('Login page loads correctly', (WidgetTester tester) async {
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: PMAjayApp(),
         ),
       );
@@ -22,7 +22,7 @@ void main() {
 
     testWidgets('Authentication with valid Centre Admin credentials', (WidgetTester tester) async {
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: PMAjayApp(),
         ),
       );
@@ -41,7 +41,7 @@ void main() {
 
     testWidgets('Authentication with valid State Admin credentials', (WidgetTester tester) async {
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: PMAjayApp(),
         ),
       );
@@ -57,7 +57,7 @@ void main() {
 
     testWidgets('Authentication with valid Agency Admin credentials', (WidgetTester tester) async {
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: PMAjayApp(),
         ),
       );
@@ -73,7 +73,7 @@ void main() {
 
     testWidgets('Authentication with valid Overwatch credentials', (WidgetTester tester) async {
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: PMAjayApp(),
         ),
       );
@@ -89,7 +89,7 @@ void main() {
 
     testWidgets('Authentication with invalid credentials shows error', (WidgetTester tester) async {
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: PMAjayApp(),
         ),
       );
@@ -105,7 +105,7 @@ void main() {
 
     testWidgets('Empty email field validation', (WidgetTester tester) async {
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: PMAjayApp(),
         ),
       );
@@ -119,7 +119,7 @@ void main() {
 
     testWidgets('Empty password field validation', (WidgetTester tester) async {
       await tester.pumpWidget(
-        ProviderScope(
+        const ProviderScope(
           child: PMAjayApp(),
         ),
       );

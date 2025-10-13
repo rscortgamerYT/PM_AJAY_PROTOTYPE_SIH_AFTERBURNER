@@ -15,6 +15,7 @@ import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
 import '../../data/mock_fund_flow_data.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
+import '../../../fund_flow/widgets/dual_entry_reconciliation_widget.dart';
 
 class CentreDashboardPage extends ConsumerStatefulWidget {
   const CentreDashboardPage({super.key});
@@ -214,6 +215,20 @@ class _CentreDashboardPageState extends ConsumerState<CentreDashboardPage> {
               onLinkTap: (linkId) {
                 debugPrint('Link tapped: $linkId');
               },
+            ),
+          ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
+          const DashboardSectionHeader(
+            title: 'National Fund Tracker - Reconciliation Ledger',
+            subtitle: 'Centralized PFMS vs Bank statement reconciliation across all states',
+            icon: Icons.account_balance,
+          ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context)),
+          SizedBox(
+            height: ResponsiveLayout.getChartHeight(context),
+            child: const DualEntryReconciliationWidget(
+              title: 'National Fund Reconciliation',
+              showDetailsPanel: false, // Compact view for dashboard integration
             ),
           ),
         ],

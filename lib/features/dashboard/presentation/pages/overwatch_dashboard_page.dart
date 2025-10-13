@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../widgets/enhanced_sankey_widget.dart';
 import '../widgets/evidence_management_widget.dart';
 import '../widgets/project_intelligence_widget.dart';
 import '../widgets/alerts_monitoring_widget.dart';
 import '../widgets/compliance_monitoring_widget.dart';
 import '../widgets/reports_analytics_widget.dart';
-import '../../data/enhanced_mock_fund_flow_data.dart';
+import '../../../fund_flow/widgets/dual_entry_reconciliation_widget.dart';
+import '../../../fund_flow/widgets/project_fund_flow_widget.dart';
 import '../../../../core/widgets/calendar_widget.dart';
 import '../../../../core/theme/app_design_system.dart';
 import '../../../../core/widgets/dashboard_components.dart';
@@ -256,14 +256,20 @@ class _OverwatchDashboardPageState extends ConsumerState<OverwatchDashboardPage>
           SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context)),
           SizedBox(
             height: ResponsiveLayout.getChartHeight(context),
-            child: EnhancedSankeyWidget(
-              initialData: EnhancedMockFundFlowData.generateEnhancedMockData(),
-              onNodeTap: (nodeId) {
-                debugPrint('Node tapped: $nodeId');
-              },
-              onLinkTap: (linkId) {
-                debugPrint('Link tapped: $linkId');
-              },
+            child: const ProjectFundFlowWidget(
+              title: 'Step-by-Step Fund Flow Tracker',
+            ),
+          ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context) * 2),
+          const DashboardSectionHeader(
+            title: 'Dual-Entry Reconciliation Ledger',
+            subtitle: 'Instant reconciliation of PFMS vs Bank statements',
+          ),
+          SizedBox(height: ResponsiveLayout.getResponsiveSpacing(context)),
+          SizedBox(
+            height: ResponsiveLayout.getChartHeight(context),
+            child: const DualEntryReconciliationWidget(
+              showDetailsPanel: false, // Compact view for dashboard integration
             ),
           ),
         ],

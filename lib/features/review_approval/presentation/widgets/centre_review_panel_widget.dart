@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/models/request_model.dart';
+import '../../../evidence/widgets/tamper_evident_evidence_widget.dart';
 
 class CentreReviewPanelWidget extends ConsumerStatefulWidget {
   const CentreReviewPanelWidget({super.key});
@@ -525,6 +526,21 @@ class _CentreReviewPanelWidgetState extends ConsumerState<CentreReviewPanelWidge
                               ),
                             );
                           }).toList(),
+                  ),
+                  const SizedBox(height: 16),
+                  
+                  _buildDetailSection(
+                    'Evidence Review & Watermarking',
+                    Icons.security,
+                    [
+                      SizedBox(
+                        height: 400,
+                        child: TamperEvidentEvidenceWidget(
+                          projectId: request.id,
+                          uploaderName: request.stateName ?? 'Centre Review',
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   if (request.reviewComments != null) ...[
