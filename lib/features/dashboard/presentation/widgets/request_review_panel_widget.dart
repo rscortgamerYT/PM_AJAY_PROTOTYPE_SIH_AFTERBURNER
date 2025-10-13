@@ -442,12 +442,13 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Approve Request'),
+        backgroundColor: Colors.grey[900],
+        title: const Text('Approve Request', style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Are you sure you want to approve this request?'),
+            Text('Are you sure you want to approve this request?', style: TextStyle(color: Colors.grey.shade300)),
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
@@ -460,17 +461,17 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
                 children: [
                   Text(
                     'Request: ${request.id}',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                   ),
-                  Text('State: ${request.stateName}'),
-                  Text('Amount: ₹${(request.estimatedAmount / 100000).toStringAsFixed(2)} Lakhs'),
+                  Text('State: ${request.stateName}', style: TextStyle(color: Colors.grey.shade300)),
+                  Text('Amount: ₹${(request.estimatedAmount / 100000).toStringAsFixed(2)} Lakhs', style: TextStyle(color: Colors.grey.shade300)),
                 ],
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'A sanction order will be auto-generated and sent to the State admin.',
-              style: TextStyle(fontSize: 12, color: Colors.grey),
+              style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
             ),
           ],
         ),
@@ -501,17 +502,26 @@ class _RequestReviewPanelWidgetState extends State<RequestReviewPanelWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Reject Request'),
+        backgroundColor: Colors.grey[900],
+        title: const Text('Reject Request', style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Please provide a reason for rejection:'),
+            Text('Please provide a reason for rejection:', style: TextStyle(color: Colors.grey.shade300)),
             const SizedBox(height: 16),
             TextField(
               controller: commentController,
-              decoration: const InputDecoration(
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
                 hintText: 'Enter rejection reason...',
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                border: const OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey.shade600),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppTheme.secondaryBlue),
+                ),
               ),
               maxLines: 3,
             ),
