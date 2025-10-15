@@ -3,12 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import '../../../../core/models/project_model.dart';
 import '../../../../core/models/agency_model.dart';
+import '../../../../core/models/project_milestone_model.dart';
 import '../../../maps/widgets/interactive_map_widget.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../widgets/smart_milestone_claims_widget.dart';
 import '../widgets/smart_milestone_workflow_widget.dart';
 import '../widgets/resource_proximity_map_widget.dart';
 import '../widgets/performance_analytics_widget.dart';
+import '../widgets/project_milestone_roadmap_widget.dart';
 import '../../../communication/presentation/pages/communication_hub_page.dart';
 import '../../../../core/widgets/calendar_widget.dart';
 import '../../../../core/theme/app_design_system.dart';
@@ -18,6 +20,7 @@ import '../../../../core/widgets/notification_panel_widget.dart';
 import '../../../../core/utils/responsive_layout.dart';
 import '../../../../core/widgets/dashboard_switcher_widget.dart';
 import '../../../../core/utils/page_transitions.dart';
+import '../../data/project_milestone_mock_data.dart';
 
 class AgencyDashboardPage extends ConsumerStatefulWidget {
   const AgencyDashboardPage({super.key});
@@ -339,28 +342,109 @@ class _AgencyDashboardPageState extends ConsumerState<AgencyDashboardPage> {
       itemCount: _projects.length,
       itemBuilder: (context, index) {
         final project = _projects[index];
+        final milestones = ProjectMilestoneMockData.getMilestonesForProject(project.id);
+        
         return Card(
-          margin: const EdgeInsets.only(bottom: 12),
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: _getStatusColor(project.status),
-              child: Icon(
-                _getStatusIcon(project.status),
-                color: Colors.white,
+          margin: const EdgeInsets.only(bottom: 16),
+          elevation: 2,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          child: Column(
+            children: [
+              ListTile(
+                contentPadding: const EdgeInsets.all(16),
+                leading: CircleAvatar(
+                  backgroundColor: _getStatusColor(project.status),
+                  child: Icon(
+                    _getStatusIcon(project.status),
+                    color: Colors.white,
+                  ),
+                ),
+                title: Text(
+                  project.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 4),
+                    Text('${project.completionPercentage.toStringAsFixed(1)}% Complete'),
+                    const SizedBox(height: 4),
+                    Text(
+                      project.description ?? 'No description',
+                      style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
+                trailing: Chip(
+                  label: Text(project.status.value),
+                  backgroundColor: _getStatusColor(project.status).withOpacity(0.2),
+                ),
               ),
-            ),
-            title: Text(project.name),
-            subtitle: Text('${project.completionPercentage.toStringAsFixed(1)}% Complete'),
-            trailing: Chip(
-              label: Text(project.status.value),
-              backgroundColor: _getStatusColor(project.status).withOpacity(0.2),
-            ),
-            onTap: () {
-              // Navigate to project details
-            },
+              const Divider(height: 1),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: ProjectMilestoneRoadmapWidget(
+                  projectId: project.id,
+                  milestones: milestones,
+                  onClaimMilestone: () {
+                    setState(() => _selectedIndex = 2);
+                  },
+                  onMilestoneDetails: (milestone) {
+                    _showMilestoneDetails(milestone);
+                  },
+                ),
+              ),
+            ],
           ),
         );
       },
+    );
+  }
+
+  void _showMilestoneDetails(ProjectMilestone milestone) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(milestone.name),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Milestone: ${milestone.milestoneNumber}'),
+              const SizedBox(height: 8),
+              Text('Description: ${milestone.description}'),
+              const SizedBox(height: 8),
+              Text('Status: ${milestone.status.label}'),
+              const SizedBox(height: 8),
+              Text('Claim Status: ${milestone.claimStatus.label}'),
+              const SizedBox(height: 8),
+              Text('Target Amount: ₹${milestone.targetAmount.toStringAsFixed(2)}'),
+              if (milestone.isClaimed)
+                Text('Claimed Amount: ₹${milestone.claimedAmount.toStringAsFixed(2)}'),
+              if (milestone.isApproved)
+                Text('Approved Amount: ₹${milestone.approvedAmount.toStringAsFixed(2)}'),
+              const SizedBox(height: 16),
+              const Text('Deliverables:', style: TextStyle(fontWeight: FontWeight.bold)),
+              ...milestone.deliverables.entries.map(
+                (e) => Padding(
+                  padding: const EdgeInsets.only(left: 8, top: 4),
+                  child: Text('• ${e.key}: ${e.value}'),
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
     );
   }
 
