@@ -1404,22 +1404,8 @@ class _ClaimSubmissionDialogState extends ConsumerState<ClaimSubmissionDialog> {
   }
 
   bool _canProceedToNextStep() {
-    switch (_currentStep) {
-      case 0:
-        return _projectFormKey.currentState?.validate() ?? false;
-      case 1:
-        return _formKey.currentState?.validate() ?? false;
-      case 2:
-        return _latitude != null && _longitude != null;
-      case 3:
-        return _financialDocuments.isNotEmpty ||
-               _geoTaggedImages.isNotEmpty ||
-               _geoTaggedVideos.isNotEmpty;
-      case 4:
-        return _agreedToTerms;
-      default:
-        return false;
-    }
+    // All steps are now unlocked - users can navigate freely
+    return true;
   }
 
   void _handleSubmit() {
@@ -1607,35 +1593,46 @@ class _ClaimSubmissionDialogState extends ConsumerState<ClaimSubmissionDialog> {
     final isCompleted = step < _currentStep;
     
     return Expanded(
-      child: Column(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: isCompleted 
-                  ? AppDesignSystem.success 
-                  : isActive 
-                      ? AppDesignSystem.deepIndigo 
-                      : AppDesignSystem.neutral200,
-              shape: BoxShape.circle,
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            _currentStep = step;
+          });
+        },
+        child: Column(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: isCompleted
+                    ? AppDesignSystem.success
+                    : isActive
+                        ? AppDesignSystem.deepIndigo
+                        : AppDesignSystem.neutral200,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: isActive ? AppDesignSystem.deepIndigo : Colors.transparent,
+                  width: 2,
+                ),
+              ),
+              child: Icon(
+                isCompleted ? Icons.check : icon,
+                color: isActive || isCompleted ? Colors.white : AppDesignSystem.neutral600,
+                size: 20,
+              ),
             ),
-            child: Icon(
-              isCompleted ? Icons.check : icon,
-              color: isActive || isCompleted ? Colors.white : AppDesignSystem.neutral600,
-              size: 20,
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: AppDesignSystem.labelSmall.copyWith(
+                color: isActive ? AppDesignSystem.deepIndigo : AppDesignSystem.neutral600,
+                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: AppDesignSystem.labelSmall.copyWith(
-              color: isActive ? AppDesignSystem.deepIndigo : AppDesignSystem.neutral600,
-              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

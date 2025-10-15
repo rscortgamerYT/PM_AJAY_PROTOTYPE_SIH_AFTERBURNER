@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../../../../core/theme/app_theme.dart';
 
@@ -19,13 +20,21 @@ class ResourceProximityMapWidget extends StatefulWidget {
       _ResourceProximityMapWidgetState();
 }
 
-class _ResourceProximityMapWidgetState 
+class _ResourceProximityMapWidgetState
     extends State<ResourceProximityMapWidget> {
   
+  final MapController _mapController = MapController();
   String _selectedCategory = 'all'; // 'all', 'suppliers', 'equipment', 'contractors'
   double _maxDistance = 50.0; // km
+  ResourceProvider? _selectedResource;
   
   final LatLng _agencyLocation = const LatLng(19.0760, 72.8777); // Mumbai
+
+  @override
+  void dispose() {
+    _mapController.dispose();
+    super.dispose();
+  }
 
   final List<ResourceProvider> _mockResources = [
     ResourceProvider(
@@ -499,34 +508,30 @@ class _ResourceProximityMapWidgetState
       color: Colors.white,
       child: Stack(
         children: [
-          // Placeholder map
-          Container(
-            color: Colors.grey.shade200,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.map, size: 80, color: Colors.grey.shade400),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Interactive Map View',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey.shade600,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Showing ${_filteredResources.length} resources within ${_maxDistance.toStringAsFixed(0)} km',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                ],
+          // Interactive Map
+          FlutterMap(
+            mapController: _mapController,
+            options: MapOptions(
+              initialCenter: _agencyLocation,
+              initialZoom: 12.0,
+              minZoom: 10.0,
+              maxZoom: 18.0,
+              interactionOptions: const InteractionOptions(
+                flags: InteractiveFlag.all,
               ),
             ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'com.pmajay.platform',
+              ),
+              MarkerLayer(
+                markers: [
+                  _buildAgencyMarker(),
+                  ..._buildResourceMarkers(),
+                ],
+              ),
+            ],
           ),
           
           // Legend
@@ -558,7 +563,238 @@ class _ResourceProximityMapWidgetState
               ),
             ),
           ),
+          
+          // Selected Resource Info Card
+          if (_selectedResource != null) _buildResourceInfoCard(),
         ],
+      ),
+    );
+  }
+
+  Marker _buildAgencyMarker() {
+    return Marker(
+      point: _agencyLocation,
+      width: 44,
+      height: 44,
+      alignment: Alignment.center,
+      child: Container(
+        width: 44,
+        height: 44,
+        decoration: BoxDecoration(
+          color: AppTheme.errorRed,
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.white, width: 3),
+          boxShadow: [
+            BoxShadow(
+              color: AppTheme.errorRed.withOpacity(0.5),
+              blurRadius: 8,
+              spreadRadius: 2,
+            ),
+          ],
+        ),
+        child: const Icon(
+          Icons.my_location,
+          color: Colors.white,
+          size: 24,
+        ),
+      ),
+    );
+  }
+
+  List<Marker> _buildResourceMarkers() {
+    return _filteredResources.map((resource) {
+      final isSelected = _selectedResource?.id == resource.id;
+      final categoryColor = _getCategoryColor(resource.category);
+      final categoryIcon = _getCategoryIcon(resource.category);
+
+      return Marker(
+        point: resource.location,
+        width: isSelected ? 50 : 36,
+        height: isSelected ? 50 : 36,
+        alignment: Alignment.center,
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              _selectedResource = resource;
+            });
+          },
+          child: Container(
+            width: isSelected ? 50 : 36,
+            height: isSelected ? 50 : 36,
+            decoration: BoxDecoration(
+              color: categoryColor,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.white,
+                width: isSelected ? 3 : 2,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: categoryColor.withOpacity(0.5),
+                  blurRadius: isSelected ? 10 : 6,
+                  spreadRadius: isSelected ? 2 : 1,
+                ),
+              ],
+            ),
+            child: Icon(
+              categoryIcon,
+              color: Colors.white,
+              size: isSelected ? 26 : 20,
+            ),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+  Widget _buildResourceInfoCard() {
+    final resource = _selectedResource!;
+    final categoryColor = _getCategoryColor(resource.category);
+
+    return Positioned(
+      bottom: 16,
+      left: 16,
+      right: 16,
+      child: Card(
+        elevation: 8,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: categoryColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      _getCategoryIcon(resource.category),
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          resource.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.location_on, size: 14, color: Colors.grey.shade600),
+                            const SizedBox(width: 4),
+                            Text(
+                              '${resource.distance.toStringAsFixed(1)} km away',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            const Icon(Icons.star, size: 14, color: AppTheme.warningOrange),
+                            const SizedBox(width: 4),
+                            Text(
+                              resource.rating.toStringAsFixed(1),
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => setState(() => _selectedResource = null),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 4,
+                runSpacing: 4,
+                children: resource.services.take(3).map((service) {
+                  return Chip(
+                    label: Text(service),
+                    backgroundColor: categoryColor.withOpacity(0.1),
+                    labelStyle: const TextStyle(fontSize: 11),
+                    padding: EdgeInsets.zero,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Est. Cost',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                        Text(
+                          _formatCurrency(resource.estimatedCost),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Delivery',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                        Text(
+                          '${resource.deliveryTime} ${resource.deliveryTime == 1 ? 'day' : 'days'}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.directions, size: 16),
+                    label: const Text('Navigate'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: categoryColor,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
